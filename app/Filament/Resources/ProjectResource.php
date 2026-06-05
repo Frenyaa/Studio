@@ -58,16 +58,16 @@ class ProjectResource extends Resource
                                     Forms\Components\TextInput::make('name')->label('Tên danh mục')->required(),
                                 ]),
 
-                            Forms\Components\Grid::make(2)->schema([
-                                Forms\Components\TextInput::make('sku')->label('Mã SP (SKU)')->placeholder('V1.0'),
-                                Forms\Components\TextInput::make('dimensions')->label('Kích thước')->placeholder('D2800 x R1600 (mm)'),
+                            Forms\Components\Grid::make(3)->schema([
+                                Forms\Components\TextInput::make('location')->label('Vị trí')->placeholder('Hà Nội'),
+                                Forms\Components\TextInput::make('area')->label('Diện tích')->placeholder('120m²'),
+                                Forms\Components\TextInput::make('year_completed')->label('Năm hoàn thành')->numeric()->minValue(1990)->maxValue(2100),
                             ]),
 
-                            Forms\Components\Textarea::make('material')->label('Chất liệu')->rows(2)
-                                ->placeholder('Khung gỗ dầu chống cong vênh; nệm mousse D40 dày 15cm...'),
-
-                            Forms\Components\Textarea::make('colors')->label('Màu sắc / Tuỳ chọn')->rows(2)
-                                ->placeholder('Hơn 200 màu vải, da: Bố, Nhung, Nỉ, Da công nghiệp...'),
+                            Forms\Components\Grid::make(2)->schema([
+                                Forms\Components\TextInput::make('client_name')->label('Chủ đầu tư'),
+                                Forms\Components\TextInput::make('style')->label('Phong cách')->placeholder('Tối giản sang trọng'),
+                            ]),
 
                             Forms\Components\Textarea::make('summary')
                                 ->label('Mô tả ngắn')
@@ -132,10 +132,10 @@ class ProjectResource extends Resource
                     ->height(56),
 
                 Tables\Columns\TextColumn::make('title')
-                    ->label('Tên sản phẩm')
+                    ->label('Tên dự án')
                     ->searchable()
                     ->sortable()
-                    ->description(fn (Project $record) => $record->sku ? 'SKU: ' . $record->sku : null),
+                    ->description(fn (Project $record) => $record->location),
 
                 Tables\Columns\TextColumn::make('category.name')
                     ->label('Danh mục')

@@ -15,7 +15,7 @@
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body class="bg-cream text-ink font-sans antialiased selection:bg-ink selection:text-cream">
+<body class="bg-ink text-cream font-sans antialiased selection:bg-accent selection:text-ink">
 
     @include('partials.nav')
 

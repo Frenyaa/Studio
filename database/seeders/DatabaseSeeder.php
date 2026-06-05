@@ -7,6 +7,9 @@ use App\Models\HeroSlide;
 use App\Models\Page;
 use App\Models\Partner;
 use App\Models\Post;
+use App\Models\Product;
+use App\Models\ProductCategory;
+use App\Models\ProductImage;
 use App\Models\Project;
 use App\Models\ProjectCategory;
 use App\Models\ProjectImage;
@@ -16,6 +19,7 @@ use App\Models\User;
 use App\Models\WorkflowStep;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 class DatabaseSeeder extends Seeder
 {
@@ -39,85 +43,42 @@ class DatabaseSeeder extends Seeder
             'is_active' => true,
         ]);
 
-        // Danh mục theo phòng / loại nội thất
-        $categories = collect([
-            ['name' => 'Phòng khách', 'slug' => 'phong-khach'],
-            ['name' => 'Phòng bếp', 'slug' => 'phong-bep'],
-            ['name' => 'Phòng ngủ', 'slug' => 'phong-ngu'],
-            ['name' => 'Phòng làm việc', 'slug' => 'phong-lam-viec'],
-            ['name' => 'Thảm nhập khẩu', 'slug' => 'tham-nhap-khau'],
-            ['name' => 'Bàn ghế ngoài trời', 'slug' => 'ban-ghe-ngoai-troi'],
+        // ===== DỰ ÁN (công trình thiết kế nội thất) =====
+        $projectCats = collect([
+            ['name' => 'Căn hộ', 'slug' => 'can-ho'],
+            ['name' => 'Biệt thự', 'slug' => 'biet-thu'],
+            ['name' => 'Nhà phố', 'slug' => 'nha-pho'],
+            ['name' => 'Thương mại', 'slug' => 'thuong-mai'],
         ])->map(fn ($c, $i) => ProjectCategory::updateOrCreate(['slug' => $c['slug']], $c + ['sort_order' => $i, 'is_active' => true]));
 
-        // Sản phẩm nội thất mẫu (ảnh placeholder — admin thay sau)
-        $products = [
-            [
-                'title' => 'Sofa Góc Socco', 'cat' => 'phong-khach', 'img' => 1, 'sku' => 'V1.0',
-                'dimensions' => 'D2800 x R1600 (mm)',
-                'material' => "Khung gỗ dầu chống cong vênh, mối mọt.\nNệm mousse D40 dày 15cm, độ đàn hồi cao gấp 40% so với mousse thông thường.",
-                'colors' => 'Hơn 200 màu vải, da với chất liệu: Bố, Nhung, Nỉ, Da công nghiệp.',
-                'summary' => 'Sofa góc bọc nỉ êm ái, khung gỗ dầu bền chắc, tự do phối màu và kích thước theo sở thích.',
-                'desc' => '<p>Điều đặc biệt là bạn có thể tự do phối màu và kích thước theo sở thích. Đối với sofa góc, bạn có thể lựa chọn hướng góc theo không gian bố trí.</p><p>Giá bán chưa bao gồm gối trang trí và các đồ trang trí khác.</p>',
-            ],
-            [
-                'title' => 'Bàn Trà Mặt Đá Marble', 'cat' => 'phong-khach', 'img' => 2, 'sku' => 'BT.02',
-                'dimensions' => 'D1200 x R600 x C420 (mm)',
-                'material' => 'Mặt đá marble tự nhiên, chân gỗ sồi phủ PU.',
-                'colors' => 'Trắng vân mây, Đen kim sa, Ghi xi măng.',
-                'summary' => 'Bàn trà mặt đá marble sang trọng, chân gỗ sồi vững chãi, điểm nhấn cho phòng khách.',
-                'desc' => '<p>Mặt đá marble tự nhiên với vân đá độc bản, mỗi sản phẩm là duy nhất. Bề mặt được xử lý chống thấm, dễ vệ sinh.</p>',
-            ],
-            [
-                'title' => 'Tủ Bếp Acrylic Bóng Gương', 'cat' => 'phong-bep', 'img' => 3, 'sku' => 'TB.03',
-                'dimensions' => 'Thiết kế theo không gian thực tế',
-                'material' => 'Thùng tủ gỗ MDF lõi xanh chống ẩm, cánh phủ Acrylic bóng gương.',
-                'colors' => 'Trắng, Kem, Xám, các tông vân gỗ.',
-                'summary' => 'Tủ bếp Acrylic bóng gương hiện đại, chống ẩm, tối ưu lưu trữ cho gian bếp.',
-                'desc' => '<p>Bề mặt Acrylic bóng gương sang trọng, chống trầy xước và dễ lau chùi. Phụ kiện ray trượt giảm chấn nhập khẩu.</p>',
-            ],
-            [
-                'title' => 'Giường Ngủ Bọc Nệm', 'cat' => 'phong-ngu', 'img' => 4, 'sku' => 'GN.04',
-                'dimensions' => 'D2000 x R1800 (mm)',
-                'material' => 'Khung gỗ tự nhiên, đầu giường bọc nệm cao cấp.',
-                'colors' => 'Be, Ghi, Nâu tằm, Xanh rêu.',
-                'summary' => 'Giường ngủ đầu bọc nệm êm ái, khung gỗ tự nhiên chắc chắn, nhẹ nhàng và thư thái.',
-                'desc' => '<p>Đầu giường bọc nệm tựa lưng êm ái, mang lại cảm giác thư giãn. Khung gỗ tự nhiên bền bỉ theo thời gian.</p>',
-            ],
-            [
-                'title' => 'Bàn Làm Việc Gỗ Óc Chó', 'cat' => 'phong-lam-viec', 'img' => 5, 'sku' => 'BLV.05',
-                'dimensions' => 'D1400 x R700 x C750 (mm)',
-                'material' => 'Gỗ óc chó nguyên khối, phủ dầu lau tự nhiên.',
-                'colors' => 'Nâu óc chó tự nhiên.',
-                'summary' => 'Bàn làm việc gỗ óc chó nguyên khối, đường nét tinh giản, ấm áp và sang trọng.',
-                'desc' => '<p>Gỗ óc chó nhập khẩu với vân gỗ đẹp tự nhiên. Hoàn thiện dầu lau giữ được vẻ mộc và an toàn cho sức khỏe.</p>',
-            ],
-            [
-                'title' => 'Thảm Dệt Nhập Khẩu', 'cat' => 'tham-nhap-khau', 'img' => 6, 'sku' => 'TM.06',
-                'dimensions' => '1600 x 2300 (mm)',
-                'material' => 'Sợi lông cừu pha viscose, dệt thủ công.',
-                'colors' => 'Kem, Ghi sáng, Xám khói.',
-                'summary' => 'Thảm dệt thủ công nhập khẩu, sợi mềm mịn, tôn lên sự ấm cúng cho không gian.',
-                'desc' => '<p>Thảm được dệt thủ công với chất sợi cao cấp, bề mặt mềm mịn, giữ ấm tốt và bền màu.</p>',
-            ],
-            [
-                'title' => 'Bộ Bàn Ghế Sân Vườn', 'cat' => 'ban-ghe-ngoai-troi', 'img' => 1, 'sku' => 'NT.07',
-                'dimensions' => 'Bộ gồm 1 bàn + 4 ghế',
-                'material' => 'Khung nhôm đúc sơn tĩnh điện, đan dây nhựa giả mây chịu thời tiết.',
-                'colors' => 'Nâu, Xám, Đen.',
-                'summary' => 'Bộ bàn ghế ngoài trời chịu thời tiết, khung nhôm bền nhẹ, thư giãn cho sân vườn, ban công.',
-                'desc' => '<p>Chất liệu chịu nắng mưa, không gỉ sét, phù hợp sân vườn, ban công, hồ bơi. Đệm ngồi tháo rời dễ vệ sinh.</p>',
-            ],
+        $projects = [
+            ['title' => 'Brave House', 'cat' => 'biet-thu', 'img' => 1, 'location' => 'Hà Nội', 'area' => '320m²', 'style' => 'Tối giản sang trọng',
+             'summary' => 'Biệt thự tối giản với gam trung tính, ánh sáng tự nhiên ngập tràn và nội thất gỗ óc chó ấm áp.',
+             'desc' => '<p>Một dự án thiết kế &amp; thi công nội thất trọn gói cho biệt thự, theo triết lý "less is more". Không gian mở liên thông giữa phòng khách, bếp và khu vực ăn uống giúp ánh sáng tự nhiên len lỏi khắp nơi.</p><p>Toàn bộ nội thất được thiết kế riêng (custom) theo công trình: gỗ óc chó, đá tự nhiên và sơn hiệu ứng tông trung tính.</p>'],
+            ['title' => 'Teasu House', 'cat' => 'nha-pho', 'img' => 2, 'location' => 'Hải Phòng', 'area' => '180m²', 'style' => 'Japandi',
+             'summary' => 'Nhà phố tinh gọn, tối ưu công năng theo chiều đứng, nội thất mộc mạc theo tinh thần Japandi.',
+             'desc' => '<p>Dự án nhà phố với giếng trời trung tâm xuyên suốt các tầng, kết hợp hệ nội thất thiết kế riêng tối ưu cho không gian hẹp ngang.</p>'],
+            ['title' => 'Metropolis Apartment', 'cat' => 'can-ho', 'img' => 3, 'location' => 'Hà Nội', 'area' => '120m²', 'style' => 'Hiện đại',
+             'summary' => 'Căn hộ hiện đại tông xám than &amp; đồng thau, nội thất đặt làm tối ưu lưu trữ.',
+             'desc' => '<p>Thiết kế &amp; thi công nội thất căn hộ với hệ tủ âm tường kịch trần, bàn ghế và sofa đặt làm theo kích thước thực tế.</p>'],
+            ['title' => 'Serene Apartment', 'cat' => 'can-ho', 'img' => 4, 'location' => 'Đà Nẵng', 'area' => '95m²', 'style' => 'Japandi',
+             'summary' => 'Căn hộ nhỏ ấm cúng, nội thất tuyển chọn theo tiêu chí "ít nhưng chất".',
+             'desc' => '<p>Dự án căn hộ theo phong cách Japandi — giao thoa tối giản Bắc Âu và tinh thần thiền Nhật Bản.</p>'],
+            ['title' => 'Lumiere Villa', 'cat' => 'biet-thu', 'img' => 5, 'location' => 'Hà Nội', 'area' => '450m²', 'style' => 'Luxury',
+             'summary' => 'Biệt thự cao cấp tôn vinh ánh sáng, nội thất thủ công đặt riêng.',
+             'desc' => '<p>Công trình biến ánh sáng tự nhiên thành vật liệu thiết kế chủ đạo, đi kèm hệ nội thất bọc da và đá vân mây đặt làm riêng.</p>'],
+            ['title' => 'Maison Office', 'cat' => 'thuong-mai', 'img' => 6, 'location' => 'TP.HCM', 'area' => '600m²', 'style' => 'Đương đại',
+             'summary' => 'Văn phòng thương mại truyền cảm hứng, nội thất thiết kế theo nhận diện thương hiệu.',
+             'desc' => '<p>Thiết kế &amp; thi công nội thất văn phòng: khu làm việc mở, phòng họp kính và khu thư giãn xanh mát, đồ nội thất đặt làm đồng bộ.</p>'],
         ];
-
-        foreach ($products as $i => $p) {
-            Project::updateOrCreate(['slug' => \Illuminate\Support\Str::slug($p['title'])], [
+        foreach ($projects as $i => $p) {
+            $project = Project::updateOrCreate(['slug' => Str::slug($p['title'])], [
                 'title' => $p['title'],
-                'project_category_id' => $categories->firstWhere('slug', $p['cat'])?->id,
-                'sku' => $p['sku'],
-                'dimensions' => $p['dimensions'],
-                'material' => $p['material'],
-                'colors' => $p['colors'],
-                // Ảnh placeholder; thay bằng ảnh thật trong Admin
+                'project_category_id' => $projectCats->firstWhere('slug', $p['cat'])?->id,
+                'location' => $p['location'],
+                'area' => $p['area'],
+                'year_completed' => 2024,
+                'style' => $p['style'],
                 'cover_image' => 'placeholders/project-' . $p['img'] . '.jpg',
                 'summary' => $p['summary'],
                 'description' => $p['desc'],
@@ -125,18 +86,106 @@ class DatabaseSeeder extends Seeder
                 'is_published' => true,
                 'sort_order' => $i,
             ]);
-        }
-
-        // Thư viện ảnh chi tiết cho mỗi dự án (dùng lại ảnh demo)
-        foreach (Project::all()->values() as $idx => $project) {
             if ($project->images()->count() === 0) {
                 for ($g = 1; $g <= 4; $g++) {
-                    $n = (($idx + $g) % 6) + 1;
-                    ProjectImage::create([
-                        'project_id' => $project->id,
-                        'image' => 'placeholders/project-' . $n . '.jpg',
-                        'sort_order' => $g,
-                    ]);
+                    $n = (($i + $g) % 6) + 1;
+                    ProjectImage::create(['project_id' => $project->id, 'image' => 'placeholders/project-' . $n . '.jpg', 'sort_order' => $g]);
+                }
+            }
+        }
+
+        // ===== SẢN PHẨM (bán lẻ, phân loại theo loại đồ) =====
+        $productCats = collect([
+            ['name' => 'Sofa', 'slug' => 'sofa'],
+            ['name' => 'Bàn', 'slug' => 'ban'],
+            ['name' => 'Ghế', 'slug' => 'ghe'],
+            ['name' => 'Tủ & Kệ', 'slug' => 'tu-ke'],
+            ['name' => 'Giường', 'slug' => 'giuong'],
+            ['name' => 'Thảm', 'slug' => 'tham'],
+            ['name' => 'Bàn ghế ngoài trời', 'slug' => 'ngoai-troi'],
+        ])->map(fn ($c, $i) => ProductCategory::updateOrCreate(['slug' => $c['slug']], $c + ['sort_order' => $i, 'is_active' => true]));
+
+        $products = [
+            ['name' => 'Sofa Góc Socco', 'cat' => 'sofa', 'img' => 1, 'sku' => 'V1.0',
+             'dimensions' => 'D2800 x R1600 (mm)',
+             'material' => "Khung gỗ dầu chống cong vênh, mối mọt.\nNệm mousse D40 dày 15cm, độ đàn hồi cao gấp 40% so với mousse thông thường.",
+             'colors' => 'Hơn 200 màu vải, da: Bố, Nhung, Nỉ, Da công nghiệp.',
+             'summary' => 'Sofa góc bọc nỉ êm ái, khung gỗ dầu bền chắc, tự do phối màu và kích thước.',
+             'desc' => '<p>Bạn có thể tự do phối màu và kích thước theo sở thích; với sofa góc, chọn hướng góc theo không gian bố trí.</p>'],
+            ['name' => 'Sofa Băng Minimal', 'cat' => 'sofa', 'img' => 2, 'sku' => 'SF.02',
+             'dimensions' => 'D2200 x R900 (mm)',
+             'material' => 'Khung gỗ tự nhiên, nệm mút D40 bọc vải/da.',
+             'colors' => 'Kem, Ghi, Xanh rêu, Nâu.',
+             'summary' => 'Sofa băng dáng thấp tối giản, phù hợp căn hộ và phòng khách nhỏ.',
+             'desc' => '<p>Thiết kế dáng thấp thanh thoát, đường nét tối giản, dễ phối với mọi không gian.</p>'],
+            ['name' => 'Bàn Làm Việc Gỗ Óc Chó', 'cat' => 'ban', 'img' => 3, 'sku' => 'BLV.03',
+             'dimensions' => 'D1400 x R700 x C750 (mm)',
+             'material' => 'Gỗ óc chó nguyên khối, phủ dầu lau tự nhiên.',
+             'colors' => 'Nâu óc chó tự nhiên.',
+             'summary' => 'Bàn làm việc gỗ óc chó nguyên khối, ấm áp và sang trọng.',
+             'desc' => '<p>Gỗ óc chó nhập khẩu vân đẹp tự nhiên, hoàn thiện dầu lau an toàn cho sức khỏe.</p>'],
+            ['name' => 'Bàn Trà Mặt Đá Marble', 'cat' => 'ban', 'img' => 4, 'sku' => 'BT.04',
+             'dimensions' => 'D1200 x R600 x C420 (mm)',
+             'material' => 'Mặt đá marble tự nhiên, chân gỗ sồi phủ PU.',
+             'colors' => 'Trắng vân mây, Đen kim sa, Ghi xi măng.',
+             'summary' => 'Bàn trà mặt đá marble sang trọng, chân gỗ sồi vững chãi.',
+             'desc' => '<p>Mặt đá marble vân độc bản, xử lý chống thấm, dễ vệ sinh.</p>'],
+            ['name' => 'Ghế Armchair Bọc Nỉ', 'cat' => 'ghe', 'img' => 5, 'sku' => 'GH.05',
+             'dimensions' => 'D750 x R780 x C800 (mm)',
+             'material' => 'Khung gỗ sồi, bọc nỉ cao cấp, mút đệm êm.',
+             'colors' => 'Be, Ghi, Xanh cổ vịt, Nâu tằm.',
+             'summary' => 'Ghế armchair ôm lưng êm ái, điểm nhấn thư giãn cho góc đọc sách.',
+             'desc' => '<p>Dáng ghế ôm trọn lưng, đệm êm, khung gỗ sồi chắc chắn.</p>'],
+            ['name' => 'Tủ Quần Áo Acrylic', 'cat' => 'tu-ke', 'img' => 6, 'sku' => 'TU.06',
+             'dimensions' => 'Thiết kế theo không gian thực tế',
+             'material' => 'Thùng gỗ MDF lõi xanh chống ẩm, cánh phủ Acrylic bóng gương.',
+             'colors' => 'Trắng, Kem, Xám, vân gỗ.',
+             'summary' => 'Tủ quần áo Acrylic bóng gương, chống ẩm, tối ưu lưu trữ.',
+             'desc' => '<p>Bề mặt Acrylic sang trọng, chống trầy, phụ kiện ray trượt giảm chấn nhập khẩu.</p>'],
+            ['name' => 'Kệ TV Gỗ Tự Nhiên', 'cat' => 'tu-ke', 'img' => 1, 'sku' => 'KE.07',
+             'dimensions' => 'D1800 x R400 x C450 (mm)',
+             'material' => 'Gỗ tự nhiên kết hợp khung kim loại sơn tĩnh điện.',
+             'colors' => 'Nâu gỗ, Đen.',
+             'summary' => 'Kệ TV gỗ tự nhiên dáng thấp, gọn gàng và tinh tế.',
+             'desc' => '<p>Kết hợp gỗ tự nhiên và kim loại, ngăn kéo êm, tối ưu cho phòng khách.</p>'],
+            ['name' => 'Giường Ngủ Bọc Nệm', 'cat' => 'giuong', 'img' => 2, 'sku' => 'GN.08',
+             'dimensions' => 'D2000 x R1800 (mm)',
+             'material' => 'Khung gỗ tự nhiên, đầu giường bọc nệm cao cấp.',
+             'colors' => 'Be, Ghi, Nâu tằm, Xanh rêu.',
+             'summary' => 'Giường ngủ đầu bọc nệm êm ái, khung gỗ chắc chắn.',
+             'desc' => '<p>Đầu giường bọc nệm tựa lưng êm, khung gỗ bền theo thời gian.</p>'],
+            ['name' => 'Thảm Dệt Nhập Khẩu', 'cat' => 'tham', 'img' => 3, 'sku' => 'TM.09',
+             'dimensions' => '1600 x 2300 (mm)',
+             'material' => 'Sợi lông cừu pha viscose, dệt thủ công.',
+             'colors' => 'Kem, Ghi sáng, Xám khói.',
+             'summary' => 'Thảm dệt thủ công nhập khẩu, sợi mềm mịn, ấm cúng.',
+             'desc' => '<p>Chất sợi cao cấp, bề mặt mềm mịn, giữ ấm tốt và bền màu.</p>'],
+            ['name' => 'Bộ Bàn Ghế Sân Vườn', 'cat' => 'ngoai-troi', 'img' => 4, 'sku' => 'NT.10',
+             'dimensions' => 'Bộ gồm 1 bàn + 4 ghế',
+             'material' => 'Khung nhôm đúc sơn tĩnh điện, đan dây nhựa giả mây chịu thời tiết.',
+             'colors' => 'Nâu, Xám, Đen.',
+             'summary' => 'Bộ bàn ghế ngoài trời chịu thời tiết, khung nhôm bền nhẹ.',
+             'desc' => '<p>Chịu nắng mưa, không gỉ sét, phù hợp sân vườn, ban công, hồ bơi; đệm tháo rời dễ vệ sinh.</p>'],
+        ];
+        foreach ($products as $i => $p) {
+            $product = Product::updateOrCreate(['slug' => Str::slug($p['name'])], [
+                'name' => $p['name'],
+                'product_category_id' => $productCats->firstWhere('slug', $p['cat'])?->id,
+                'sku' => $p['sku'],
+                'dimensions' => $p['dimensions'],
+                'material' => $p['material'],
+                'colors' => $p['colors'],
+                'cover_image' => 'placeholders/project-' . $p['img'] . '.jpg',
+                'summary' => $p['summary'],
+                'description' => $p['desc'],
+                'is_featured' => true,
+                'is_published' => true,
+                'sort_order' => $i,
+            ]);
+            if ($product->images()->count() === 0) {
+                for ($g = 1; $g <= 4; $g++) {
+                    $n = (($i + $g) % 6) + 1;
+                    ProductImage::create(['product_id' => $product->id, 'image' => 'placeholders/project-' . $n . '.jpg', 'sort_order' => $g]);
                 }
             }
         }
@@ -148,7 +197,7 @@ class DatabaseSeeder extends Seeder
             ['title' => 'Giao lắp & Bảo hành', 'summary' => 'Giao hàng, lắp đặt tận nơi và bảo hành dài hạn, đồng hành cùng bạn lâu dài.'],
         ];
         foreach ($services as $i => $s) {
-            Service::updateOrCreate(['slug' => \Illuminate\Support\Str::slug($s['title'])], $s + ['sort_order' => $i, 'is_active' => true]);
+            Service::updateOrCreate(['slug' => Str::slug($s['title'])], $s + ['sort_order' => $i, 'is_active' => true]);
         }
 
         // Quy trình
@@ -173,7 +222,7 @@ class DatabaseSeeder extends Seeder
             SiteStat::updateOrCreate(['label' => $s['label']], $s + ['sort_order' => $i, 'is_active' => true]);
         }
 
-        // Đối tác (logo placeholder)
+        // Đối tác
         foreach (['Kohler', 'Dulux', 'Toto', 'Häfele', 'Caesar', 'An Cường'] as $i => $name) {
             Partner::updateOrCreate(['name' => $name], [
                 'logo' => 'placeholders/partner-' . ($i + 1) . '.svg',
@@ -192,32 +241,20 @@ class DatabaseSeeder extends Seeder
             ClientFeedback::updateOrCreate(['client_name' => $f['client_name']], $f + ['rating' => 5, 'sort_order' => $i, 'is_active' => true]);
         }
 
-        // Bài viết (Cảm hứng / Góc tư vấn)
+        // Bài viết (Cảm hứng)
         $posts = [
-            [
-                'title' => '5 nguyên tắc vàng của không gian tối giản sang trọng',
-                'category' => 'Xu hướng',
-                'cover_image' => 'placeholders/post-1.jpg',
-                'excerpt' => 'Tối giản không có nghĩa là trống trải. Cùng khám phá những nguyên tắc giúp không gian vừa tinh gọn vừa đẳng cấp.',
-                'content' => '<p>Phong cách tối giản sang trọng (Minimalism Luxury) đề cao chất lượng hơn số lượng. Mỗi món đồ được lựa chọn kỹ lưỡng, mỗi khoảng trống đều có chủ đích.</p><h3>1. Bảng màu trung tính</h3><p>Trắng, kem, xám và các tông đất tạo nền tảng thanh lịch, để vật liệu và ánh sáng lên tiếng.</p><h3>2. Vật liệu thật</h3><p>Gỗ tự nhiên, đá, kim loại — chất liệu chân thực mang lại chiều sâu và sự bền vững.</p><h3>3. Ánh sáng nhiều lớp</h3><p>Kết hợp ánh sáng tự nhiên và chiếu sáng nghệ thuật để tôn lên kết cấu không gian.</p>',
-            ],
-            [
-                'title' => 'Chọn vật liệu bền vững cho ngôi nhà hiện đại',
-                'category' => 'Vật liệu',
-                'cover_image' => 'placeholders/post-2.jpg',
-                'excerpt' => 'Vật liệu không chỉ đẹp mà còn cần bền và thân thiện. Gợi ý cách chọn vật liệu vừa thẩm mỹ vừa lâu dài.',
-                'content' => '<p>Một ngôi nhà đẹp bền vững bắt đầu từ việc chọn đúng vật liệu. Hãy ưu tiên những vật liệu có nguồn gốc rõ ràng, dễ bảo trì và phù hợp khí hậu.</p><p>Gỗ kỹ thuật, đá nung kết và sơn gốc nước là những lựa chọn vừa an toàn cho sức khỏe vừa giữ được vẻ đẹp theo thời gian.</p>',
-            ],
-            [
-                'title' => 'Tận dụng ánh sáng tự nhiên trong thiết kế nội thất',
-                'category' => 'Mẹo thiết kế',
-                'cover_image' => 'placeholders/post-3.jpg',
-                'excerpt' => 'Ánh sáng tự nhiên là "vật liệu" miễn phí và quyền lực nhất. Đây là cách khai thác tối đa nguồn sáng quý giá này.',
-                'content' => '<p>Ánh sáng tự nhiên làm cho không gian rộng rãi, ấm áp và tốt cho sức khỏe. Hãy bố trí cửa sổ lớn, dùng rèm mỏng và bề mặt phản chiếu để khuếch tán ánh sáng.</p><p>Màu sơn sáng và gương đặt đúng vị trí sẽ nhân đôi hiệu quả chiếu sáng cho căn phòng.</p>',
-            ],
+            ['title' => '5 nguyên tắc vàng của không gian tối giản sang trọng', 'category' => 'Xu hướng', 'cover_image' => 'placeholders/post-1.jpg',
+             'excerpt' => 'Tối giản không có nghĩa là trống trải. Cùng khám phá những nguyên tắc giúp không gian vừa tinh gọn vừa đẳng cấp.',
+             'content' => '<p>Phong cách tối giản sang trọng đề cao chất lượng hơn số lượng.</p><h3>1. Bảng màu trung tính</h3><p>Trắng, kem, xám và các tông đất tạo nền tảng thanh lịch.</p><h3>2. Vật liệu thật</h3><p>Gỗ tự nhiên, đá, kim loại mang lại chiều sâu và sự bền vững.</p><h3>3. Ánh sáng nhiều lớp</h3><p>Kết hợp ánh sáng tự nhiên và chiếu sáng nghệ thuật.</p>'],
+            ['title' => 'Chọn vật liệu bền vững cho ngôi nhà hiện đại', 'category' => 'Vật liệu', 'cover_image' => 'placeholders/post-2.jpg',
+             'excerpt' => 'Vật liệu không chỉ đẹp mà còn cần bền và thân thiện. Gợi ý cách chọn vật liệu vừa thẩm mỹ vừa lâu dài.',
+             'content' => '<p>Hãy ưu tiên vật liệu có nguồn gốc rõ ràng, dễ bảo trì và phù hợp khí hậu.</p><p>Gỗ kỹ thuật, đá nung kết và sơn gốc nước là lựa chọn an toàn và bền đẹp.</p>'],
+            ['title' => 'Tận dụng ánh sáng tự nhiên trong thiết kế nội thất', 'category' => 'Mẹo thiết kế', 'cover_image' => 'placeholders/post-3.jpg',
+             'excerpt' => 'Ánh sáng tự nhiên là "vật liệu" miễn phí và quyền lực nhất. Đây là cách khai thác tối đa nguồn sáng quý giá này.',
+             'content' => '<p>Bố trí cửa sổ lớn, dùng rèm mỏng và bề mặt phản chiếu để khuếch tán ánh sáng.</p><p>Màu sơn sáng và gương đặt đúng vị trí sẽ nhân đôi hiệu quả chiếu sáng.</p>'],
         ];
         foreach ($posts as $i => $p) {
-            Post::updateOrCreate(['slug' => \Illuminate\Support\Str::slug($p['title'])], $p + [
+            Post::updateOrCreate(['slug' => Str::slug($p['title'])], $p + [
                 'is_published' => true,
                 'published_at' => now()->subDays(count($posts) - $i),
                 'sort_order' => $i,
@@ -226,25 +263,13 @@ class DatabaseSeeder extends Seeder
 
         // Trang chính sách (nội dung mẫu — chỉnh trong Admin)
         $pages = [
-            [
-                'title' => 'Chính sách bảo mật',
-                'content' => '<p>Chúng tôi cam kết bảo vệ thông tin cá nhân của khách hàng. Trang này mô tả cách chúng tôi thu thập, sử dụng và bảo vệ dữ liệu của bạn.</p><h3>1. Thông tin thu thập</h3><p>Họ tên, số điện thoại, email và nội dung bạn cung cấp qua form đăng ký tư vấn.</p><h3>2. Mục đích sử dụng</h3><p>Liên hệ tư vấn, báo giá và chăm sóc khách hàng. Chúng tôi không chia sẻ thông tin cho bên thứ ba khi chưa có sự đồng ý của bạn.</p><h3>3. Bảo mật dữ liệu</h3><p>Dữ liệu được lưu trữ an toàn và chỉ những nhân sự có thẩm quyền mới được truy cập.</p>',
-            ],
-            [
-                'title' => 'Điều khoản sử dụng',
-                'content' => '<p>Khi truy cập và sử dụng website, bạn đồng ý với các điều khoản dưới đây.</p><h3>1. Quyền sở hữu nội dung</h3><p>Toàn bộ hình ảnh, bài viết và thiết kế trên website thuộc quyền sở hữu của chúng tôi, không được sao chép khi chưa được phép.</p><h3>2. Trách nhiệm người dùng</h3><p>Bạn cam kết cung cấp thông tin chính xác và không sử dụng website cho mục đích vi phạm pháp luật.</p>',
-            ],
-            [
-                'title' => 'Chính sách bảo hành',
-                'content' => '<p>Chúng tôi cam kết bảo hành cho các hạng mục thiết kế và thi công nội thất.</p><h3>Thời gian bảo hành</h3><p>Bảo hành tối thiểu 24 tháng cho phần thi công và sản phẩm nội thất do chúng tôi cung cấp.</p><h3>Điều kiện bảo hành</h3><p>Áp dụng cho lỗi kỹ thuật trong quá trình thi công và sản xuất. Không áp dụng cho hư hỏng do sử dụng sai cách hoặc tác động ngoại lực.</p>',
-            ],
-            [
-                'title' => 'Chính sách thanh toán',
-                'content' => '<p>Quy trình thanh toán minh bạch, rõ ràng theo từng giai đoạn.</p><h3>Các đợt thanh toán</h3><p>Thông thường chia thành các đợt: tạm ứng khi ký hợp đồng, thanh toán theo tiến độ thi công và quyết toán khi bàn giao.</p><h3>Phương thức</h3><p>Chuyển khoản ngân hàng hoặc tiền mặt. Mọi giao dịch đều có hợp đồng và chứng từ đầy đủ.</p>',
-            ],
+            ['title' => 'Chính sách bảo mật', 'content' => '<p>Chúng tôi cam kết bảo vệ thông tin cá nhân của khách hàng.</p><h3>1. Thông tin thu thập</h3><p>Họ tên, số điện thoại, email và nội dung bạn cung cấp qua form đăng ký tư vấn.</p><h3>2. Mục đích sử dụng</h3><p>Liên hệ tư vấn, báo giá và chăm sóc khách hàng.</p><h3>3. Bảo mật dữ liệu</h3><p>Dữ liệu được lưu trữ an toàn, chỉ nhân sự có thẩm quyền mới truy cập.</p>'],
+            ['title' => 'Điều khoản sử dụng', 'content' => '<p>Khi sử dụng website, bạn đồng ý với các điều khoản dưới đây.</p><h3>1. Quyền sở hữu nội dung</h3><p>Hình ảnh, bài viết, thiết kế trên website thuộc quyền sở hữu của chúng tôi.</p><h3>2. Trách nhiệm người dùng</h3><p>Cung cấp thông tin chính xác, không dùng website cho mục đích vi phạm pháp luật.</p>'],
+            ['title' => 'Chính sách bảo hành', 'content' => '<p>Cam kết bảo hành cho sản phẩm và hạng mục thi công nội thất.</p><h3>Thời gian</h3><p>Tối thiểu 24 tháng cho sản phẩm và phần thi công do chúng tôi cung cấp.</p><h3>Điều kiện</h3><p>Áp dụng cho lỗi kỹ thuật; không áp dụng cho hư hỏng do sử dụng sai cách hoặc tác động ngoại lực.</p>'],
+            ['title' => 'Chính sách thanh toán', 'content' => '<p>Quy trình thanh toán minh bạch theo từng giai đoạn.</p><h3>Các đợt</h3><p>Tạm ứng khi ký hợp đồng, thanh toán theo tiến độ và quyết toán khi bàn giao.</p><h3>Phương thức</h3><p>Chuyển khoản hoặc tiền mặt, có hợp đồng và chứng từ đầy đủ.</p>'],
         ];
         foreach ($pages as $i => $pg) {
-            Page::updateOrCreate(['slug' => \Illuminate\Support\Str::slug($pg['title'])], $pg + [
+            Page::updateOrCreate(['slug' => Str::slug($pg['title'])], $pg + [
                 'is_published' => true,
                 'show_in_footer' => true,
                 'sort_order' => $i,

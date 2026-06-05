@@ -7,6 +7,9 @@ use App\Models\HeroSlide;
 use App\Models\Page;
 use App\Models\Partner;
 use App\Models\Post;
+use App\Models\Product;
+use App\Models\ProductCategory;
+use App\Models\ProductImage;
 use App\Models\Project;
 use App\Models\ProjectCategory;
 use App\Models\ProjectImage;
@@ -38,6 +41,9 @@ class AppServiceProvider extends ServiceProvider
             Partner::class,
             ClientFeedback::class,
             Post::class,
+            Product::class,
+            ProductCategory::class,
+            ProductImage::class,
         ];
 
         foreach ($models as $model) {

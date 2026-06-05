@@ -3,23 +3,23 @@
 @section('title', 'Dự án — ' . config('app.name'))
 
 @section('content')
-    <section class="bg-cream pt-32 pb-20 lg:pt-40">
+    <section class="bg-ink pt-32 pb-20 lg:pt-40">
         <div class="mx-auto max-w-7xl px-6 lg:px-10">
             {{-- Tiêu đề --}}
             <div class="mb-12 text-center">
-                <p class="text-xs font-medium uppercase tracking-luxe text-ink-muted">Portfolio</p>
+                <p class="text-xs font-medium uppercase tracking-luxe text-cream/70">Portfolio</p>
                 <h1 class="mt-4 font-serif text-4xl font-light tracking-wide lg:text-6xl">Toàn Bộ Dự Án</h1>
             </div>
 
             {{-- Bộ lọc danh mục --}}
             <div class="mb-14 flex flex-wrap items-center justify-center gap-x-8 gap-y-3 text-xs font-medium uppercase tracking-luxe">
                 <a href="{{ route('projects.index') }}"
-                   class="border-b-2 pb-1 transition-colors {{ ! request('category') ? 'border-ink text-ink' : 'border-transparent text-ink-muted hover:text-ink' }}">
+                   class="border-b-2 pb-1 transition-colors {{ ! request('category') ? 'border-ink text-cream' : 'border-transparent text-cream/70 hover:text-cream' }}">
                     Tất cả
                 </a>
                 @foreach ($categories as $category)
                     <a href="{{ route('projects.index', ['category' => $category->slug]) }}"
-                       class="border-b-2 pb-1 transition-colors {{ request('category') === $category->slug ? 'border-ink text-ink' : 'border-transparent text-ink-muted hover:text-ink' }}">
+                       class="border-b-2 pb-1 transition-colors {{ request('category') === $category->slug ? 'border-ink text-cream' : 'border-transparent text-cream/70 hover:text-cream' }}">
                         {{ $category->name }}
                     </a>
                 @endforeach
@@ -27,7 +27,7 @@
 
             {{-- Lưới dự án --}}
             @if ($projects->isEmpty())
-                <p class="text-center text-ink-muted">Chưa có dự án nào.</p>
+                <p class="text-center text-cream/70">Chưa có dự án nào.</p>
             @else
                 <div class="grid grid-cols-1 gap-x-6 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
                     @foreach ($projects as $project)
@@ -42,18 +42,18 @@
 
                             <div class="mt-5 flex items-baseline justify-between">
                                 <div>
-                                    <h3 class="font-serif text-2xl font-light text-ink">{{ $project->title }}</h3>
+                                    <h3 class="font-serif text-2xl font-light text-cream">{{ $project->title }}</h3>
                                     @if ($project->location)
-                                        <p class="mt-1 text-xs uppercase tracking-luxe text-ink-muted">{{ $project->location }}</p>
+                                        <p class="mt-1 text-xs uppercase tracking-luxe text-cream/70">{{ $project->location }}</p>
                                     @endif
                                 </div>
                                 @if ($project->category)
-                                    <span class="text-[11px] uppercase tracking-luxe text-ink-muted">{{ $project->category->name }}</span>
+                                    <span class="text-[11px] uppercase tracking-luxe text-cream/70">{{ $project->category->name }}</span>
                                 @endif
                             </div>
 
                             @if ($project->summary)
-                                <p class="mt-3 border-t border-line pt-4 text-sm leading-relaxed text-ink-muted line-clamp-2 transition-colors duration-500 group-hover:border-ink/40">
+                                <p class="mt-3 border-t border-line pt-4 text-sm leading-relaxed text-cream/70 line-clamp-2 transition-colors duration-500 group-hover:border-cream/40">
                                     {{ $project->summary }}
                                 </p>
                             @endif

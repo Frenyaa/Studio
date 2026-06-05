@@ -3,7 +3,7 @@
     x-data="{ home: {{ request()->routeIs('home') ? 'true' : 'false' }}, scrolled: false, mobileOpen: false }"
     x-init="scrolled = !home"
     @scroll.window="if (home) scrolled = (window.pageYOffset > 60)"
-    :class="scrolled ? 'bg-cream backdrop-blur shadow-[0_1px_0_0_rgba(0,0,0,0.06)] text-ink' : 'bg-transparent text-white'"
+    :class="scrolled ? 'bg-ink backdrop-blur shadow-[0_1px_0_0_rgba(0,0,0,0.06)] text-cream' : 'bg-transparent text-white'"
     class="fixed inset-x-0 top-0 z-50 transition-colors duration-500 ease-luxe"
 >
     <nav class="mx-auto flex max-w-7xl items-center justify-between px-6 py-5 lg:px-10">
@@ -15,6 +15,7 @@
         {{-- Menu desktop --}}
         <ul class="hidden items-center gap-10 text-xs font-medium uppercase tracking-luxe lg:flex">
             <li><a href="{{ route('home') }}" class="transition-colors duration-300 hover:text-accent">Trang chủ</a></li>
+            <li><a href="{{ route('products.index') }}" class="transition-colors duration-300 hover:text-accent">Sản phẩm</a></li>
             <li><a href="{{ route('projects.index') }}" class="transition-colors duration-300 hover:text-accent">Dự án</a></li>
             <li><a href="{{ route('home') }}#services" class="transition-colors duration-300 hover:text-accent">Dịch vụ</a></li>
             <li><a href="{{ route('home') }}#about" class="transition-colors duration-300 hover:text-accent">Về chúng tôi</a></li>
@@ -48,6 +49,7 @@
         </div>
         <ul class="mt-10 flex flex-col items-center gap-8 font-serif text-3xl">
             <li><a @click="mobileOpen = false" class="transition-colors duration-300 hover:text-accent" href="{{ route('home') }}">Trang chủ</a></li>
+            <li><a @click="mobileOpen = false" class="transition-colors duration-300 hover:text-accent" href="{{ route('products.index') }}">Sản phẩm</a></li>
             <li><a @click="mobileOpen = false" class="transition-colors duration-300 hover:text-accent" href="{{ route('projects.index') }}">Dự án</a></li>
             <li><a @click="mobileOpen = false" class="transition-colors duration-300 hover:text-accent" href="{{ route('home') }}#services">Dịch vụ</a></li>
             <li><a @click="mobileOpen = false" class="transition-colors duration-300 hover:text-accent" href="{{ route('home') }}#about">Về chúng tôi</a></li>

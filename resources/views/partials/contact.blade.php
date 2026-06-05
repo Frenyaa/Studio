@@ -1,10 +1,10 @@
 {{-- FORM ĐĂNG KÝ TƯ VẤN: input gạch chân, gửi AJAX không reload --}}
-<section id="contact" class="bg-cream py-24 lg:py-32">
+<section id="contact" class="bg-ink py-24 lg:py-32">
     <div class="mx-auto max-w-3xl px-6 lg:px-10">
         <div class="reveal mb-14 text-center">
             <p class="eyebrow">Liên hệ</p>
             <h2 class="mt-4 font-serif text-4xl font-light tracking-wide lg:text-5xl">Đăng Ký Tư Vấn</h2>
-            <p class="mt-5 text-ink-muted">Để lại thông tin, đội ngũ {{ config('app.name') }} sẽ liên hệ tư vấn miễn phí.</p>
+            <p class="mt-5 text-cream/70">Để lại thông tin, đội ngũ {{ config('app.name') }} sẽ liên hệ tư vấn miễn phí.</p>
         </div>
 
         <form
@@ -20,18 +20,18 @@
                 <div>
                     <input
                         type="text" x-model="form.name" placeholder="Họ và tên *"
-                        class="w-full border-0 border-b border-ink/30 bg-transparent px-0 py-3 text-ink placeholder-ink-muted focus:border-ink focus:ring-0"
+                        class="w-full border-0 border-b border-cream/30 bg-transparent px-0 py-3 text-cream placeholder-cream/40 focus:border-cream focus:ring-0"
                     >
-                    <p x-show="errors.name" x-text="errors.name" class="mt-2 text-xs text-red-600"></p>
+                    <p x-show="errors.name" x-text="errors.name" class="mt-2 text-xs text-red-400"></p>
                 </div>
 
                 {{-- Số điện thoại --}}
                 <div>
                     <input
                         type="tel" x-model="form.phone" placeholder="Số điện thoại *"
-                        class="w-full border-0 border-b border-ink/30 bg-transparent px-0 py-3 text-ink placeholder-ink-muted focus:border-ink focus:ring-0"
+                        class="w-full border-0 border-b border-cream/30 bg-transparent px-0 py-3 text-cream placeholder-cream/40 focus:border-cream focus:ring-0"
                     >
-                    <p x-show="errors.phone" x-text="errors.phone" class="mt-2 text-xs text-red-600"></p>
+                    <p x-show="errors.phone" x-text="errors.phone" class="mt-2 text-xs text-red-400"></p>
                 </div>
             </div>
 
@@ -39,7 +39,7 @@
             <div>
                 <select
                     x-model="form.need"
-                    class="w-full border-0 border-b border-ink/30 bg-transparent px-0 py-3 text-ink focus:border-ink focus:ring-0"
+                    class="w-full border-0 border-b border-cream/30 bg-transparent px-0 py-3 text-cream focus:border-cream focus:ring-0"
                 >
                     <option value="">Nhu cầu của bạn</option>
                     @foreach (\App\Models\Lead::NEEDS as $key => $label)
@@ -52,7 +52,7 @@
             <div>
                 <textarea
                     x-model="form.message" rows="2" placeholder="Lời nhắn"
-                    class="w-full resize-none border-0 border-b border-ink/30 bg-transparent px-0 py-3 text-ink placeholder-ink-muted focus:border-ink focus:ring-0"
+                    class="w-full resize-none border-0 border-b border-cream/30 bg-transparent px-0 py-3 text-cream placeholder-cream/40 focus:border-cream focus:ring-0"
                 ></textarea>
             </div>
 
@@ -61,7 +61,7 @@
                 <button
                     type="submit"
                     :disabled="loading"
-                    class="w-full bg-ink px-12 py-5 text-sm font-medium uppercase tracking-luxe text-cream transition-opacity duration-300 hover:opacity-90 disabled:opacity-50 sm:w-auto"
+                    class="w-full bg-accent px-12 py-5 text-sm font-medium uppercase tracking-luxe text-ink transition-opacity duration-300 hover:opacity-90 disabled:opacity-50 sm:w-auto"
                 >
                     <span x-show="!loading">Gửi</span>
                     <span x-show="loading" x-cloak>Đang gửi...</span>
@@ -72,7 +72,7 @@
             <p
                 x-show="success" x-cloak x-transition
                 x-text="successMessage"
-                class="text-center text-sm font-medium text-emerald-700"
+                class="text-center text-sm font-medium text-emerald-400"
             ></p>
         </form>
     </div>

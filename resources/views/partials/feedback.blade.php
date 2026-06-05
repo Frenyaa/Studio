@@ -1,12 +1,12 @@
 {{-- KHÁCH HÀNG: slider feedback tối giản (Alpine) --}}
 @if ($feedbacks->isNotEmpty())
-<section class="bg-cream-deep py-24 lg:py-32">
+<section class="bg-ink-soft py-24 lg:py-32">
     <div
         x-data="feedbackSlider({{ $feedbacks->count() }})"
         class="reveal mx-auto max-w-3xl px-6 text-center lg:px-10"
     >
         <p class="eyebrow">Khách hàng nói về chúng tôi</p>
-        <div class="mx-auto mt-6 mb-12 h-px w-16 bg-ink/30"></div>
+        <div class="mx-auto mt-6 mb-12 h-px w-16 bg-cream/30"></div>
 
         <div class="relative min-h-[220px]">
             @foreach ($feedbacks as $i => $feedback)
@@ -18,13 +18,13 @@
                     @if(!$loop->first) x-cloak @endif
                     class="absolute inset-0"
                 >
-                    <blockquote class="font-serif text-2xl font-light italic leading-relaxed text-ink lg:text-3xl">
+                    <blockquote class="font-serif text-2xl font-light italic leading-relaxed text-cream lg:text-3xl">
                         “{{ $feedback->content }}”
                     </blockquote>
                     <figcaption class="mt-8">
-                        <span class="block text-sm font-medium uppercase tracking-luxe text-ink">{{ $feedback->client_name }}</span>
+                        <span class="block text-sm font-medium uppercase tracking-luxe text-cream">{{ $feedback->client_name }}</span>
                         @if ($feedback->client_location)
-                            <span class="mt-1 block text-xs text-ink-muted">{{ $feedback->client_location }}</span>
+                            <span class="mt-1 block text-xs text-cream/70">{{ $feedback->client_location }}</span>
                         @endif
                     </figcaption>
                 </figure>
@@ -36,7 +36,7 @@
             @foreach ($feedbacks as $i => $feedback)
                 <button
                     @click="go({{ $i }})"
-                    :class="active === {{ $i }} ? 'w-8 bg-ink' : 'w-2 bg-ink/30'"
+                    :class="active === {{ $i }} ? 'w-8 bg-ink' : 'w-2 bg-cream/30'"
                     class="h-2 rounded-full transition-all duration-500"
                     aria-label="Feedback {{ $i + 1 }}"
                 ></button>

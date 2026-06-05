@@ -6,8 +6,9 @@ use App\Models\ClientFeedback;
 use App\Models\HeroSlide;
 use App\Models\Partner;
 use App\Models\Post;
+use App\Models\Product;
+use App\Models\ProductCategory;
 use App\Models\Project;
-use App\Models\ProjectCategory;
 use App\Models\Service;
 use App\Models\SiteStat;
 use App\Models\WorkflowStep;
@@ -37,9 +38,17 @@ class HomeController extends Controller
 
                 'posts' => Post::published()->latestPosts()->take(3)->get(),
 
-                'categories' => ProjectCategory::active()
+                // Sản phẩm bán lẻ
+                'featuredProducts' => Product::published()
+                    ->featured()
+                    ->ordered()
+                    ->with('category')
+                    ->take(6)
+                    ->get(),
+
+                'productCategories' => ProductCategory::active()
                     ->orderBy('sort_order')
-                    ->with(['projects' => fn ($q) => $q->where('is_published', true)->orderBy('sort_order')])
+                    ->with(['products' => fn ($q) => $q->where('is_published', true)->orderBy('sort_order')])
                     ->get(),
 
                 'services' => Service::active()->orderBy('sort_order')->get(),

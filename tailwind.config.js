@@ -15,18 +15,19 @@ export default {
         extend: {
             colors: {
                 // Bảng màu Minimalism Luxury
+                // THEME TỐI (than chì trung tính): ink = nền tối, cream = chữ sáng
                 ink: {
-                    DEFAULT: '#1a1a1a', // Đen/than cho chữ
-                    soft: '#2b2b2b',
-                    muted: '#6b6b6b',
+                    DEFAULT: '#16181a', // nền chính (than chì)
+                    soft: '#1e2124',    // nền section xen kẽ / card
+                    muted: '#6f7378',
                 },
                 cream: {
-                    DEFAULT: '#f6f3ee', // Kem / off-white nền
-                    deep: '#ece7df',
+                    DEFAULT: '#ece8e1', // chữ sáng (off-white ấm)
+                    deep: '#cfc9bd',
                 },
                 porcelain: '#ffffff',
-                line: '#e3ddd3', // đường viền mảnh
-                accent: '#c2a679', // màu nhấn champagne/gold khi hover, chọn
+                line: '#2b2e31', // đường viền mảnh trên nền tối
+                accent: '#c2a679', // màu nhấn champagne/gold
             },
             fontFamily: {
                 // Font Serif thanh lịch cho tiêu đề

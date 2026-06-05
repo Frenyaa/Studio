@@ -4,14 +4,19 @@ use App\Http\Controllers\BlogController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LeadController;
 use App\Http\Controllers\PageController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProjectController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
-// Dự án
+// Dự án (công trình thiết kế)
 Route::get('/du-an', [ProjectController::class, 'index'])->name('projects.index');
 Route::get('/du-an/{project}', [ProjectController::class, 'show'])->name('projects.show');
+
+// Sản phẩm (bán lẻ)
+Route::get('/san-pham', [ProductController::class, 'index'])->name('products.index');
+Route::get('/san-pham/{product}', [ProductController::class, 'show'])->name('products.show');
 
 // Cảm hứng / Blog
 Route::get('/cam-hung', [BlogController::class, 'index'])->name('blog.index');

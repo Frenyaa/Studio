@@ -1,5 +1,5 @@
 {{-- GIỚI THIỆU + KHỐI CHỈ SỐ chạy số tự động --}}
-<section id="about" class="bg-cream py-24 lg:py-32">
+<section id="about" class="bg-ink py-24 lg:py-32">
     <div class="mx-auto max-w-7xl px-6 lg:px-10">
         <div class="grid items-center gap-16 lg:grid-cols-2">
             {{-- Phần chữ giới thiệu --}}
@@ -8,7 +8,7 @@
                 <h2 class="mt-4 font-serif text-3xl font-light leading-snug tracking-wide lg:text-4xl">
                     Nội thất tối giản sang trọng — nâng tầm không gian sống của bạn.
                 </h2>
-                <p class="mt-6 max-w-lg leading-relaxed text-ink-muted">
+                <p class="mt-6 max-w-lg leading-relaxed text-cream/70">
                     {{ config('app.name') }} tuyển chọn và chế tác những món nội thất tinh tế từ vật liệu cao cấp:
                     gỗ tự nhiên, da và vải nhập khẩu. Mỗi sản phẩm đều chú trọng đường nét tối giản, độ hoàn thiện
                     tỉ mỉ và độ bền theo thời gian — mang đến không gian sống đẳng cấp, ấm cúng cho gia đình bạn.
@@ -24,10 +24,10 @@
                 >
                     @foreach ($stats as $i => $stat)
                         <div class="border-l border-line pl-6">
-                            <div class="font-serif text-5xl font-light text-ink lg:text-6xl">
+                            <div class="font-serif text-5xl font-light text-cream lg:text-6xl">
                                 <span>{{ $stat->prefix }}</span><span x-text="vals[{{ $i }}]">0</span><span>{{ $stat->suffix }}</span>
                             </div>
-                            <p class="mt-3 text-xs uppercase tracking-luxe text-ink-muted">{{ $stat->label }}</p>
+                            <p class="mt-3 text-xs uppercase tracking-luxe text-cream/70">{{ $stat->label }}</p>
                         </div>
                     @endforeach
                 </div>

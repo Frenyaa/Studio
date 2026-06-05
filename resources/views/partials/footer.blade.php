@@ -1,5 +1,5 @@
 {{-- FOOTER --}}
-<footer class="bg-ink text-cream/80">
+<footer class="border-t border-line bg-ink text-cream/80">
     <div class="mx-auto max-w-7xl px-6 py-20 lg:px-10">
         <div class="grid gap-12 lg:grid-cols-5">
             {{-- Thương hiệu --}}

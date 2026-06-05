@@ -6,14 +6,14 @@
 @section('content')
     <article>
         {{-- Tiêu đề + ảnh bìa --}}
-        <header class="bg-cream pt-32 pb-12 text-center lg:pt-40">
+        <header class="bg-ink pt-32 pb-12 text-center lg:pt-40">
             <div class="mx-auto max-w-3xl px-6">
                 @if ($post->category)
                     <p class="eyebrow">{{ $post->category }}</p>
                 @endif
                 <h1 class="mt-4 font-serif text-4xl font-light leading-tight tracking-wide lg:text-5xl">{{ $post->title }}</h1>
                 @if ($post->published_at)
-                    <p class="mt-5 text-xs uppercase tracking-luxe text-ink-muted">{{ $post->published_at->format('d/m/Y') }}</p>
+                    <p class="mt-5 text-xs uppercase tracking-luxe text-cream/70">{{ $post->published_at->format('d/m/Y') }}</p>
                 @endif
             </div>
         </header>
@@ -25,15 +25,15 @@
         @endif
 
         {{-- Nội dung --}}
-        <div class="bg-cream py-16">
-            <div class="prose prose-neutral mx-auto max-w-3xl px-6 prose-headings:font-serif prose-headings:font-light prose-img:rounded-sm">
+        <div class="bg-ink py-16">
+            <div class="prose prose-invert mx-auto max-w-3xl px-6 prose-headings:font-serif prose-headings:font-light prose-img:rounded-sm">
                 {!! $post->content !!}
             </div>
         </div>
 
         {{-- Bài viết liên quan --}}
         @if ($related->isNotEmpty())
-            <section class="border-t border-line bg-cream-deep py-20">
+            <section class="border-t border-line bg-ink-soft py-20">
                 <div class="mx-auto max-w-7xl px-6 lg:px-10">
                     <h2 class="mb-12 text-center font-serif text-3xl font-light">Bài viết khác</h2>
                     <div class="grid grid-cols-1 gap-x-8 gap-y-10 md:grid-cols-3">
@@ -45,7 +45,7 @@
                                              class="h-full w-full object-cover transition-transform duration-1000 ease-luxe group-hover:scale-105">
                                     @endif
                                 </div>
-                                <h3 class="mt-4 font-serif text-xl font-light text-ink">{{ $item->title }}</h3>
+                                <h3 class="mt-4 font-serif text-xl font-light text-cream">{{ $item->title }}</h3>
                             </a>
                         @endforeach
                     </div>

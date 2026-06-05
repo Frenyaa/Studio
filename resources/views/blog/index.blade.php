@@ -3,7 +3,7 @@
 @section('title', 'Cảm hứng — ' . config('app.name'))
 
 @section('content')
-    <section class="bg-cream pt-32 pb-20 lg:pt-40">
+    <section class="bg-ink pt-32 pb-20 lg:pt-40">
         <div class="mx-auto max-w-7xl px-6 lg:px-10">
             <div class="mb-16 text-center">
                 <p class="eyebrow">Cảm hứng</p>
@@ -11,7 +11,7 @@
             </div>
 
             @if ($posts->isEmpty())
-                <p class="text-center text-ink-muted">Chưa có bài viết nào.</p>
+                <p class="text-center text-cream/70">Chưa có bài viết nào.</p>
             @else
                 <div class="grid grid-cols-1 gap-x-8 gap-y-12 md:grid-cols-3">
                     @foreach ($posts as $post)
@@ -25,11 +25,11 @@
                                 </div>
                             </div>
                             @if ($post->category)
-                                <p class="mt-5 text-[11px] uppercase tracking-luxe text-ink-muted">{{ $post->category }}</p>
+                                <p class="mt-5 text-[11px] uppercase tracking-luxe text-cream/70">{{ $post->category }}</p>
                             @endif
-                            <h2 class="mt-2 font-serif text-2xl font-light leading-snug text-ink">{{ $post->title }}</h2>
+                            <h2 class="mt-2 font-serif text-2xl font-light leading-snug text-cream">{{ $post->title }}</h2>
                             @if ($post->excerpt)
-                                <p class="mt-3 text-sm leading-relaxed text-ink-muted line-clamp-2">{{ $post->excerpt }}</p>
+                                <p class="mt-3 text-sm leading-relaxed text-cream/70 line-clamp-2">{{ $post->excerpt }}</p>
                             @endif
                         </a>
                     @endforeach
