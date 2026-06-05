@@ -14,6 +14,7 @@ use App\Models\Project;
 use App\Models\ProjectCategory;
 use App\Models\ProjectImage;
 use App\Models\Service;
+use App\Models\Setting;
 use App\Models\SiteStat;
 use App\Models\WorkflowStep;
 use Illuminate\Support\Facades\Cache;
@@ -55,7 +56,7 @@ class AppServiceProvider extends ServiceProvider
         Page::saved(fn () => Cache::forget('footer_pages'));
         Page::deleted(fn () => Cache::forget('footer_pages'));
 
-        // Chia sẻ danh sách trang chính sách cho footer (mọi trang)
+        // Chia sẻ danh sách trang chính sách + cài đặt website cho footer (mọi trang)
         View::composer('partials.footer', function ($view) {
             $view->with('footerPages', Cache::remember('footer_pages', now()->addMinutes(30), function () {
                 return Page::published()
@@ -63,6 +64,7 @@ class AppServiceProvider extends ServiceProvider
                     ->orderBy('sort_order')
                     ->get(['title', 'slug']);
             }));
+            $view->with('settings', Setting::allCached());
         });
     }
 }

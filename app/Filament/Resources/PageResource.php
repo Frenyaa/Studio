@@ -19,11 +19,11 @@ class PageResource extends Resource
 
     protected static ?string $navigationGroup = 'Nội dung';
 
-    protected static ?string $navigationLabel = 'Trang & Chính sách';
+    protected static ?string $navigationLabel = 'Chính sách';
 
-    protected static ?string $modelLabel = 'trang';
+    protected static ?string $modelLabel = 'chính sách';
 
-    protected static ?string $pluralModelLabel = 'Trang & Chính sách';
+    protected static ?string $pluralModelLabel = 'Chính sách';
 
     protected static ?int $navigationSort = 5;
 

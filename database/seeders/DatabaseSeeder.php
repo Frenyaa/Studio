@@ -14,6 +14,7 @@ use App\Models\Project;
 use App\Models\ProjectCategory;
 use App\Models\ProjectImage;
 use App\Models\Service;
+use App\Models\Setting;
 use App\Models\SiteStat;
 use App\Models\User;
 use App\Models\WorkflowStep;
@@ -274,6 +275,21 @@ class DatabaseSeeder extends Seeder
                 'show_in_footer' => true,
                 'sort_order' => $i,
             ]);
+        }
+
+        // Cài đặt website (liên hệ + mạng xã hội) — chỉnh trong Admin → Cài đặt website
+        $settings = [
+            'footer_about' => 'Thiết kế & thi công nội thất toàn diện theo phong cách tối giản sang trọng — kiến tạo không gian sống tinh tế, bền vững theo thời gian.',
+            'contact_address' => 'Vũ Tông Phan, Thanh Xuân, Hà Nội',
+            'contact_hotline' => '0900 000 000',
+            'contact_email' => 'hello@studio.vn',
+            'social_facebook' => 'https://facebook.com',
+            'social_youtube' => 'https://youtube.com',
+            'social_tiktok' => 'https://tiktok.com',
+            'social_zalo' => '',
+        ];
+        foreach ($settings as $key => $value) {
+            Setting::updateOrCreate(['key' => $key], ['value' => $value]);
         }
     }
 }
