@@ -1,17 +1,17 @@
 {{-- GIỚI THIỆU + KHỐI CHỈ SỐ chạy số tự động --}}
-<section id="about" class="bg-cream-deep py-24 lg:py-32">
+<section id="about" class="bg-cream py-24 lg:py-32">
     <div class="mx-auto max-w-7xl px-6 lg:px-10">
         <div class="grid items-center gap-16 lg:grid-cols-2">
             {{-- Phần chữ giới thiệu --}}
             <div class="reveal">
                 <p class="eyebrow">Về {{ config('app.name') }}</p>
                 <h2 class="mt-4 font-serif text-3xl font-light leading-snug tracking-wide lg:text-4xl">
-                    Sự tỉ mỉ trong từng chi tiết, cam kết duy mỹ trọn vẹn cho không gian sống của bạn.
+                    Nội thất tối giản sang trọng — nâng tầm không gian sống của bạn.
                 </h2>
                 <p class="mt-6 max-w-lg leading-relaxed text-ink-muted">
-                    Chúng tôi theo đuổi triết lý thiết kế tối giản sang trọng — nơi mỗi đường nét, chất liệu và
-                    ánh sáng đều được cân nhắc kỹ lưỡng. Hợp tác cùng những nhà cung ứng vật liệu hàng đầu,
-                    chúng tôi mang đến trải nghiệm thiết kế — thi công toàn diện, chỉn chu đến từng milimet.
+                    {{ config('app.name') }} tuyển chọn và chế tác những món nội thất tinh tế từ vật liệu cao cấp:
+                    gỗ tự nhiên, da và vải nhập khẩu. Mỗi sản phẩm đều chú trọng đường nét tối giản, độ hoàn thiện
+                    tỉ mỉ và độ bền theo thời gian — mang đến không gian sống đẳng cấp, ấm cúng cho gia đình bạn.
                 </p>
             </div>
 

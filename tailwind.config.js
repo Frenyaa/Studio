@@ -26,6 +26,7 @@ export default {
                 },
                 porcelain: '#ffffff',
                 line: '#e3ddd3', // đường viền mảnh
+                accent: '#c2a679', // màu nhấn champagne/gold khi hover, chọn
             },
             fontFamily: {
                 // Font Serif thanh lịch cho tiêu đề

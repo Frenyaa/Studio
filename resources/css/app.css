@@ -6,6 +6,8 @@
     html {
         -webkit-font-smoothing: antialiased;
         scroll-behavior: smooth;
+        /* Chừa khoảng cho thanh menu cố định khi cuộn tới neo (#about, #services...) */
+        scroll-padding-top: 6rem;
     }
 
     body {

@@ -44,7 +44,7 @@
     {{-- Nội dung overlay --}}
     <div class="relative z-10 flex h-full flex-col items-center justify-center px-6 text-center text-white">
         <h1 class="max-w-4xl font-serif text-4xl font-light leading-tight tracking-wide animate-fade-up sm:text-5xl lg:text-6xl">
-            {{ $hero?->slogan ?? 'THIẾT KẾ THI CÔNG TOÀN DIỆN CHO NGÔI NHÀ CỦA BẠN' }}
+            {{ $hero?->slogan ?? 'NỘI THẤT CAO CẤP CHO KHÔNG GIAN SỐNG TINH TẾ' }}
         </h1>
 
         @if ($hero?->sub_slogan)
@@ -54,10 +54,10 @@
         @endif
 
         <a
-            href="{{ $hero?->cta_anchor ?? '#portfolio' }}"
+            href="{{ $hero?->cta_anchor ?? '#categories' }}"
             class="btn-line mt-12 border-white/70 text-white hover:bg-white hover:text-ink"
         >
-            {{ $hero?->cta_label ?? 'XEM DỰ ÁN' }}
+            {{ $hero?->cta_label ?? 'XEM SẢN PHẨM' }}
             <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17.25 8.25 21 12m0 0-3.75 3.75M21 12H3" /></svg>
         </a>
     </div>

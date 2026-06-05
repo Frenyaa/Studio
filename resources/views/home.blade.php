@@ -9,9 +9,9 @@
 
     @include('partials.spotlight', ['spotlight' => $spotlight])
 
-    @include('partials.about', ['stats' => $stats])
-
     @include('partials.services', ['services' => $services])
+
+    @include('partials.about', ['stats' => $stats])
 
     @include('partials.workflow', ['workflowSteps' => $workflowSteps])
 

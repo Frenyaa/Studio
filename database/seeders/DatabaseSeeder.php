@@ -29,11 +29,12 @@ class DatabaseSeeder extends Seeder
 
         // Hero
         HeroSlide::updateOrCreate(['id' => 1], [
+            'video_file' => 'hero/videos/hero-demo.mp4',
             'poster_image' => 'placeholders/hero.jpg',
-            'slogan' => 'THIẾT KẾ THI CÔNG TOÀN DIỆN CHO NGÔI NHÀ CỦA BẠN',
-            'sub_slogan' => 'Minimalism Luxury',
-            'cta_label' => 'XEM DỰ ÁN',
-            'cta_anchor' => '#portfolio',
+            'slogan' => 'NỘI THẤT CAO CẤP CHO KHÔNG GIAN SỐNG TINH TẾ',
+            'sub_slogan' => 'Tối giản · Sang trọng · Bền vững',
+            'cta_label' => 'XEM SẢN PHẨM',
+            'cta_anchor' => '#categories',
             'show_logo_overlay' => true,
             'is_active' => true,
         ]);
@@ -142,9 +143,9 @@ class DatabaseSeeder extends Seeder
 
         // Dịch vụ
         $services = [
-            ['title' => 'Thiết kế', 'summary' => 'Concept & bản vẽ 3D chi tiết, định hình phong cách riêng cho không gian.'],
-            ['title' => 'Thi công trọn gói', 'summary' => 'Thi công toàn diện, giám sát chặt chẽ, bàn giao đúng tiến độ.'],
-            ['title' => 'Cải tạo', 'summary' => 'Làm mới không gian cũ với giải pháp tối ưu công năng và thẩm mỹ.'],
+            ['title' => 'Đặt làm theo yêu cầu', 'summary' => 'Tùy chỉnh kích thước, màu vải/da và chất liệu theo đúng không gian và sở thích của bạn.'],
+            ['title' => 'Vật liệu cao cấp', 'summary' => 'Gỗ tự nhiên, da, nỉ nhập khẩu — bền đẹp theo thời gian, an toàn cho sức khỏe.'],
+            ['title' => 'Giao lắp & Bảo hành', 'summary' => 'Giao hàng, lắp đặt tận nơi và bảo hành dài hạn, đồng hành cùng bạn lâu dài.'],
         ];
         foreach ($services as $i => $s) {
             Service::updateOrCreate(['slug' => \Illuminate\Support\Str::slug($s['title'])], $s + ['sort_order' => $i, 'is_active' => true]);
@@ -152,10 +153,10 @@ class DatabaseSeeder extends Seeder
 
         // Quy trình
         $steps = [
-            ['number' => '01', 'title' => 'Khảo sát', 'description' => 'Lắng nghe nhu cầu, đo đạc và phân tích hiện trạng không gian.'],
-            ['number' => '02', 'title' => 'Thiết kế 3D', 'description' => 'Xây dựng concept và phối cảnh 3D chân thực để bạn hình dung.'],
-            ['number' => '03', 'title' => 'Sản xuất', 'description' => 'Gia công nội thất tại xưởng với vật liệu được kiểm soát chất lượng.'],
-            ['number' => '04', 'title' => 'Thi công', 'description' => 'Lắp đặt, hoàn thiện và bàn giao công trình đúng cam kết.'],
+            ['number' => '01', 'title' => 'Tư vấn', 'description' => 'Lắng nghe nhu cầu, gu thẩm mỹ và không gian của bạn.'],
+            ['number' => '02', 'title' => 'Chọn mẫu & vật liệu', 'description' => 'Lựa chọn thiết kế, màu vải/da, chất liệu và kích thước phù hợp.'],
+            ['number' => '03', 'title' => 'Sản xuất', 'description' => 'Gia công tại xưởng với vật liệu được kiểm soát chất lượng nghiêm ngặt.'],
+            ['number' => '04', 'title' => 'Giao hàng & Lắp đặt', 'description' => 'Vận chuyển, lắp đặt tận nơi và bảo hành chu đáo.'],
         ];
         foreach ($steps as $i => $s) {
             WorkflowStep::updateOrCreate(['title' => $s['title']], $s + ['sort_order' => $i, 'is_active' => true]);
@@ -164,9 +165,9 @@ class DatabaseSeeder extends Seeder
         // Chỉ số
         $stats = [
             ['value' => '10', 'suffix' => '+', 'label' => 'Năm kinh nghiệm'],
-            ['value' => '30', 'suffix' => '/63', 'label' => 'Tỉnh thành'],
-            ['value' => '80', 'suffix' => '+', 'label' => 'Công trình'],
-            ['value' => '30', 'suffix' => '+', 'label' => 'Nhân sự'],
+            ['value' => '500', 'suffix' => '+', 'label' => 'Mẫu nội thất'],
+            ['value' => '2000', 'suffix' => '+', 'label' => 'Khách hàng hài lòng'],
+            ['value' => '24', 'suffix' => ' tháng', 'label' => 'Bảo hành sản phẩm'],
         ];
         foreach ($stats as $i => $s) {
             SiteStat::updateOrCreate(['label' => $s['label']], $s + ['sort_order' => $i, 'is_active' => true]);
@@ -183,9 +184,9 @@ class DatabaseSeeder extends Seeder
 
         // Feedback
         $feedbacks = [
-            ['client_name' => 'Anh Kiên', 'client_location' => 'Hà Nội', 'content' => 'Đội ngũ làm việc rất tỉ mỉ và chuyên nghiệp. Căn nhà của tôi đẹp đúng như kỳ vọng, từng chi tiết đều chỉn chu.'],
-            ['client_name' => 'Chị Mai', 'client_location' => 'Hải Phòng', 'content' => 'Tôi đặc biệt ấn tượng với khả năng tối giản mà vẫn sang trọng. Quy trình rõ ràng, bàn giao đúng hẹn.'],
-            ['client_name' => 'Anh Tuấn', 'client_location' => 'Đà Nẵng', 'content' => 'Sự tận tâm và gu thẩm mỹ tinh tế đã thuyết phục tôi hoàn toàn. Rất đáng để hợp tác.'],
+            ['client_name' => 'Anh Kiên', 'client_location' => 'Hà Nội', 'content' => 'Bộ sofa đúng như hình, chất vải đẹp và rất êm. Giao lắp nhanh, nhân viên tư vấn nhiệt tình.'],
+            ['client_name' => 'Chị Mai', 'client_location' => 'Hải Phòng', 'content' => 'Mình rất ưng chất lượng gỗ và độ hoàn thiện. Được phối màu theo yêu cầu, sang trọng đúng gu.'],
+            ['client_name' => 'Anh Tuấn', 'client_location' => 'Đà Nẵng', 'content' => 'Sản phẩm cao cấp, đáng tiền. Chế độ bảo hành chu đáo, chắc chắn sẽ tiếp tục ủng hộ.'],
         ];
         foreach ($feedbacks as $i => $f) {
             ClientFeedback::updateOrCreate(['client_name' => $f['client_name']], $f + ['rating' => 5, 'sort_order' => $i, 'is_active' => true]);

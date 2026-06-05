@@ -4,18 +4,13 @@
     <div class="mx-auto max-w-7xl px-6 lg:px-10">
         <div class="reveal mb-16 text-center">
             <p class="text-xs font-medium uppercase tracking-luxe text-cream/50">Quy trình</p>
-            <h2 class="mt-4 font-serif text-4xl font-light tracking-wide lg:text-5xl">Quy Trình Làm Việc Chuyên Nghiệp</h2>
+            <h2 class="mt-4 font-serif text-4xl font-light tracking-wide lg:text-5xl">Quy Trình Đặt Hàng</h2>
             <div class="mx-auto mt-6 h-px w-16 bg-cream/30"></div>
         </div>
 
         <div class="grid gap-12 md:grid-cols-2 lg:grid-cols-4">
             @foreach ($workflowSteps as $index => $step)
                 <div class="relative reveal reveal-d{{ ($index % 4) + 1 }}">
-                    {{-- Đường nối ngang giữa các bước (desktop) --}}
-                    @if (! $loop->last)
-                        <span class="absolute right-0 top-10 hidden h-px w-1/2 translate-x-1/2 bg-cream/15 lg:block"></span>
-                    @endif
-
                     <div class="font-serif text-7xl font-extralight leading-none text-cream/25">
                         {{ $step->number ?? str_pad($index + 1, 2, '0', STR_PAD_LEFT) }}
                     </div>
