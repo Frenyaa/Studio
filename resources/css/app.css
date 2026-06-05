@@ -1,0 +1,86 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    html {
+        -webkit-font-smoothing: antialiased;
+        scroll-behavior: smooth;
+    }
+
+    body {
+        @apply font-sans text-ink;
+    }
+
+    h1, h2, h3, h4 {
+        @apply font-serif;
+        line-height: 1.1;
+    }
+}
+
+@layer components {
+    /* Nút đường kẻ mảnh + mũi tên (phong cách BoConcept) */
+    .btn-line {
+        @apply inline-flex items-center gap-3 border px-9 py-4 text-xs font-medium uppercase tracking-luxe transition-all duration-500 ease-luxe;
+    }
+    .btn-line svg {
+        @apply h-4 w-4 transition-transform duration-500 ease-luxe;
+    }
+    .btn-line:hover svg {
+        @apply translate-x-1;
+    }
+
+    /* Nhãn nhỏ phía trên tiêu đề section */
+    .eyebrow {
+        @apply text-xs font-medium uppercase tracking-luxe text-ink-muted;
+    }
+}
+
+@layer utilities {
+    /* Ẩn phần tử Alpine cho tới khi khởi tạo xong (chống nháy) */
+    [x-cloak] {
+        display: none !important;
+    }
+
+    /* Scroll reveal */
+    .reveal {
+        opacity: 0;
+        transform: translateY(32px);
+        transition: opacity 1s cubic-bezier(0.22, 1, 0.36, 1),
+                    transform 1s cubic-bezier(0.22, 1, 0.36, 1);
+        will-change: opacity, transform;
+    }
+    .reveal.is-visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    /* Trễ theo bậc để tạo hiệu ứng so le */
+    .reveal-d1 { transition-delay: 0.08s; }
+    .reveal-d2 { transition-delay: 0.16s; }
+    .reveal-d3 { transition-delay: 0.24s; }
+    .reveal-d4 { transition-delay: 0.32s; }
+    .reveal-d5 { transition-delay: 0.40s; }
+}
+
+/* Thanh cuộn mảnh cho băng chuyền danh mục */
+.cat-scroll::-webkit-scrollbar {
+    height: 3px;
+}
+.cat-scroll::-webkit-scrollbar-track {
+    background: #e3ddd3;
+}
+.cat-scroll::-webkit-scrollbar-thumb {
+    background: #1a1a1a;
+}
+
+/* Thanh cuộn tối giản */
+::-webkit-scrollbar {
+    width: 10px;
+}
+::-webkit-scrollbar-track {
+    background: #f6f3ee;
+}
+::-webkit-scrollbar-thumb {
+    background: #c9c1b4;
+    border-radius: 9999px;
+}
