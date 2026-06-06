@@ -16,8 +16,6 @@ npm run build
 php artisan serve
 ```
 
-Mặc định dùng SQLite. Muốn dùng MySQL thì sửa lại phần `DB_*` trong file `.env`.
-
 ## Truy cập
 
 - Trang chủ: http://localhost:8000

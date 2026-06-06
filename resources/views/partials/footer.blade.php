@@ -20,7 +20,7 @@
         <div class="grid gap-12 lg:grid-cols-5">
             {{-- Thương hiệu --}}
             <div class="lg:col-span-2">
-                <span class="font-serif text-3xl font-light tracking-luxe text-cream">{{ strtoupper($brand) }}</span>
+                <span class="font-brand text-3xl font-light tracking-luxe text-cream">{{ strtoupper($brand) }}</span>
                 <p class="mt-6 max-w-sm text-sm leading-relaxed text-cream/60">{{ $about }}</p>
             </div>
 

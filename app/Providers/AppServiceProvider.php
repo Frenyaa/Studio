@@ -62,6 +62,11 @@ class AppServiceProvider extends ServiceProvider
         ProjectCategory::saved(fn () => Cache::forget('nav_project_cats'));
         ProjectCategory::deleted(fn () => Cache::forget('nav_project_cats'));
 
+        // Chia sẻ cài đặt website cho form tư vấn + dải CTA
+        View::composer(['partials.contact', 'partials.cta'], function ($view) {
+            $view->with('settings', Setting::allCached());
+        });
+
         // Chia sẻ danh sách trang chính sách + cài đặt website cho footer (mọi trang)
         View::composer('partials.footer', function ($view) {
             $view->with('footerPages', Cache::remember('footer_pages', now()->addMinutes(30), function () {

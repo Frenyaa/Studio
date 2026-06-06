@@ -6,8 +6,8 @@
     <section class="bg-ink pt-32 pb-20 lg:pt-40">
         <div class="mx-auto max-w-7xl px-6 lg:px-10">
             <div class="mb-12 text-center">
-                <p class="eyebrow">Blog</p>
-                <h1 class="mt-4 font-serif text-4xl font-light tracking-wide lg:text-6xl">Góc Tư Vấn & Cảm Hứng</h1>
+                <p class="eyebrow">Chia sẻ</p>
+                <h1 class="mt-4 font-serif text-4xl font-light tracking-wide lg:text-6xl">Blog Nội Thất</h1>
             </div>
 
             {{-- Lọc theo chủ đề --}}

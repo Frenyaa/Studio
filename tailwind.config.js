@@ -32,8 +32,10 @@ export default {
             fontFamily: {
                 // Font Serif thanh lịch cho tiêu đề
                 serif: ['"Cormorant Garamond"', '"Playfair Display"', ...defaultTheme.fontFamily.serif],
-                // Sans tinh tế cho nội dung
-                sans: ['"Jost"', '"Inter"', ...defaultTheme.fontFamily.sans],
+                // Sans cho nội dung (Be Vietnam Pro — hỗ trợ tiếng Việt tốt)
+                sans: ['"Be Vietnam Pro"', '"Inter"', ...defaultTheme.fontFamily.sans],
+                // Font riêng cho tên thương hiệu (logo chữ)
+                brand: ['"Cormorant Garamond"', '"Playfair Display"', ...defaultTheme.fontFamily.serif],
             },
             letterSpacing: {
                 luxe: '0.22em',

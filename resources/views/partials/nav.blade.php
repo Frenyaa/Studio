@@ -8,7 +8,7 @@
 >
     <nav class="mx-auto flex max-w-7xl items-center justify-between px-6 py-5 lg:px-10">
         {{-- Logo --}}
-        <a href="{{ route('home') }}" class="font-serif text-2xl font-semibold tracking-luxe">
+        <a href="{{ route('home') }}" class="font-brand text-2xl font-semibold tracking-luxe">
             {{ strtoupper($siteName ?? config('app.name')) }}
         </a>
 
@@ -26,7 +26,7 @@
                     <div class="invisible absolute left-1/2 top-full z-50 w-56 -translate-x-1/2 pt-4 opacity-0 transition-all duration-200 group-hover:visible group-hover:opacity-100">
                         <ul class="border border-line bg-ink py-2 text-cream shadow-2xl">
                             @foreach ($navProductCategories as $c)
-                                <li><a href="{{ route('products.index', ['category' => $c->slug]) }}" class="block px-5 py-2 text-[13px] font-normal normal-case tracking-normal text-cream/80 transition-colors hover:bg-ink-soft hover:text-accent">{{ $c->name }}</a></li>
+                                <li><a href="{{ route('products.index', ['category' => $c->slug]) }}" class="block px-5 py-2.5 font-sans text-[11px] font-medium uppercase tracking-[0.14em] text-cream/70 transition-colors hover:bg-ink-soft hover:text-accent">{{ $c->name }}</a></li>
                             @endforeach
                         </ul>
                     </div>
@@ -43,7 +43,7 @@
                     <div class="invisible absolute left-1/2 top-full z-50 w-56 -translate-x-1/2 pt-4 opacity-0 transition-all duration-200 group-hover:visible group-hover:opacity-100">
                         <ul class="border border-line bg-ink py-2 text-cream shadow-2xl">
                             @foreach ($navProjectCategories as $c)
-                                <li><a href="{{ route('projects.index', ['category' => $c->slug]) }}" class="block px-5 py-2 text-[13px] font-normal normal-case tracking-normal text-cream/80 transition-colors hover:bg-ink-soft hover:text-accent">{{ $c->name }}</a></li>
+                                <li><a href="{{ route('projects.index', ['category' => $c->slug]) }}" class="block px-5 py-2.5 font-sans text-[11px] font-medium uppercase tracking-[0.14em] text-cream/70 transition-colors hover:bg-ink-soft hover:text-accent">{{ $c->name }}</a></li>
                             @endforeach
                         </ul>
                     </div>
@@ -63,7 +63,7 @@
                     <div class="invisible absolute left-1/2 top-full z-50 w-56 -translate-x-1/2 pt-4 opacity-0 transition-all duration-200 group-hover:visible group-hover:opacity-100">
                         <ul class="border border-line bg-ink py-2 text-cream shadow-2xl">
                             @foreach ($navBlogCategories as $slug => $label)
-                                <li><a href="{{ route('blog.index', ['category' => $slug]) }}" class="block px-5 py-2 text-[13px] font-normal normal-case tracking-normal text-cream/80 transition-colors hover:bg-ink-soft hover:text-accent">{{ $label }}</a></li>
+                                <li><a href="{{ route('blog.index', ['category' => $slug]) }}" class="block px-5 py-2.5 font-sans text-[11px] font-medium uppercase tracking-[0.14em] text-cream/70 transition-colors hover:bg-ink-soft hover:text-accent">{{ $label }}</a></li>
                             @endforeach
                         </ul>
                     </div>
@@ -90,7 +90,7 @@
         class="fixed inset-0 h-screen w-screen overflow-y-auto text-cream lg:hidden"
     >
         <div class="flex items-center justify-between px-6 py-5">
-            <span class="font-serif text-2xl tracking-luxe">{{ strtoupper($siteName ?? config('app.name')) }}</span>
+            <span class="font-brand text-2xl tracking-luxe">{{ strtoupper($siteName ?? config('app.name')) }}</span>
             <button @click="mobileOpen = false" aria-label="Đóng menu">
                 <svg class="h-7 w-7" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
                     <path stroke-linecap="round" d="M6 18 18 6M6 6l12 12" />

@@ -48,7 +48,7 @@ class LeadResource extends Resource
                     ]),
                     Forms\Components\Grid::make(2)->schema([
                         Forms\Components\TextInput::make('email')->label('Email')->email(),
-                        Forms\Components\Select::make('need')->label('Nhu cầu')->options(Lead::NEEDS),
+                        Forms\Components\TextInput::make('need')->label('Nhu cầu'),
                     ]),
                     Forms\Components\Textarea::make('message')->label('Lời nhắn')->rows(3),
                 ]),
@@ -82,7 +82,6 @@ class LeadResource extends Resource
                 Tables\Columns\TextColumn::make('phone')->label('SĐT')->searchable()->copyable()->icon('heroicon-m-phone'),
                 Tables\Columns\TextColumn::make('need')
                     ->label('Nhu cầu')
-                    ->formatStateUsing(fn ($state) => Lead::NEEDS[$state] ?? $state)
                     ->badge()
                     ->color('gray'),
                 Tables\Columns\TextColumn::make('message')->label('Lời nhắn')->limit(40)->tooltip(fn ($record) => $record->message),
@@ -93,7 +92,6 @@ class LeadResource extends Resource
             ])
             ->filters([
                 Tables\Filters\SelectFilter::make('status')->label('Trạng thái')->options(Lead::STATUSES),
-                Tables\Filters\SelectFilter::make('need')->label('Nhu cầu')->options(Lead::NEEDS),
             ])
             ->actions([
                 Tables\Actions\ViewAction::make(),

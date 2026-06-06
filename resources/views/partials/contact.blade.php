@@ -1,10 +1,20 @@
 {{-- FORM ĐĂNG KÝ TƯ VẤN: input gạch chân, gửi AJAX không reload --}}
+@php
+    $cs = $settings ?? [];
+    $consultTitle = ($cs['consult_title'] ?? '') ?: 'Đăng Ký Tư Vấn';
+    $consultSubtitle = ($cs['consult_subtitle'] ?? '') ?: 'Để lại thông tin, đội ngũ của chúng tôi sẽ liên hệ tư vấn miễn phí.';
+    $consultNeeds = collect(preg_split('/\r\n|\r|\n/', ($cs['consult_needs'] ?? '')))
+        ->map(fn ($n) => trim($n))->filter()->values();
+    if ($consultNeeds->isEmpty()) {
+        $consultNeeds = collect(['Mua sản phẩm có sẵn', 'Đặt làm theo yêu cầu', 'Tư vấn thiết kế', 'Khác']);
+    }
+@endphp
 <section id="contact" class="bg-ink py-24 lg:py-32">
     <div class="mx-auto max-w-3xl px-6 lg:px-10">
         <div class="reveal mb-14 text-center">
             <p class="eyebrow">Liên hệ</p>
-            <h2 class="mt-4 font-serif text-4xl font-light tracking-wide lg:text-5xl">Đăng Ký Tư Vấn</h2>
-            <p class="mt-5 text-cream/70">Để lại thông tin, đội ngũ {{ config('app.name') }} sẽ liên hệ tư vấn miễn phí.</p>
+            <h2 class="mt-4 font-serif text-4xl font-light tracking-wide lg:text-5xl">{{ $consultTitle }}</h2>
+            <p class="mt-5 text-cream/70">{{ $consultSubtitle }}</p>
         </div>
 
         <form
@@ -39,11 +49,11 @@
             <div>
                 <select
                     x-model="form.need"
-                    class="w-full border-0 border-b border-cream/30 bg-transparent px-0 py-3 text-cream focus:border-cream focus:ring-0"
+                    class="w-full border-0 border-b border-cream/30 bg-transparent px-0 py-3 text-cream focus:border-cream focus:ring-0 [&>option]:bg-ink [&>option]:text-cream"
                 >
                     <option value="">Nhu cầu của bạn</option>
-                    @foreach (\App\Models\Lead::NEEDS as $key => $label)
-                        <option value="{{ $key }}">{{ $label }}</option>
+                    @foreach ($consultNeeds as $need)
+                        <option value="{{ $need }}">{{ $need }}</option>
                     @endforeach
                 </select>
             </div>

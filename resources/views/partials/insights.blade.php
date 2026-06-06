@@ -3,8 +3,8 @@
 <section id="insights" class="bg-ink py-24 lg:py-32">
     <div class="mx-auto max-w-7xl px-6 lg:px-10">
         <div class="reveal mb-16 flex flex-col items-center text-center">
-            <p class="eyebrow">Cảm hứng</p>
-            <h2 class="mt-4 font-serif text-4xl font-light tracking-wide lg:text-5xl">Góc Tư Vấn & Xu Hướng</h2>
+            <p class="eyebrow">Chia sẻ</p>
+            <h2 class="mt-4 font-serif text-4xl font-light tracking-wide lg:text-5xl">Blog Nội Thất</h2>
             <div class="mx-auto mt-6 h-px w-16 bg-cream/30"></div>
         </div>
 

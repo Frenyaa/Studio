@@ -15,7 +15,7 @@
                         src="{{ asset('storage/' . $partner->logo) }}"
                         alt="{{ $partner->name }}"
                         loading="lazy"
-                        class="h-8 w-auto opacity-50 grayscale transition-all duration-500 hover:opacity-100 hover:grayscale-0 lg:h-10"
+                        class="h-8 w-auto opacity-60 brightness-0 invert transition-all duration-500 hover:opacity-100 lg:h-10"
                     >
                 </a>
             @endforeach
