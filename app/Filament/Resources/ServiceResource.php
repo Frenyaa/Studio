@@ -17,7 +17,9 @@ class ServiceResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-squares-2x2';
 
-    protected static ?string $navigationGroup = 'Nội dung';
+    protected static ?string $navigationGroup = 'Trang chủ';
+
+    protected static bool $shouldRegisterNavigation = false;
 
     protected static ?string $navigationLabel = 'Dịch vụ';
 
@@ -25,7 +27,7 @@ class ServiceResource extends Resource
 
     protected static ?string $pluralModelLabel = 'Dịch vụ';
 
-    protected static ?int $navigationSort = 1;
+    protected static ?int $navigationSort = 2;
 
     public static function form(Form $form): Form
     {

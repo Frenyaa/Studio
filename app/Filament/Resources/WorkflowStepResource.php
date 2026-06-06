@@ -16,7 +16,9 @@ class WorkflowStepResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-bars-3-bottom-left';
 
-    protected static ?string $navigationGroup = 'Nội dung';
+    protected static ?string $navigationGroup = 'Trang chủ';
+
+    protected static bool $shouldRegisterNavigation = false;
 
     protected static ?string $navigationLabel = 'Quy trình làm việc';
 
@@ -24,7 +26,7 @@ class WorkflowStepResource extends Resource
 
     protected static ?string $pluralModelLabel = 'Quy trình làm việc';
 
-    protected static ?int $navigationSort = 2;
+    protected static ?int $navigationSort = 3;
 
     public static function form(Form $form): Form
     {

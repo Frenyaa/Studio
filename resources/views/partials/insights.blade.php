@@ -20,7 +20,7 @@
                         </div>
                     </div>
                     @if ($post->category)
-                        <p class="mt-5 text-[11px] uppercase tracking-luxe text-cream/70">{{ $post->category }}</p>
+                        <p class="mt-5 text-[11px] uppercase tracking-luxe text-cream/70">{{ $post->category_label }}</p>
                     @endif
                     <h3 class="mt-2 font-serif text-2xl font-light leading-snug text-cream transition-colors group-hover:text-cream">{{ $post->title }}</h3>
                     @if ($post->excerpt)

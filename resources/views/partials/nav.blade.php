@@ -1,4 +1,4 @@
-{{-- Thanh điều hướng tối giản: trong suốt trên hero, chuyển nền kem khi cuộn --}}
+{{-- Thanh điều hướng: trong suốt trên hero, nền tối khi cuộn; có dropdown danh mục --}}
 <header
     x-data="{ home: {{ request()->routeIs('home') ? 'true' : 'false' }}, scrolled: false, mobileOpen: false }"
     x-init="scrolled = !home"
@@ -9,17 +9,67 @@
     <nav class="mx-auto flex max-w-7xl items-center justify-between px-6 py-5 lg:px-10">
         {{-- Logo --}}
         <a href="{{ route('home') }}" class="font-serif text-2xl font-semibold tracking-luxe">
-            {{ strtoupper(config('app.name')) }}
+            {{ strtoupper($siteName ?? config('app.name')) }}
         </a>
 
         {{-- Menu desktop --}}
-        <ul class="hidden items-center gap-10 text-xs font-medium uppercase tracking-luxe lg:flex">
+        <ul class="hidden items-center gap-9 text-xs font-medium uppercase tracking-luxe lg:flex">
             <li><a href="{{ route('home') }}" class="transition-colors duration-300 hover:text-accent">Trang chủ</a></li>
-            <li><a href="{{ route('products.index') }}" class="transition-colors duration-300 hover:text-accent">Sản phẩm</a></li>
-            <li><a href="{{ route('projects.index') }}" class="transition-colors duration-300 hover:text-accent">Dự án</a></li>
+
+            {{-- Sản phẩm + dropdown loại --}}
+            <li class="group relative">
+                <a href="{{ route('products.index') }}" class="flex items-center gap-1 transition-colors duration-300 hover:text-accent">
+                    Sản phẩm
+                    <svg class="h-3 w-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5"/></svg>
+                </a>
+                @if (!empty($navProductCategories) && $navProductCategories->isNotEmpty())
+                    <div class="invisible absolute left-1/2 top-full z-50 w-56 -translate-x-1/2 pt-4 opacity-0 transition-all duration-200 group-hover:visible group-hover:opacity-100">
+                        <ul class="border border-line bg-ink py-2 text-cream shadow-2xl">
+                            @foreach ($navProductCategories as $c)
+                                <li><a href="{{ route('products.index', ['category' => $c->slug]) }}" class="block px-5 py-2 text-[13px] font-normal normal-case tracking-normal text-cream/80 transition-colors hover:bg-ink-soft hover:text-accent">{{ $c->name }}</a></li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+            </li>
+
+            {{-- Dự án + dropdown loại công trình --}}
+            <li class="group relative">
+                <a href="{{ route('projects.index') }}" class="flex items-center gap-1 transition-colors duration-300 hover:text-accent">
+                    Dự án
+                    <svg class="h-3 w-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5"/></svg>
+                </a>
+                @if (!empty($navProjectCategories) && $navProjectCategories->isNotEmpty())
+                    <div class="invisible absolute left-1/2 top-full z-50 w-56 -translate-x-1/2 pt-4 opacity-0 transition-all duration-200 group-hover:visible group-hover:opacity-100">
+                        <ul class="border border-line bg-ink py-2 text-cream shadow-2xl">
+                            @foreach ($navProjectCategories as $c)
+                                <li><a href="{{ route('projects.index', ['category' => $c->slug]) }}" class="block px-5 py-2 text-[13px] font-normal normal-case tracking-normal text-cream/80 transition-colors hover:bg-ink-soft hover:text-accent">{{ $c->name }}</a></li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+            </li>
+
             <li><a href="{{ route('home') }}#services" class="transition-colors duration-300 hover:text-accent">Dịch vụ</a></li>
             <li><a href="{{ route('home') }}#about" class="transition-colors duration-300 hover:text-accent">Về chúng tôi</a></li>
-            <li><a href="{{ route('blog.index') }}" class="transition-colors duration-300 hover:text-accent">Cảm hứng</a></li>
+
+            {{-- Blog + dropdown chủ đề --}}
+            <li class="group relative">
+                <a href="{{ route('blog.index') }}" class="flex items-center gap-1 transition-colors duration-300 hover:text-accent">
+                    Blog
+                    <svg class="h-3 w-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5"/></svg>
+                </a>
+                @if (!empty($navBlogCategories))
+                    <div class="invisible absolute left-1/2 top-full z-50 w-56 -translate-x-1/2 pt-4 opacity-0 transition-all duration-200 group-hover:visible group-hover:opacity-100">
+                        <ul class="border border-line bg-ink py-2 text-cream shadow-2xl">
+                            @foreach ($navBlogCategories as $slug => $label)
+                                <li><a href="{{ route('blog.index', ['category' => $slug]) }}" class="block px-5 py-2 text-[13px] font-normal normal-case tracking-normal text-cream/80 transition-colors hover:bg-ink-soft hover:text-accent">{{ $label }}</a></li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+            </li>
+
             <li><a href="{{ route('home') }}#contact" class="transition-colors duration-300 hover:text-accent">Liên hệ</a></li>
         </ul>
 
@@ -31,30 +81,66 @@
         </button>
     </nav>
 
-    {{-- Overlay menu mobile (Alpine) — nền đen đặc bằng inline style để chắc chắn không trong suốt --}}
+    {{-- Overlay menu mobile --}}
     <div
         x-cloak
         x-show="mobileOpen"
         x-transition.opacity
-        style="background-color:#1a1a1a; z-index:100;"
+        style="background-color:#16181a; z-index:100;"
         class="fixed inset-0 h-screen w-screen overflow-y-auto text-cream lg:hidden"
     >
         <div class="flex items-center justify-between px-6 py-5">
-            <span class="font-serif text-2xl tracking-luxe">{{ strtoupper(config('app.name')) }}</span>
+            <span class="font-serif text-2xl tracking-luxe">{{ strtoupper($siteName ?? config('app.name')) }}</span>
             <button @click="mobileOpen = false" aria-label="Đóng menu">
                 <svg class="h-7 w-7" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
                     <path stroke-linecap="round" d="M6 18 18 6M6 6l12 12" />
                 </svg>
             </button>
         </div>
-        <ul class="mt-10 flex flex-col items-center gap-8 font-serif text-3xl">
-            <li><a @click="mobileOpen = false" class="transition-colors duration-300 hover:text-accent" href="{{ route('home') }}">Trang chủ</a></li>
-            <li><a @click="mobileOpen = false" class="transition-colors duration-300 hover:text-accent" href="{{ route('products.index') }}">Sản phẩm</a></li>
-            <li><a @click="mobileOpen = false" class="transition-colors duration-300 hover:text-accent" href="{{ route('projects.index') }}">Dự án</a></li>
-            <li><a @click="mobileOpen = false" class="transition-colors duration-300 hover:text-accent" href="{{ route('home') }}#services">Dịch vụ</a></li>
-            <li><a @click="mobileOpen = false" class="transition-colors duration-300 hover:text-accent" href="{{ route('home') }}#about">Về chúng tôi</a></li>
-            <li><a @click="mobileOpen = false" class="transition-colors duration-300 hover:text-accent" href="{{ route('blog.index') }}">Cảm hứng</a></li>
-            <li><a @click="mobileOpen = false" class="transition-colors duration-300 hover:text-accent" href="{{ route('home') }}#contact">Liên hệ</a></li>
+
+        <ul class="mt-6 flex flex-col items-center gap-6 pb-16 font-serif text-3xl">
+            <li><a @click="mobileOpen = false" class="hover:text-accent" href="{{ route('home') }}">Trang chủ</a></li>
+
+            {{-- Sản phẩm + loại --}}
+            <li class="flex flex-col items-center gap-2">
+                <a @click="mobileOpen = false" class="hover:text-accent" href="{{ route('products.index') }}">Sản phẩm</a>
+                @if (!empty($navProductCategories) && $navProductCategories->isNotEmpty())
+                    <div class="flex max-w-xs flex-wrap justify-center gap-x-4 gap-y-1 font-sans text-xs uppercase tracking-luxe text-cream/50">
+                        @foreach ($navProductCategories as $c)
+                            <a @click="mobileOpen = false" class="hover:text-accent" href="{{ route('products.index', ['category' => $c->slug]) }}">{{ $c->name }}</a>
+                        @endforeach
+                    </div>
+                @endif
+            </li>
+
+            {{-- Dự án + loại --}}
+            <li class="flex flex-col items-center gap-2">
+                <a @click="mobileOpen = false" class="hover:text-accent" href="{{ route('projects.index') }}">Dự án</a>
+                @if (!empty($navProjectCategories) && $navProjectCategories->isNotEmpty())
+                    <div class="flex max-w-xs flex-wrap justify-center gap-x-4 gap-y-1 font-sans text-xs uppercase tracking-luxe text-cream/50">
+                        @foreach ($navProjectCategories as $c)
+                            <a @click="mobileOpen = false" class="hover:text-accent" href="{{ route('projects.index', ['category' => $c->slug]) }}">{{ $c->name }}</a>
+                        @endforeach
+                    </div>
+                @endif
+            </li>
+
+            <li><a @click="mobileOpen = false" class="hover:text-accent" href="{{ route('home') }}#services">Dịch vụ</a></li>
+            <li><a @click="mobileOpen = false" class="hover:text-accent" href="{{ route('home') }}#about">Về chúng tôi</a></li>
+
+            {{-- Blog + chủ đề --}}
+            <li class="flex flex-col items-center gap-2">
+                <a @click="mobileOpen = false" class="hover:text-accent" href="{{ route('blog.index') }}">Blog</a>
+                @if (!empty($navBlogCategories))
+                    <div class="flex max-w-xs flex-wrap justify-center gap-x-4 gap-y-1 font-sans text-xs uppercase tracking-luxe text-cream/50">
+                        @foreach ($navBlogCategories as $slug => $label)
+                            <a @click="mobileOpen = false" class="hover:text-accent" href="{{ route('blog.index', ['category' => $slug]) }}">{{ $label }}</a>
+                        @endforeach
+                    </div>
+                @endif
+            </li>
+
+            <li><a @click="mobileOpen = false" class="hover:text-accent" href="{{ route('home') }}#contact">Liên hệ</a></li>
         </ul>
     </div>
 </header>

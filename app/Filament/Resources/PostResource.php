@@ -17,9 +17,9 @@ class PostResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-newspaper';
 
-    protected static ?string $navigationGroup = 'Nội dung';
+    protected static ?string $navigationGroup = 'Blog';
 
-    protected static ?string $navigationLabel = 'Bài viết (Cảm hứng)';
+    protected static ?string $navigationLabel = 'Bài viết';
 
     protected static ?string $modelLabel = 'bài viết';
 
@@ -55,7 +55,11 @@ class PostResource extends Resource
             Forms\Components\Group::make()->schema([
                 Forms\Components\Section::make('Ảnh & phân loại')->schema([
                     Forms\Components\FileUpload::make('cover_image')->label('Ảnh bìa')->image()->imageEditor()->directory('posts'),
-                    Forms\Components\TextInput::make('category')->label('Chủ đề')->placeholder('Xu hướng'),
+                    Forms\Components\Select::make('category')
+                        ->label('Chủ đề')
+                        ->options(\App\Models\Post::CATEGORIES)
+                        ->searchable()
+                        ->native(false),
                 ]),
                 Forms\Components\Section::make('Xuất bản')->schema([
                     Forms\Components\Toggle::make('is_published')->label('Xuất bản')->default(true),
@@ -73,7 +77,8 @@ class PostResource extends Resource
             ->columns([
                 Tables\Columns\ImageColumn::make('cover_image')->label('Ảnh')->square()->height(56),
                 Tables\Columns\TextColumn::make('title')->label('Tiêu đề')->searchable()->sortable()->wrap(),
-                Tables\Columns\TextColumn::make('category')->label('Chủ đề')->badge()->color('gray'),
+                Tables\Columns\TextColumn::make('category')->label('Chủ đề')->badge()->color('gray')
+                    ->formatStateUsing(fn ($state) => \App\Models\Post::CATEGORIES[$state] ?? $state),
                 Tables\Columns\IconColumn::make('is_published')->label('Xuất bản')->boolean(),
                 Tables\Columns\TextColumn::make('published_at')->label('Ngày đăng')->date('d/m/Y')->sortable(),
             ])

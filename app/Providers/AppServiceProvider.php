@@ -56,6 +56,12 @@ class AppServiceProvider extends ServiceProvider
         Page::saved(fn () => Cache::forget('footer_pages'));
         Page::deleted(fn () => Cache::forget('footer_pages'));
 
+        // Xoá cache danh mục trên menu khi có thay đổi
+        ProductCategory::saved(fn () => Cache::forget('nav_product_cats'));
+        ProductCategory::deleted(fn () => Cache::forget('nav_product_cats'));
+        ProjectCategory::saved(fn () => Cache::forget('nav_project_cats'));
+        ProjectCategory::deleted(fn () => Cache::forget('nav_project_cats'));
+
         // Chia sẻ danh sách trang chính sách + cài đặt website cho footer (mọi trang)
         View::composer('partials.footer', function ($view) {
             $view->with('footerPages', Cache::remember('footer_pages', now()->addMinutes(30), function () {
@@ -65,6 +71,18 @@ class AppServiceProvider extends ServiceProvider
                     ->get(['title', 'slug']);
             }));
             $view->with('settings', Setting::allCached());
+        });
+
+        // Chia sẻ danh mục cho menu điều hướng (dropdown)
+        View::composer('partials.nav', function ($view) {
+            $view->with('navProductCategories', Cache::remember('nav_product_cats', now()->addMinutes(30), fn () => ProductCategory::where('is_active', true)->orderBy('sort_order')->get(['name', 'slug'])));
+            $view->with('navProjectCategories', Cache::remember('nav_project_cats', now()->addMinutes(30), fn () => ProjectCategory::where('is_active', true)->orderBy('sort_order')->get(['name', 'slug'])));
+            $view->with('navBlogCategories', Post::CATEGORIES);
+        });
+
+        // Chia sẻ tên thương hiệu cho menu, footer, layout
+        View::composer(['layouts.app', 'partials.nav', 'partials.footer'], function ($view) {
+            $view->with('siteName', Setting::getValue('site_name', config('app.name')));
         });
     }
 }

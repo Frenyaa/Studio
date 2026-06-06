@@ -16,7 +16,9 @@ class SiteStatResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-chart-bar';
 
-    protected static ?string $navigationGroup = 'Nội dung';
+    protected static ?string $navigationGroup = 'Trang chủ';
+
+    protected static bool $shouldRegisterNavigation = false;
 
     protected static ?string $navigationLabel = 'Chỉ số ấn tượng';
 
@@ -24,7 +26,7 @@ class SiteStatResource extends Resource
 
     protected static ?string $pluralModelLabel = 'Chỉ số ấn tượng';
 
-    protected static ?int $navigationSort = 3;
+    protected static ?int $navigationSort = 4;
 
     public static function form(Form $form): Form
     {

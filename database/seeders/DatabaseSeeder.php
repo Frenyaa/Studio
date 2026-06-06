@@ -242,17 +242,26 @@ class DatabaseSeeder extends Seeder
             ClientFeedback::updateOrCreate(['client_name' => $f['client_name']], $f + ['rating' => 5, 'sort_order' => $i, 'is_active' => true]);
         }
 
-        // Bài viết (Cảm hứng)
+        // Bài viết (Blog) — chủ đề dùng slug theo Post::CATEGORIES
         $posts = [
-            ['title' => '5 nguyên tắc vàng của không gian tối giản sang trọng', 'category' => 'Xu hướng', 'cover_image' => 'placeholders/post-1.jpg',
+            ['title' => '5 nguyên tắc vàng của không gian tối giản sang trọng', 'category' => 'xu-huong', 'cover_image' => 'placeholders/post-1.jpg',
              'excerpt' => 'Tối giản không có nghĩa là trống trải. Cùng khám phá những nguyên tắc giúp không gian vừa tinh gọn vừa đẳng cấp.',
              'content' => '<p>Phong cách tối giản sang trọng đề cao chất lượng hơn số lượng.</p><h3>1. Bảng màu trung tính</h3><p>Trắng, kem, xám và các tông đất tạo nền tảng thanh lịch.</p><h3>2. Vật liệu thật</h3><p>Gỗ tự nhiên, đá, kim loại mang lại chiều sâu và sự bền vững.</p><h3>3. Ánh sáng nhiều lớp</h3><p>Kết hợp ánh sáng tự nhiên và chiếu sáng nghệ thuật.</p>'],
-            ['title' => 'Chọn vật liệu bền vững cho ngôi nhà hiện đại', 'category' => 'Vật liệu', 'cover_image' => 'placeholders/post-2.jpg',
+            ['title' => 'Chọn vật liệu bền vững cho ngôi nhà hiện đại', 'category' => 'vat-lieu', 'cover_image' => 'placeholders/post-2.jpg',
              'excerpt' => 'Vật liệu không chỉ đẹp mà còn cần bền và thân thiện. Gợi ý cách chọn vật liệu vừa thẩm mỹ vừa lâu dài.',
              'content' => '<p>Hãy ưu tiên vật liệu có nguồn gốc rõ ràng, dễ bảo trì và phù hợp khí hậu.</p><p>Gỗ kỹ thuật, đá nung kết và sơn gốc nước là lựa chọn an toàn và bền đẹp.</p>'],
-            ['title' => 'Tận dụng ánh sáng tự nhiên trong thiết kế nội thất', 'category' => 'Mẹo thiết kế', 'cover_image' => 'placeholders/post-3.jpg',
+            ['title' => 'Tận dụng ánh sáng tự nhiên trong thiết kế nội thất', 'category' => 'meo-thiet-ke', 'cover_image' => 'placeholders/post-3.jpg',
              'excerpt' => 'Ánh sáng tự nhiên là "vật liệu" miễn phí và quyền lực nhất. Đây là cách khai thác tối đa nguồn sáng quý giá này.',
              'content' => '<p>Bố trí cửa sổ lớn, dùng rèm mỏng và bề mặt phản chiếu để khuếch tán ánh sáng.</p><p>Màu sơn sáng và gương đặt đúng vị trí sẽ nhân đôi hiệu quả chiếu sáng.</p>'],
+            ['title' => 'Lấy cảm hứng phối màu từ thiên nhiên', 'category' => 'cam-hung-sang-tao', 'cover_image' => 'placeholders/post-1.jpg',
+             'excerpt' => 'Những bảng màu lấy cảm hứng từ thiên nhiên mang lại sự ấm áp và cân bằng cho không gian sống.',
+             'content' => '<p>Tông đất, xanh rêu, be cát... gợi cảm giác thư thái, gần gũi.</p><p>Kết hợp vật liệu mộc và cây xanh để hoàn thiện tổng thể.</p>'],
+            ['title' => 'Phong cách Japandi: giao thoa Bắc Âu và Nhật Bản', 'category' => 'phong-cach', 'cover_image' => 'placeholders/post-2.jpg',
+             'excerpt' => 'Japandi cân bằng giữa sự ấm cúng Scandinavian và tinh thần tối giản, thiền định của Nhật Bản.',
+             'content' => '<p>Đường nét mộc mạc, vật liệu tự nhiên và bảng màu trung tính là cốt lõi của Japandi.</p>'],
+            ['title' => 'Kinh nghiệm chọn sofa bền đẹp theo thời gian', 'category' => 'kinh-nghiem', 'cover_image' => 'placeholders/post-3.jpg',
+             'excerpt' => 'Chọn sofa không chỉ nhìn đẹp — khung, nệm và chất liệu bọc mới quyết định độ bền.',
+             'content' => '<p>Ưu tiên khung gỗ tự nhiên đã xử lý, nệm mật độ cao và vải/da dễ vệ sinh.</p>'],
         ];
         foreach ($posts as $i => $p) {
             Post::updateOrCreate(['slug' => Str::slug($p['title'])], $p + [
@@ -279,7 +288,10 @@ class DatabaseSeeder extends Seeder
 
         // Cài đặt website (liên hệ + mạng xã hội) — chỉnh trong Admin → Cài đặt website
         $settings = [
+            'site_name' => 'STUDIO',
             'footer_about' => 'Thiết kế & thi công nội thất toàn diện theo phong cách tối giản sang trọng — kiến tạo không gian sống tinh tế, bền vững theo thời gian.',
+            'footer_slogan' => 'Nội Thất Cao Cấp | Tối Giản & Sang Trọng',
+            'footer_copyright' => '© {year} {brand}. All rights reserved.',
             'contact_address' => 'Vũ Tông Phan, Thanh Xuân, Hà Nội',
             'contact_hotline' => '0900 000 000',
             'contact_email' => 'hello@studio.vn',

@@ -18,9 +18,9 @@ Route::get('/du-an/{project}', [ProjectController::class, 'show'])->name('projec
 Route::get('/san-pham', [ProductController::class, 'index'])->name('products.index');
 Route::get('/san-pham/{product}', [ProductController::class, 'show'])->name('products.show');
 
-// Cảm hứng / Blog
-Route::get('/cam-hung', [BlogController::class, 'index'])->name('blog.index');
-Route::get('/cam-hung/{post}', [BlogController::class, 'show'])->name('blog.show');
+// Blog
+Route::get('/blog', [BlogController::class, 'index'])->name('blog.index');
+Route::get('/blog/{post}', [BlogController::class, 'show'])->name('blog.show');
 
 // Trang nội dung / Chính sách
 Route::get('/trang/{page}', [PageController::class, 'show'])->name('pages.show');

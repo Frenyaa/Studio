@@ -10,6 +10,16 @@ class Post extends Model
 {
     use HasFactory;
 
+    /** Chủ đề blog set sẵn (slug => nhãn) — admin chọn, không gõ tay. */
+    public const CATEGORIES = [
+        'cam-hung-sang-tao' => 'Cảm hứng sáng tạo',
+        'xu-huong' => 'Xu hướng',
+        'meo-thiet-ke' => 'Mẹo thiết kế',
+        'vat-lieu' => 'Vật liệu',
+        'phong-cach' => 'Phong cách',
+        'kinh-nghiem' => 'Kinh nghiệm chọn mua',
+    ];
+
     protected $fillable = [
         'title',
         'slug',
@@ -45,6 +55,12 @@ class Post extends Model
     public function getRouteKeyName(): string
     {
         return 'slug';
+    }
+
+    /** Nhãn hiển thị của chủ đề. */
+    public function getCategoryLabelAttribute(): ?string
+    {
+        return self::CATEGORIES[$this->category] ?? $this->category;
     }
 
     public function scopePublished($query)

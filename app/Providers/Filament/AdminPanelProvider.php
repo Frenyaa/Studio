@@ -44,9 +44,11 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->navigationGroups([
                 'Trang chủ',
+                'Sản phẩm',
                 'Dự án',
-                'Nội dung',
+                'Blog',
                 'Khách hàng',
+                'Hệ thống',
             ])
             ->middleware([
                 EncryptCookies::class,

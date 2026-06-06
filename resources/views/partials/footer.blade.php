@@ -5,6 +5,9 @@
     $address = ($s['contact_address'] ?? '') ?: 'Vũ Tông Phan, Thanh Xuân, Hà Nội';
     $hotline = ($s['contact_hotline'] ?? '') ?: '0900 000 000';
     $email   = ($s['contact_email'] ?? '') ?: 'hello@studio.vn';
+    $slogan  = ($s['footer_slogan'] ?? '') ?: 'Nội Thất Cao Cấp | Tối Giản & Sang Trọng';
+    $brand   = ($s['site_name'] ?? '') ?: config('app.name');
+    $copyright = str_replace(['{year}', '{brand}'], [date('Y'), $brand], ($s['footer_copyright'] ?? '') ?: '© {year} {brand}. All rights reserved.');
     $socials = array_filter([
         'Facebook' => $s['social_facebook'] ?? '',
         'Youtube'  => $s['social_youtube'] ?? '',
@@ -17,7 +20,7 @@
         <div class="grid gap-12 lg:grid-cols-5">
             {{-- Thương hiệu --}}
             <div class="lg:col-span-2">
-                <span class="font-serif text-3xl font-light tracking-luxe text-cream">{{ strtoupper(config('app.name')) }}</span>
+                <span class="font-serif text-3xl font-light tracking-luxe text-cream">{{ strtoupper($brand) }}</span>
                 <p class="mt-6 max-w-sm text-sm leading-relaxed text-cream/60">{{ $about }}</p>
             </div>
 
@@ -72,8 +75,9 @@
         </div>
 
         <div class="mt-16 flex flex-col items-center justify-between gap-4 border-t border-cream/10 pt-8 text-xs text-cream/40 sm:flex-row">
-            <p>&copy; {{ date('Y') }} {{ config('app.name') }}. All rights reserved.</p>
-            <p>Nội Thất Cao Cấp | Tối Giản & Sang Trọng</p>
+            <p>{{ $copyright }}</p>
+            <p>{{ $slogan }}</p>
         </div>
     </div>
 </footer>
+

@@ -9,7 +9,7 @@
         <header class="bg-ink pt-32 pb-12 text-center lg:pt-40">
             <div class="mx-auto max-w-3xl px-6">
                 @if ($post->category)
-                    <p class="eyebrow">{{ $post->category }}</p>
+                    <p class="eyebrow">{{ $post->category_label }}</p>
                 @endif
                 <h1 class="mt-4 font-serif text-4xl font-light leading-tight tracking-wide lg:text-5xl">{{ $post->title }}</h1>
                 @if ($post->published_at)

@@ -34,6 +34,8 @@ class ManageSettings extends Page implements HasForms
     /** Giá trị mặc định khi chưa cấu hình. */
     protected array $defaults = [
         'footer_about' => 'Thiết kế & thi công nội thất toàn diện theo phong cách tối giản sang trọng — kiến tạo không gian sống tinh tế, bền vững theo thời gian.',
+        'footer_slogan' => 'Nội Thất Cao Cấp | Tối Giản & Sang Trọng',
+        'footer_copyright' => '© {year} {brand}. All rights reserved.',
         'contact_address' => 'Vũ Tông Phan, Thanh Xuân, Hà Nội',
         'contact_hotline' => '0900 000 000',
         'contact_email' => 'hello@studio.vn',
@@ -49,6 +51,7 @@ class ManageSettings extends Page implements HasForms
         foreach ($this->defaults as $key => $default) {
             $values[$key] = Setting::getValue($key, $default);
         }
+        $values['site_name'] = Setting::getValue('site_name', config('app.name'));
         $this->form->fill($values);
     }
 
@@ -56,10 +59,19 @@ class ManageSettings extends Page implements HasForms
     {
         return $form
             ->schema([
+                Section::make('Thương hiệu')
+                    ->description('Tên hiển thị trên menu (logo chữ), footer và tiêu đề trang.')
+                    ->schema([
+                        TextInput::make('site_name')->label('Tên thương hiệu')->required(),
+                    ]),
+
                 Section::make('Giới thiệu (footer)')
                     ->description('Đoạn mô tả ngắn hiển thị dưới tên thương hiệu ở footer.')
                     ->schema([
                         Textarea::make('footer_about')->label('Đoạn giới thiệu')->rows(3),
+                        TextInput::make('footer_slogan')->label('Slogan cuối footer'),
+                        TextInput::make('footer_copyright')->label('Dòng bản quyền (copyright)')
+                            ->helperText('Dùng {year} để tự điền năm hiện tại, {brand} để tự điền tên thương hiệu.'),
                     ]),
 
                 Section::make('Thông tin liên hệ')
