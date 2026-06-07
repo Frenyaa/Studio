@@ -9,7 +9,11 @@
     <nav class="mx-auto flex max-w-7xl items-center justify-between px-6 py-5 lg:px-10">
         {{-- Logo --}}
         <a href="{{ route('home') }}" class="font-brand text-2xl font-semibold tracking-luxe">
-            {{ strtoupper($siteName ?? config('app.name')) }}
+            @if (!empty($siteLogo))
+                <img src="{{ asset('storage/' . $siteLogo) }}" alt="{{ $siteName ?? config('app.name') }}" class="h-8 w-auto">
+            @else
+                {{ strtoupper($siteName ?? config('app.name')) }}
+            @endif
         </a>
 
         {{-- Menu desktop --}}
@@ -90,7 +94,11 @@
         class="fixed inset-0 h-screen w-screen overflow-y-auto text-cream lg:hidden"
     >
         <div class="flex items-center justify-between px-6 py-5">
-            <span class="font-brand text-2xl tracking-luxe">{{ strtoupper($siteName ?? config('app.name')) }}</span>
+            @if (!empty($siteLogo))
+                <img src="{{ asset('storage/' . $siteLogo) }}" alt="{{ $siteName ?? config('app.name') }}" class="h-8 w-auto">
+            @else
+                <span class="font-brand text-2xl tracking-luxe">{{ strtoupper($siteName ?? config('app.name')) }}</span>
+            @endif
             <button @click="mobileOpen = false" aria-label="Đóng menu">
                 <svg class="h-7 w-7" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
                     <path stroke-linecap="round" d="M6 18 18 6M6 6l12 12" />

@@ -3,9 +3,12 @@
 namespace App\Filament\Pages;
 
 use App\Models\Setting;
+use App\Support\SocialPlatforms;
 use Filament\Actions\Action;
 use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\Section;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Tabs;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
@@ -42,17 +45,16 @@ class ManageSettings extends Page implements HasForms
         'cta_title' => 'Tìm món nội thất hoàn hảo cho ngôi nhà của bạn',
         'cta_subtitle' => 'Để chuyên viên của chúng tôi tư vấn chọn sản phẩm, phối màu và kích thước phù hợp — giúp bạn sở hữu không gian sống đúng gu và đẳng cấp.',
         'cta_button' => 'Nhận tư vấn miễn phí',
+        'cta_video_url' => '',
         'cta_image' => '',
+        'cta_image_url' => '',
         'consult_title' => 'Đăng Ký Tư Vấn',
         'consult_subtitle' => 'Để lại thông tin, đội ngũ của chúng tôi sẽ liên hệ tư vấn miễn phí.',
         'consult_needs' => "Mua sản phẩm có sẵn\nĐặt làm theo yêu cầu\nTư vấn thiết kế\nKhác",
         'contact_address' => 'Vũ Tông Phan, Thanh Xuân, Hà Nội',
         'contact_hotline' => '0900 000 000',
         'contact_email' => 'hello@studio.vn',
-        'social_facebook' => '',
-        'social_youtube' => '',
-        'social_tiktok' => '',
-        'social_zalo' => '',
+        'site_logo' => '',
     ];
 
     public function mount(): void
@@ -62,6 +64,21 @@ class ManageSettings extends Page implements HasForms
             $values[$key] = Setting::getValue($key, $default);
         }
         $values['site_name'] = Setting::getValue('site_name', config('app.name'));
+        $values['site_logo'] = Setting::getValue('site_logo', '');
+
+        // Mạng xã hội: lấy từ JSON 'socials'; nếu chưa có thì dựng từ dữ liệu cũ
+        $socials = json_decode(Setting::getValue('socials', ''), true);
+        if (! is_array($socials) || empty($socials)) {
+            $socials = [];
+            foreach (['facebook', 'youtube', 'tiktok', 'zalo'] as $p) {
+                $url = Setting::getValue('social_' . $p);
+                if ($url) {
+                    $socials[] = ['platform' => $p, 'url' => $url];
+                }
+            }
+        }
+        $values['socials'] = $socials;
+
         $this->form->fill($values);
     }
 
@@ -72,7 +89,9 @@ class ManageSettings extends Page implements HasForms
                 Tabs::make()->tabs([
                     Tabs\Tab::make('Thương hiệu')->icon('heroicon-o-sparkles')->schema([
                         TextInput::make('site_name')->label('Tên thương hiệu')->required()
-                            ->helperText('Hiển thị trên menu (logo chữ), footer và tiêu đề trang.'),
+                            ->helperText('Dùng khi chưa tải logo ảnh.'),
+                        FileUpload::make('site_logo')->label('Logo (ảnh)')->image()->imageEditor()->directory('settings')
+                            ->helperText('Tải logo lên sẽ thay cho tên chữ trên menu & footer. Nên dùng ảnh nền trong suốt (PNG), màu sáng để hợp nền tối.'),
                     ]),
 
                     Tabs\Tab::make('Dải CTA')->icon('heroicon-o-megaphone')->schema([
@@ -80,8 +99,15 @@ class ManageSettings extends Page implements HasForms
                         TextInput::make('cta_title')->label('Tiêu đề'),
                         Textarea::make('cta_subtitle')->label('Mô tả')->rows(2),
                         TextInput::make('cta_button')->label('Chữ trên nút'),
-                        FileUpload::make('cta_image')->label('Ảnh nền')->image()->imageEditor()->directory('settings')
+                        TextInput::make('cta_video_url')->label('Link video nền (YouTube / Vimeo / MP4)')->url()
+                            ->placeholder('https://youtu.be/... hoặc .../video.mp4')
+                            ->helperText('Có video thì dùng video làm nền (ưu tiên cao nhất). Ảnh bên dưới làm nền dự phòng / poster.')
+                            ->columnSpanFull(),
+                        FileUpload::make('cta_image')->label('Ảnh nền (upload)')->image()->imageEditor()->directory('settings')
                             ->helperText('Để trống sẽ dùng ảnh mặc định.'),
+                        TextInput::make('cta_image_url')->label('Hoặc link ảnh nền')->url()
+                            ->placeholder('https://...')
+                            ->helperText('Dán link ảnh để khỏi upload. Nếu có link, link được ưu tiên hơn upload.'),
                     ])->columns(2),
 
                     Tabs\Tab::make('Form tư vấn')->icon('heroicon-o-clipboard-document-list')->schema([
@@ -105,11 +131,19 @@ class ManageSettings extends Page implements HasForms
                     ]),
 
                     Tabs\Tab::make('Mạng xã hội')->icon('heroicon-o-share')->schema([
-                        TextInput::make('social_facebook')->label('Facebook')->url()->placeholder('https://facebook.com/...'),
-                        TextInput::make('social_youtube')->label('Youtube')->url()->placeholder('https://youtube.com/...'),
-                        TextInput::make('social_tiktok')->label('Tiktok')->url()->placeholder('https://tiktok.com/@...'),
-                        TextInput::make('social_zalo')->label('Zalo')->url()->placeholder('https://zalo.me/...'),
-                    ])->columns(2),
+                        Repeater::make('socials')
+                            ->hiddenLabel()
+                            ->schema([
+                                Select::make('platform')->label('Nền tảng')
+                                    ->options(SocialPlatforms::options())
+                                    ->required()->searchable()->native(false),
+                                TextInput::make('url')->label('Đường link')->url()->required()->placeholder('https://...'),
+                            ])
+                            ->itemLabel(fn (array $state): ?string => SocialPlatforms::label($state['platform'] ?? ''))
+                            ->addActionLabel('Thêm mạng xã hội')
+                            ->reorderable()->collapsible()
+                            ->columns(2),
+                    ]),
                 ])->persistTabInQueryString(),
             ])
             ->statePath('data');
@@ -127,6 +161,9 @@ class ManageSettings extends Page implements HasForms
     public function save(): void
     {
         foreach ($this->form->getState() as $key => $value) {
+            if (is_array($value)) {
+                $value = json_encode(array_values($value), JSON_UNESCAPED_UNICODE);
+            }
             Setting::setValue($key, $value);
         }
 

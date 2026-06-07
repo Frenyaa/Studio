@@ -85,9 +85,10 @@ class AppServiceProvider extends ServiceProvider
             $view->with('navBlogCategories', Post::CATEGORIES);
         });
 
-        // Chia sẻ tên thương hiệu cho menu, footer, layout
+        // Chia sẻ tên + logo thương hiệu cho menu, footer, layout
         View::composer(['layouts.app', 'partials.nav', 'partials.footer'], function ($view) {
             $view->with('siteName', Setting::getValue('site_name', config('app.name')));
+            $view->with('siteLogo', Setting::getValue('site_logo', ''));
         });
     }
 }

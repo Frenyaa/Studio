@@ -296,16 +296,21 @@ class DatabaseSeeder extends Seeder
             'cta_title' => 'Tìm món nội thất hoàn hảo cho ngôi nhà của bạn',
             'cta_subtitle' => 'Để chuyên viên của chúng tôi tư vấn chọn sản phẩm, phối màu và kích thước phù hợp — giúp bạn sở hữu không gian sống đúng gu và đẳng cấp.',
             'cta_button' => 'Nhận tư vấn miễn phí',
+            'cta_video_url' => '',
+            'cta_image_url' => '',
             'consult_title' => 'Đăng Ký Tư Vấn',
             'consult_subtitle' => 'Để lại thông tin, đội ngũ của chúng tôi sẽ liên hệ tư vấn miễn phí.',
             'consult_needs' => "Mua sản phẩm có sẵn\nĐặt làm theo yêu cầu\nTư vấn thiết kế\nKhác",
             'contact_address' => 'Vũ Tông Phan, Thanh Xuân, Hà Nội',
             'contact_hotline' => '0900 000 000',
             'contact_email' => 'hello@studio.vn',
-            'social_facebook' => 'https://facebook.com',
-            'social_youtube' => 'https://youtube.com',
-            'social_tiktok' => 'https://tiktok.com',
-            'social_zalo' => '',
+            'site_logo' => '',
+            'socials' => json_encode([
+                ['platform' => 'facebook', 'url' => 'https://facebook.com'],
+                ['platform' => 'youtube', 'url' => 'https://youtube.com'],
+                ['platform' => 'tiktok', 'url' => 'https://tiktok.com'],
+                ['platform' => 'instagram', 'url' => 'https://instagram.com'],
+            ], JSON_UNESCAPED_UNICODE),
         ];
         foreach ($settings as $key => $value) {
             Setting::updateOrCreate(['key' => $key], ['value' => $value]);

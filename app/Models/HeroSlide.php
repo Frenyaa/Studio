@@ -13,6 +13,7 @@ class HeroSlide extends Model
         'video_file',
         'video_url',
         'poster_image',
+        'poster_url',
         'slogan',
         'sub_slogan',
         'cta_label',
@@ -42,4 +43,15 @@ class HeroSlide extends Model
 
         return $this->video_url;
     }
+
+    /** Nguồn ảnh poster: ưu tiên link ngoài, fallback file upload. */
+    public function getPosterSourceAttribute(): ?string
+    {
+        if ($this->poster_url) {
+            return $this->poster_url;
+        }
+
+        return $this->poster_image ? asset('storage/' . $this->poster_image) : null;
+    }
 }
+

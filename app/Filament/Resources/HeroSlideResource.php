@@ -40,15 +40,22 @@ class HeroSlideResource extends Resource
                         ->helperText('Khuyến nghị nén dưới 10MB, độ phân giải 1920x1080.'),
 
                     Forms\Components\TextInput::make('video_url')
-                        ->label('Hoặc link video ngoài')
+                        ->label('Hoặc link video (YouTube / Vimeo / MP4)')
                         ->url()
-                        ->placeholder('https://cdn.example.com/hero.mp4'),
+                        ->placeholder('https://youtu.be/... hoặc https://cdn.example.com/hero.mp4')
+                        ->helperText('Dán link để khỏi upload video nặng. Hỗ trợ YouTube, Vimeo hoặc link MP4 trực tiếp. (Nếu đã upload file thì file được ưu tiên.)'),
 
                     Forms\Components\FileUpload::make('poster_image')
-                        ->label('Ảnh poster (lazy-load)')
+                        ->label('Ảnh poster (upload)')
                         ->image()
                         ->directory('hero/posters')
-                        ->helperText('Hiển thị trong lúc video chưa tải xong.'),
+                        ->helperText('Hiển thị trong lúc video chưa tải xong (hoặc khi không có video).'),
+
+                    Forms\Components\TextInput::make('poster_url')
+                        ->label('Hoặc link ảnh poster')
+                        ->url()
+                        ->placeholder('https://...')
+                        ->helperText('Dán link ảnh để khỏi upload. Có link thì link được ưu tiên.'),
                 ])->columns(1),
 
             Forms\Components\Section::make('Nội dung overlay')
