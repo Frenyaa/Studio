@@ -18,6 +18,7 @@ use App\Models\Setting;
 use App\Models\SiteStat;
 use App\Models\WorkflowStep;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
@@ -30,6 +31,12 @@ class AppServiceProvider extends ServiceProvider
 
     public function boot(): void
     {
+        // Khi chạy sau tunnel/HTTPS (APP_URL https) thì ép mọi URL tài nguyên dùng https,
+        // tránh lỗi "mixed content" khiến CSS/JS bị trình duyệt chặn.
+        if (str_starts_with((string) config('app.url'), 'https://')) {
+            URL::forceScheme('https');
+        }
+
         // Tự xoá cache trang chủ mỗi khi nội dung liên quan thay đổi trong Admin.
         $models = [
             HeroSlide::class,
