@@ -54,6 +54,7 @@ class ManageSettings extends Page implements HasForms
         'contact_address' => 'Vũ Tông Phan, Thanh Xuân, Hà Nội',
         'contact_hotline' => '0900 000 000',
         'contact_email' => 'hello@studio.vn',
+        'contact_map_embed' => '',
         'site_logo' => '',
         'site_tagline' => 'Kiến Tạo Không Gian Đẹp',
     ];
@@ -131,6 +132,9 @@ class ManageSettings extends Page implements HasForms
                         TextInput::make('contact_address')->label('Địa chỉ'),
                         TextInput::make('contact_hotline')->label('Hotline')->tel(),
                         TextInput::make('contact_email')->label('Email')->email(),
+                        TextInput::make('contact_map_embed')->label('Link bản đồ Google Maps')->url()
+                            ->placeholder('https://www.google.com/maps/embed?pb=...')
+                            ->helperText('Lấy embed code từ Google Maps: Chia sẻ → Nhúng bản đồ → Copy iFrame src'),
                     ]),
 
                     Tabs\Tab::make('Mạng xã hội')->icon('heroicon-o-share')->schema([
