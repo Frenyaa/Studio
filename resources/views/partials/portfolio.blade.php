@@ -4,7 +4,7 @@
         {{-- Tiêu đề section --}}
         <div class="reveal mb-16 text-center">
             <p class="eyebrow">Portfolio</p>
-            <h2 class="mt-4 font-serif text-4xl font-light tracking-wide lg:text-5xl">Dự Án Tiêu Biểu</h2>
+            <h2 class="mt-4 font-serif text-4xl font-light tracking-wide lg:text-5xl">Dự Án Nổi Bật</h2>
             <div class="mx-auto mt-6 h-px w-16 bg-accent/70"></div>
         </div>
 

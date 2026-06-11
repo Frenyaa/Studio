@@ -9,8 +9,6 @@
 
     @include('partials.portfolio', ['featuredProjects' => $featuredProjects])
 
-    @include('partials.spotlight', ['spotlight' => $spotlight])
-
     @include('partials.cta')
 
     @include('partials.contact')

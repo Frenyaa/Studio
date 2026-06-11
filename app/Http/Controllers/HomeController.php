@@ -30,12 +30,6 @@ class HomeController extends Controller
                     ->take(3)
                     ->get(),
 
-                'spotlight' => Project::published()
-                    ->featured()
-                    ->ordered()
-                    ->with('category')
-                    ->first(),
-
                 'posts' => Post::published()->latestPosts()->take(3)->get(),
 
                 // Sản phẩm bán lẻ
