@@ -18,9 +18,8 @@
             <h2 class="mt-4 font-serif text-4xl font-light tracking-wide lg:text-5xl">{{ $consultTitle }}</h2>
             <p class="mt-5 text-cream/70">{{ $consultSubtitle }}</p>
 
-            {{-- Thông tin liên hệ nhỏ ở trên --}}
+            {{-- Thông tin liên hệ nhỏ ở trên (Hotline + Email) --}}
             <div class="mt-8 space-y-3 text-sm text-cream/60">
-                <p>📍 {{ $address }}</p>
                 @if ($cs['contact_hotline'] ?? '')
                     <p>☎ <a href="tel:{{ $cs['contact_hotline'] }}" class="text-cream hover:text-accent transition-colors">{{ $cs['contact_hotline'] }}</a></p>
                 @endif
