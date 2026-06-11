@@ -11,5 +11,5 @@
 
     @include('partials.cta')
 
-    @include('partials.contact')
+    @include('partials.contact-home')
 @endsection
