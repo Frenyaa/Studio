@@ -6,7 +6,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>@yield('title', ($siteName ?? config('app.name')) . ' — ' . ($siteTagline ?? 'Nội Thất Cao Cấp'))</title>
-    <meta name="description" content="@yield('meta_description', ($siteName ?? config('app.name')) . ' — Thương hiệu nội thất cao cấp phong cách tối giản sang trọng. Sofa, bàn ghế, giường tủ thiết kế tinh tế cho không gian sống đẳng cấp.')">
+    <meta name="description" content="@yield('meta_description', ($siteName ?? config('app.name')) . ' — Kiến Tạo Không Gian Đẹp')">
 
     {{-- Preconnect & font Serif thanh lịch --}}
     <link rel="preconnect" href="https://fonts.googleapis.com">
