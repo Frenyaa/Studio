@@ -5,6 +5,7 @@
     $address = ($s['contact_address'] ?? '') ?: 'Vũ Tông Phan, Thanh Xuân, Hà Nội';
     $hotline = ($s['contact_hotline'] ?? '') ?: '0900 000 000';
     $email   = ($s['contact_email'] ?? '') ?: 'hello@studio.vn';
+    $mapEmbed = ($s['contact_map_embed'] ?? '') ?: '';
     $slogan  = ($s['footer_slogan'] ?? '') ?: 'Nội Thất Cao Cấp | Tối Giản & Sang Trọng';
     $brand   = ($s['site_name'] ?? '') ?: config('app.name');
     $logo    = $s['site_logo'] ?? '';
@@ -13,6 +14,19 @@
     $socialItems = is_array($socialItems) ? array_filter($socialItems, fn ($i) => !empty($i['url'])) : [];
 @endphp
 <footer class="border-t border-line bg-ink text-cream/80">
+    {{-- Bản đồ (toàn chiều rộng nếu có) --}}
+    @if ($mapEmbed)
+        <div class="h-64 w-full overflow-hidden">
+            <iframe
+                src="{{ $mapEmbed }}"
+                width="100%" height="100%"
+                style="border: 0;"
+                allowfullscreen="" loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
+            ></iframe>
+        </div>
+    @endif
+
     <div class="mx-auto max-w-7xl px-6 py-20 lg:px-10">
         <div class="grid gap-12 lg:grid-cols-5">
             {{-- Thương hiệu --}}
