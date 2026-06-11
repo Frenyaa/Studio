@@ -5,7 +5,7 @@
         <div class="reveal mb-16 flex flex-col items-center text-center">
             <p class="eyebrow">Chia sẻ</p>
             <h2 class="mt-4 font-serif text-4xl font-light tracking-wide lg:text-5xl">Blog Nội Thất</h2>
-            <div class="mx-auto mt-6 h-px w-16 bg-cream/30"></div>
+            <div class="mx-auto mt-6 h-px w-16 bg-accent/70"></div>
         </div>
 
         <div class="grid grid-cols-1 gap-x-8 gap-y-12 md:grid-cols-3">

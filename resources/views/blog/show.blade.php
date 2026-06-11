@@ -26,7 +26,7 @@
 
         {{-- Nội dung --}}
         <div class="bg-ink py-16">
-            <div class="prose prose-invert mx-auto max-w-3xl px-6 prose-headings:font-serif prose-headings:font-light prose-img:rounded-sm">
+            <div class="prose mx-auto max-w-3xl px-6 prose-headings:font-serif prose-headings:font-light prose-headings:text-cream prose-p:text-cream/80 prose-li:text-cream/80 prose-strong:text-cream prose-a:text-accent prose-img:rounded-sm">
                 {!! $post->content !!}
             </div>
         </div>

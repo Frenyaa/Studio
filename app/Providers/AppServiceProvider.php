@@ -55,8 +55,14 @@ class AppServiceProvider extends ServiceProvider
         ];
 
         foreach ($models as $model) {
-            $model::saved(fn () => Cache::forget('homepage_data'));
-            $model::deleted(fn () => Cache::forget('homepage_data'));
+            $model::saved(function () {
+                Cache::forget('homepage_data');
+                Cache::forget('about_data');
+            });
+            $model::deleted(function () {
+                Cache::forget('homepage_data');
+                Cache::forget('about_data');
+            });
         }
 
         // Xoá cache danh sách trang ở footer khi có thay đổi
@@ -96,6 +102,7 @@ class AppServiceProvider extends ServiceProvider
         View::composer(['layouts.app', 'partials.nav', 'partials.footer'], function ($view) {
             $view->with('siteName', Setting::getValue('site_name', config('app.name')));
             $view->with('siteLogo', Setting::getValue('site_logo', ''));
+            $view->with('siteTagline', Setting::getValue('site_tagline', 'Kiến Tạo Không Gian Đẹp'));
         });
     }
 }

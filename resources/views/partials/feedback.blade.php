@@ -6,7 +6,7 @@
         class="reveal mx-auto max-w-3xl px-6 text-center lg:px-10"
     >
         <p class="eyebrow">Khách hàng nói về chúng tôi</p>
-        <div class="mx-auto mt-6 mb-12 h-px w-16 bg-cream/30"></div>
+        <div class="mx-auto mt-6 mb-12 h-px w-16 bg-accent/70"></div>
 
         <div class="relative min-h-[220px]">
             @foreach ($feedbacks as $i => $feedback)
@@ -36,7 +36,7 @@
             @foreach ($feedbacks as $i => $feedback)
                 <button
                     @click="go({{ $i }})"
-                    :class="active === {{ $i }} ? 'w-8 bg-ink' : 'w-2 bg-cream/30'"
+                    :class="active === {{ $i }} ? 'w-8 bg-accent' : 'w-2 bg-cream/30'"
                     class="h-2 rounded-full transition-all duration-500"
                     aria-label="Feedback {{ $i + 1 }}"
                 ></button>

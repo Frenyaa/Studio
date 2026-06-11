@@ -15,19 +15,22 @@ export default {
         extend: {
             colors: {
                 // Bảng màu Minimalism Luxury
-                // THEME TỐI (than chì trung tính): ink = nền tối, cream = chữ sáng
+                // THEME SÁNG (kem ấm + nhấn xanh ô-liu).
+                // Giữ NGUYÊN tên token cũ để khỏi sửa toàn bộ template — chỉ đảo ý nghĩa:
+                //   ink   = NỀN sáng (kem)      -> dùng cho bg-ink, bg-ink-soft
+                //   cream = CHỮ tối (nâu trầm)  -> dùng cho text-cream, border-cream...
                 ink: {
-                    DEFAULT: '#16181a', // nền chính (than chì)
-                    soft: '#1e2124',    // nền section xen kẽ / card
-                    muted: '#6f7378',
+                    DEFAULT: '#f4ecda', // nền chính (nâu vàng / sand ấm rõ)
+                    soft: '#e6ecdb',    // nền section xen kẽ (xanh sage nhẹ — để thấy rõ xanh lá)
+                    muted: '#8a8073',   // chữ nhãn nhỏ phụ — xám ấm
                 },
                 cream: {
-                    DEFAULT: '#ece8e1', // chữ sáng (off-white ấm)
-                    deep: '#cfc9bd',
+                    DEFAULT: '#3a352a', // chữ chính (nâu trầm)
+                    deep: '#5b5246',    // chữ phụ
                 },
                 porcelain: '#ffffff',
-                line: '#2b2e31', // đường viền mảnh trên nền tối
-                accent: '#c2a679', // màu nhấn champagne/gold
+                line: '#ded2bb', // đường viền mảnh trên nền sáng (ngả nâu vàng)
+                accent: '#647a4f', // màu nhấn xanh ô-liu (đậm hơn cho rõ)
             },
             fontFamily: {
                 // Font Serif thanh lịch cho tiêu đề

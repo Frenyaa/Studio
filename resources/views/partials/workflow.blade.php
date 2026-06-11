@@ -3,9 +3,9 @@
 <section id="workflow" class="bg-ink-soft py-24 text-cream lg:py-32">
     <div class="mx-auto max-w-7xl px-6 lg:px-10">
         <div class="reveal mb-16 text-center">
-            <p class="text-xs font-medium uppercase tracking-luxe text-cream/50">Quy trình</p>
+            <p class="eyebrow">Quy trình</p>
             <h2 class="mt-4 font-serif text-4xl font-light tracking-wide lg:text-5xl">Quy Trình Đặt Hàng</h2>
-            <div class="mx-auto mt-6 h-px w-16 bg-cream/30"></div>
+            <div class="mx-auto mt-6 h-px w-16 bg-accent/70"></div>
         </div>
 
         <div class="grid gap-12 md:grid-cols-2 lg:grid-cols-4">

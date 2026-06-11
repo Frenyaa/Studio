@@ -11,7 +11,7 @@
     }
 
     body {
-        @apply font-sans text-ink;
+        @apply font-sans text-cream;
     }
 
     h1, h2, h3, h4 {
@@ -34,7 +34,7 @@
 
     /* Nhãn nhỏ phía trên tiêu đề section */
     .eyebrow {
-        @apply text-xs font-medium uppercase tracking-luxe text-ink-muted;
+        @apply text-xs font-semibold uppercase tracking-luxe text-accent;
     }
 }
 

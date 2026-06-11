@@ -54,8 +54,7 @@
                 @endif
             </li>
 
-            <li><a href="{{ route('home') }}#services" class="transition-colors duration-300 hover:text-accent">Dịch vụ</a></li>
-            <li><a href="{{ route('home') }}#about" class="transition-colors duration-300 hover:text-accent">Về chúng tôi</a></li>
+            <li><a href="{{ route('about') }}" class="transition-colors duration-300 hover:text-accent">Về chúng tôi</a></li>
 
             {{-- Blog + dropdown chủ đề --}}
             <li class="group relative">
@@ -74,7 +73,7 @@
                 @endif
             </li>
 
-            <li><a href="{{ route('home') }}#contact" class="transition-colors duration-300 hover:text-accent">Liên hệ</a></li>
+            <li><a href="{{ route('contact') }}" class="transition-colors duration-300 hover:text-accent">Liên hệ</a></li>
         </ul>
 
         {{-- Nút hamburger mobile --}}
@@ -90,7 +89,7 @@
         x-cloak
         x-show="mobileOpen"
         x-transition.opacity
-        style="background-color:#16181a; z-index:100;"
+        style="background-color:#f6f1e7; z-index:100;"
         class="fixed inset-0 h-screen w-screen overflow-y-auto text-cream lg:hidden"
     >
         <div class="flex items-center justify-between px-6 py-5">
@@ -133,8 +132,7 @@
                 @endif
             </li>
 
-            <li><a @click="mobileOpen = false" class="hover:text-accent" href="{{ route('home') }}#services">Dịch vụ</a></li>
-            <li><a @click="mobileOpen = false" class="hover:text-accent" href="{{ route('home') }}#about">Về chúng tôi</a></li>
+            <li><a @click="mobileOpen = false" class="hover:text-accent" href="{{ route('about') }}">Về chúng tôi</a></li>
 
             {{-- Blog + chủ đề --}}
             <li class="flex flex-col items-center gap-2">
@@ -148,7 +146,7 @@
                 @endif
             </li>
 
-            <li><a @click="mobileOpen = false" class="hover:text-accent" href="{{ route('home') }}#contact">Liên hệ</a></li>
+            <li><a @click="mobileOpen = false" class="hover:text-accent" href="{{ route('contact') }}">Liên hệ</a></li>
         </ul>
     </div>
 </header>

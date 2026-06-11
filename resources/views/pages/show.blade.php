@@ -8,12 +8,12 @@
         <div class="mx-auto max-w-3xl px-6">
             <p class="eyebrow">{{ config('app.name') }}</p>
             <h1 class="mt-4 font-serif text-4xl font-light leading-tight tracking-wide lg:text-5xl">{{ $page->title }}</h1>
-            <div class="mx-auto mt-6 h-px w-16 bg-cream/30"></div>
+            <div class="mx-auto mt-6 h-px w-16 bg-accent/70"></div>
         </div>
     </section>
 
     <section class="bg-ink pb-24">
-        <div class="prose prose-invert mx-auto max-w-3xl px-6 prose-headings:font-serif prose-headings:font-light">
+        <div class="prose mx-auto max-w-3xl px-6 prose-headings:font-serif prose-headings:font-light prose-headings:text-cream prose-p:text-cream/80 prose-li:text-cream/80 prose-strong:text-cream prose-a:text-accent">
             {!! $page->content !!}
         </div>
     </section>

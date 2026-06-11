@@ -34,7 +34,7 @@
                         <div class="aspect-[4/3] w-full cursor-zoom-in overflow-hidden">
                             <img :src="active" alt="{{ $product->name }}" class="h-full w-full object-cover">
                         </div>
-                        <span class="absolute bottom-4 right-4 flex h-10 w-10 items-center justify-center bg-ink/70 text-cream">
+                        <span class="absolute bottom-4 right-4 flex h-10 w-10 items-center justify-center bg-black/60 text-white">
                             <svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3.75v4.5m0-4.5h4.5m-4.5 0L9 9M3.75 20.25v-4.5m0 4.5h4.5m-4.5 0L9 15M20.25 3.75h-4.5m4.5 0v4.5m0-4.5L15 9m5.25 11.25h-4.5m4.5 0v-4.5m0 4.5L15 15"/></svg>
                         </span>
                     </div>
@@ -65,7 +65,7 @@
                     <div class="my-7 h-px w-full bg-line"></div>
 
                     <a
-                        href="{{ route('home') }}#contact"
+                        href="{{ route('contact') }}"
                         class="flex w-full items-center justify-center gap-3 bg-accent px-8 py-5 text-sm font-medium uppercase tracking-luxe text-ink transition-opacity duration-300 hover:opacity-90"
                     >
                         Gặp nhân viên tư vấn
@@ -91,7 +91,7 @@
                         </dl>
 
                         @if ($product->description)
-                            <div class="prose prose-invert mt-8 max-w-none prose-headings:font-serif prose-headings:font-light prose-p:text-cream/70">
+                            <div class="prose mt-8 max-w-none prose-headings:font-serif prose-headings:font-light prose-headings:text-cream prose-p:text-cream/70 prose-li:text-cream/70 prose-strong:text-cream">
                                 {!! $product->description !!}
                             </div>
                         @endif
@@ -103,7 +103,7 @@
         {{-- Lightbox --}}
         <div x-cloak x-show="lightbox" x-transition.opacity
              @click="lightbox = false" @keydown.escape.window="lightbox = false"
-             class="fixed inset-0 z-[60] flex items-center justify-center bg-ink/95 p-6">
+             class="fixed inset-0 z-[60] flex items-center justify-center bg-black/95 p-6">
             <img :src="active" class="max-h-[90vh] max-w-full object-contain" alt="">
         </div>
     </div>

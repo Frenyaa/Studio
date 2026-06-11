@@ -5,7 +5,7 @@
         <div class="reveal mb-16 text-center">
             <p class="eyebrow">Bộ sưu tập</p>
             <h2 class="mt-4 font-serif text-4xl font-light tracking-wide lg:text-5xl">Sản Phẩm Nổi Bật</h2>
-            <div class="mx-auto mt-6 h-px w-16 bg-cream/30"></div>
+            <div class="mx-auto mt-6 h-px w-16 bg-accent/70"></div>
         </div>
 
         <div class="grid grid-cols-1 gap-x-6 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">

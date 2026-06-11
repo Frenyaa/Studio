@@ -55,6 +55,7 @@ class ManageSettings extends Page implements HasForms
         'contact_hotline' => '0900 000 000',
         'contact_email' => 'hello@studio.vn',
         'site_logo' => '',
+        'site_tagline' => 'Kiến Tạo Không Gian Đẹp',
     ];
 
     public function mount(): void
@@ -90,6 +91,8 @@ class ManageSettings extends Page implements HasForms
                     Tabs\Tab::make('Thương hiệu')->icon('heroicon-o-sparkles')->schema([
                         TextInput::make('site_name')->label('Tên thương hiệu')->required()
                             ->helperText('Dùng khi chưa tải logo ảnh.'),
+                        TextInput::make('site_tagline')->label('Tiêu đề trang (tab trình duyệt / Google)')
+                            ->helperText('Hiển thị trên tab trình duyệt và kết quả Google. Dạng: "Tên thương hiệu — {tagline}". Ví dụ: Kiến Tạo Không Gian Đẹp.'),
                         FileUpload::make('site_logo')->label('Logo (ảnh)')->image()->imageEditor()->directory('settings')
                             ->helperText('Tải logo lên sẽ thay cho tên chữ trên menu & footer. Nên dùng ảnh nền trong suốt (PNG), màu sáng để hợp nền tối.'),
                     ]),

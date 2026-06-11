@@ -45,12 +45,12 @@
         <img src="{{ $poster }}" alt="{{ config('app.name') }}" class="absolute inset-0 h-full w-full object-cover animate-slow-zoom">
     @else
         {{-- Fallback nền tối khi chưa cấu hình hero trong admin --}}
-        <div class="absolute inset-0 bg-gradient-to-b from-ink-soft to-ink"></div>
+        <div class="absolute inset-0 bg-gradient-to-b from-neutral-800 to-neutral-900"></div>
     @endif
 
-    {{-- Lớp phủ mờ tối giản, nhẹ để giữ độ sáng của ảnh --}}
-    <div class="absolute inset-0 bg-ink/25"></div>
-    <div class="absolute inset-0 bg-gradient-to-t from-ink/70 via-ink/10 to-ink/20"></div>
+    {{-- Lớp phủ mờ tối giản, nhẹ để giữ độ sáng của ảnh (luôn tối để chữ trắng dễ đọc) --}}
+    <div class="absolute inset-0 bg-black/25"></div>
+    <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-black/20"></div>
 
     {{-- Logo phóng to mờ dần khi cuộn --}}
     @if ($hero?->show_logo_overlay ?? true)
@@ -78,7 +78,7 @@
 
         <a
             href="{{ $hero?->cta_anchor ?? '#categories' }}"
-            class="btn-line mt-12 border-white/70 text-white hover:bg-white hover:text-ink"
+            class="btn-line mt-12 border-white/70 text-white hover:bg-white hover:text-cream"
         >
             {{ $hero?->cta_label ?? 'XEM SẢN PHẨM' }}
             <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17.25 8.25 21 12m0 0-3.75 3.75M21 12H3" /></svg>

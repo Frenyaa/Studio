@@ -27,7 +27,7 @@ class HomeController extends Controller
                     ->featured()
                     ->ordered()
                     ->with('category')
-                    ->take(6)
+                    ->take(3)
                     ->get(),
 
                 'spotlight' => Project::published()
@@ -43,7 +43,7 @@ class HomeController extends Controller
                     ->featured()
                     ->ordered()
                     ->with('category')
-                    ->take(6)
+                    ->take(3)
                     ->get(),
 
                 'productCategories' => ProductCategory::active()

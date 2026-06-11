@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\AboutController;
 use App\Http\Controllers\BlogController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LeadController;
 use App\Http\Controllers\PageController;
@@ -9,6 +11,12 @@ use App\Http\Controllers\ProjectController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
+
+// Về chúng tôi (gộp: dịch vụ, giới thiệu, quy trình, đối tác, cảm nhận KH, blog)
+Route::get('/ve-chung-toi', [AboutController::class, 'index'])->name('about');
+
+// Liên hệ (trang riêng, để menu bấm ở đâu cũng vào đúng)
+Route::get('/lien-he', [ContactController::class, 'index'])->name('contact');
 
 // Dự án (công trình thiết kế)
 Route::get('/du-an', [ProjectController::class, 'index'])->name('projects.index');
