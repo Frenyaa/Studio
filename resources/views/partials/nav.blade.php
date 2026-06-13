@@ -54,7 +54,23 @@
                 @endif
             </li>
 
-            <li><a href="{{ route('about') }}" class="transition-colors duration-300 hover:text-accent">Về chúng tôi</a></li>
+            {{-- Về chúng tôi + dropdown --}}
+            <li class="group relative">
+                <a href="{{ route('about') }}" class="flex items-center gap-1 transition-colors duration-300 hover:text-accent">
+                    Về chúng tôi
+                    <svg class="h-3 w-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5"/></svg>
+                </a>
+                <div class="invisible absolute left-1/2 top-full z-50 w-56 -translate-x-1/2 pt-4 opacity-0 transition-all duration-200 group-hover:visible group-hover:opacity-100">
+                    <ul class="border border-line bg-ink py-2 text-cream shadow-2xl">
+                        <li><a href="{{ route('about') }}" class="block px-5 py-2.5 font-sans text-[11px] font-medium uppercase tracking-[0.14em] text-cream/70 transition-colors hover:bg-ink-soft hover:text-accent">Về Studio</a></li>
+                        <li><a href="{{ route('about') }}#services" class="block px-5 py-2.5 font-sans text-[11px] font-medium uppercase tracking-[0.14em] text-cream/70 transition-colors hover:bg-ink-soft hover:text-accent">Dịch vụ chúng tôi</a></li>
+                        <li><a href="{{ route('about') }}#workflow" class="block px-5 py-2.5 font-sans text-[11px] font-medium uppercase tracking-[0.14em] text-cream/70 transition-colors hover:bg-ink-soft hover:text-accent">Quy trình đặt hàng</a></li>
+                        <li><a href="{{ route('about') }}#partners" class="block px-5 py-2.5 font-sans text-[11px] font-medium uppercase tracking-[0.14em] text-cream/70 transition-colors hover:bg-ink-soft hover:text-accent">Đối tác & thương hiệu</a></li>
+                        <li><a href="{{ route('about') }}#feedback" class="block px-5 py-2.5 font-sans text-[11px] font-medium uppercase tracking-[0.14em] text-cream/70 transition-colors hover:bg-ink-soft hover:text-accent">Khách hàng nói về chúng tôi</a></li>
+                        <li><a href="{{ route('about') }}#insights" class="block px-5 py-2.5 font-sans text-[11px] font-medium uppercase tracking-[0.14em] text-cream/70 transition-colors hover:bg-ink-soft hover:text-accent">Blog nội thất</a></li>
+                    </ul>
+                </div>
+            </li>
 
             {{-- Blog + dropdown chủ đề --}}
             <li class="group relative">
@@ -132,7 +148,18 @@
                 @endif
             </li>
 
-            <li><a @click="mobileOpen = false" class="hover:text-accent" href="{{ route('about') }}">Về chúng tôi</a></li>
+            {{-- Về chúng tôi + loại --}}
+            <li class="flex flex-col items-center gap-2">
+                <a @click="mobileOpen = false" class="hover:text-accent" href="{{ route('about') }}">Về chúng tôi</a>
+                <div class="flex max-w-xs flex-wrap justify-center gap-x-4 gap-y-1 font-sans text-xs uppercase tracking-luxe text-cream/50">
+                    <a @click="mobileOpen = false" class="hover:text-accent" href="{{ route('about') }}">Về Studio</a>
+                    <a @click="mobileOpen = false" class="hover:text-accent" href="{{ route('about') }}#services">Dịch vụ</a>
+                    <a @click="mobileOpen = false" class="hover:text-accent" href="{{ route('about') }}#workflow">Quy trình</a>
+                    <a @click="mobileOpen = false" class="hover:text-accent" href="{{ route('about') }}#feedback">Khách hàng</a>
+                    <a @click="mobileOpen = false" class="hover:text-accent" href="{{ route('about') }}#insights">Blog</a>
+                    <a @click="mobileOpen = false" class="hover:text-accent" href="{{ route('about') }}#partners">Đối tác</a>
+                </div>
+            </li>
 
             {{-- Blog + chủ đề --}}
             <li class="flex flex-col items-center gap-2">

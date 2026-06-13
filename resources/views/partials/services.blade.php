@@ -1,6 +1,6 @@
 {{-- DỊCH VỤ --}}
 @if ($services->isNotEmpty())
-<section id="services" class="bg-ink-soft py-24 lg:py-32">
+<section class="bg-ink-soft py-24 lg:py-32" id="services">
     <div class="mx-auto max-w-7xl px-6 lg:px-10">
         <div class="reveal mb-16 text-center">
             <p class="eyebrow">Dịch vụ</p>
