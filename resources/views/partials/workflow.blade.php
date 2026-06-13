@@ -1,6 +1,6 @@
 {{-- QUY TRÌNH LÀM VIỆC: số lớn 01, 02, 03 làm điểm nhấn --}}
 @if ($workflowSteps->isNotEmpty())
-<section id="workflow" class="bg-ink-soft py-24 text-cream lg:py-32">
+<section id="workflow" class="bg-ink py-24 text-cream lg:py-32">
     <div class="mx-auto max-w-7xl px-6 lg:px-10">
         <div class="reveal mb-16 text-center">
             <p class="eyebrow">Quy trình</p>

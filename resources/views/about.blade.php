@@ -12,15 +12,15 @@
         </div>
     </section>
 
-    @include('partials.services', ['services' => $services])
-
     @include('partials.about', ['stats' => $stats])
 
-    @include('partials.workflow', ['workflowSteps' => $workflowSteps])
+    @include('partials.services', ['services' => $services])
 
-    @include('partials.partners', ['partners' => $partners])
+    @include('partials.workflow', ['workflowSteps' => $workflowSteps])
 
     @include('partials.feedback', ['feedbacks' => $feedbacks])
 
     @include('partials.insights', ['posts' => $posts])
+
+    @include('partials.partners', ['partners' => $partners])
 @endsection
