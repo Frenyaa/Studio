@@ -12,36 +12,10 @@
     $ctaBg = $ctaImageUrl !== ''
         ? $ctaImageUrl
         : ($ctaImagePath ? asset('storage/' . $ctaImagePath) : asset('storage/placeholders/project-5.jpg'));
-
-    // Video nền (link): YouTube / Vimeo (iframe) hoặc MP4 trực tiếp (video)
-    $ctaVideoUrl = trim((string) ($c['cta_video_url'] ?? ''));
-    $ctaEmbed = null;
-    $ctaVideo = null;
-    if ($ctaVideoUrl !== '') {
-        if (preg_match('~(?:youtube\.com/(?:watch\?v=|embed/|shorts/)|youtu\.be/)([\w-]{11})~', $ctaVideoUrl, $m)) {
-            $ctaEmbed = "https://www.youtube.com/embed/{$m[1]}?autoplay=1&mute=1&loop=1&playlist={$m[1]}&controls=0&showinfo=0&modestbranding=1&playsinline=1&rel=0";
-        } elseif (preg_match('~vimeo\.com/(?:video/)?(\d+)~', $ctaVideoUrl, $m)) {
-            $ctaEmbed = "https://player.vimeo.com/video/{$m[1]}?autoplay=1&muted=1&loop=1&background=1";
-        } else {
-            $ctaVideo = $ctaVideoUrl;
-        }
-    }
 @endphp
 <section class="relative overflow-hidden">
-    {{-- Nền: video (nếu có) hoặc ảnh --}}
-    @if ($ctaEmbed)
-        <div class="absolute inset-0 overflow-hidden">
-            <iframe class="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
-                style="width:100vw;height:56.25vw;min-height:100%;min-width:177.78vh;"
-                src="{{ $ctaEmbed }}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen title="CTA video"></iframe>
-        </div>
-    @elseif ($ctaVideo)
-        <video class="absolute inset-0 h-full w-full object-cover" autoplay muted loop playsinline poster="{{ $ctaBg }}">
-            <source src="{{ $ctaVideo }}" type="video/mp4">
-        </video>
-    @else
-        <div class="absolute inset-0 bg-cover bg-center bg-fixed" style="background-image:url('{{ $ctaBg }}')"></div>
-    @endif
+    {{-- Nền: ảnh --}}
+    <div class="absolute inset-0 bg-cover bg-center bg-fixed" style="background-image:url('{{ $ctaBg }}')"></div>
 
     <div class="absolute inset-0 bg-black/55"></div>
 
