@@ -3,45 +3,12 @@
     x-data="heroSection()"
     class="relative h-screen w-full overflow-hidden bg-ink"
 >
-    {{-- Video nền: ưu tiên file upload → link YouTube/Vimeo → link MP4 trực tiếp → ảnh poster. --}}
+    {{-- Ảnh nền --}}
     @php
         $poster = $hero?->poster_source;
-        $videoFile = $hero?->video_file ? asset('storage/' . $hero->video_file) : null;
-        $rawUrl = trim((string) ($hero?->video_url ?? ''));
-
-        $embedUrl = null;
-        $directVideo = $videoFile;
-
-        if (! $videoFile && $rawUrl !== '') {
-            if (preg_match('~(?:youtube\.com/(?:watch\?v=|embed/|shorts/)|youtu\.be/)([\w-]{11})~', $rawUrl, $m)) {
-                $embedUrl = "https://www.youtube.com/embed/{$m[1]}?autoplay=1&mute=1&loop=1&playlist={$m[1]}&controls=0&showinfo=0&modestbranding=1&playsinline=1&rel=0";
-            } elseif (preg_match('~vimeo\.com/(?:video/)?(\d+)~', $rawUrl, $m)) {
-                $embedUrl = "https://player.vimeo.com/video/{$m[1]}?autoplay=1&muted=1&loop=1&background=1";
-            } else {
-                $directVideo = $rawUrl; // link MP4 trực tiếp
-            }
-        }
     @endphp
 
-    @if ($embedUrl)
-        <div class="absolute inset-0 overflow-hidden">
-            <iframe
-                class="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
-                style="width:100vw;height:56.25vw;min-height:100vh;min-width:177.78vh;"
-                src="{{ $embedUrl }}"
-                frameborder="0" allow="autoplay; encrypted-media" allowfullscreen title="hero video"
-            ></iframe>
-        </div>
-    @elseif ($directVideo)
-        <video
-            class="absolute inset-0 h-full w-full object-cover"
-            autoplay muted loop playsinline preload="none"
-            @if($poster) poster="{{ $poster }}" @endif
-            x-ref="video"
-        >
-            <source data-src="{{ $directVideo }}" type="video/mp4">
-        </video>
-    @elseif ($poster)
+    @if ($poster)
         <img src="{{ $poster }}" alt="{{ config('app.name') }}" class="absolute inset-0 h-full w-full object-cover animate-slow-zoom">
     @else
         {{-- Fallback nền tối khi chưa cấu hình hero trong admin --}}
@@ -100,19 +67,6 @@ function heroSection() {
         logoOpacity: 1,
         logoScale: 1,
         init() {
-            // Lazy-load video: chỉ gán src khi vào trang để không chặn render đầu tiên.
-            this.$nextTick(() => {
-                const video = this.$refs.video;
-                if (video) {
-                    const source = video.querySelector('source[data-src]');
-                    if (source && !source.src) {
-                        source.src = source.dataset.src;
-                        video.load();
-                        video.play().catch(() => {});
-                    }
-                }
-            });
-
             // Logo mờ dần + phóng to nhẹ khi cuộn.
             window.addEventListener('scroll', () => {
                 const y = window.pageYOffset;
