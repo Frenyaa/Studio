@@ -9,7 +9,5 @@
 
     @include('partials.portfolio', ['featuredProjects' => $featuredProjects])
 
-    @include('partials.cta')
-
     @include('partials.contact-home')
 @endsection
