@@ -34,7 +34,7 @@
                         <a href="{{ route('projects.show', $project) }}" class="group block">
                             <div class="relative overflow-hidden bg-ink">
                                 <div class="aspect-[3/4] w-full overflow-hidden">
-                                    <img src="{{ asset('storage/' . $project->grid_image) }}" alt="{{ $project->title }}" loading="lazy"
+                                    <img src="{{ Str::startsWith($project->grid_image, 'http') ? $project->grid_image : asset('storage/' . $project->grid_image) }}" alt="{{ $project->title }}" loading="lazy"
                                          class="h-full w-full object-cover transition-transform duration-[1400ms] ease-luxe group-hover:scale-105">
                                 </div>
                                 <div class="absolute inset-0 bg-ink/0 transition-colors duration-500 group-hover:bg-ink/15"></div>

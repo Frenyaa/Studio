@@ -3,6 +3,7 @@
 namespace App\Filament\Pages;
 
 use App\Models\Page as PageModel;
+use App\Models\Partner;
 use App\Models\Service;
 use App\Models\SiteStat;
 use App\Models\WorkflowStep;
@@ -50,6 +51,8 @@ class ManageHomepage extends Page implements HasForms
                 ->map(fn ($r) => $r->only(['id', 'value', 'prefix', 'suffix', 'label', 'is_active']))->toArray(),
             'pages' => PageModel::orderBy('sort_order')->get()
                 ->map(fn ($r) => $r->only(['id', 'title', 'content', 'is_published', 'show_in_footer']))->toArray(),
+            'partners' => Partner::orderBy('sort_order')->get()
+                ->map(fn ($r) => $r->only(['id', 'name', 'website', 'is_active']))->toArray(),
         ]);
     }
 
@@ -122,6 +125,21 @@ class ManageHomepage extends Page implements HasForms
                             ->addActionLabel('Thêm chính sách')
                             ->columns(2),
                     ]),
+
+                    Tabs\Tab::make('Đối tác')->schema([
+                        Repeater::make('partners')
+                            ->hiddenLabel()
+                            ->schema([
+                                Hidden::make('id'),
+                                TextInput::make('name')->label('Tên đối tác')->required()->placeholder('Kohler'),
+                                TextInput::make('website')->label('Website')->url()->placeholder('https://kohler.com'),
+                                Toggle::make('is_active')->label('Hiển thị')->default(true),
+                            ])
+                            ->itemLabel(fn (array $state): ?string => $state['name'] ?? 'Đối tác mới')
+                            ->collapsible()->reorderable()
+                            ->addActionLabel('Thêm đối tác')
+                            ->columns(2),
+                    ]),
                 ])->persistTabInQueryString(),
             ])
             ->statePath('data');
@@ -142,6 +160,7 @@ class ManageHomepage extends Page implements HasForms
         $this->syncRepeater(WorkflowStep::class, $state['steps'] ?? [], ['number', 'title', 'description', 'is_active']);
         $this->syncRepeater(SiteStat::class, $state['stats'] ?? [], ['value', 'prefix', 'suffix', 'label', 'is_active']);
         $this->syncRepeater(PageModel::class, $state['pages'] ?? [], ['title', 'content', 'is_published', 'show_in_footer']);
+        $this->syncRepeater(Partner::class, $state['partners'] ?? [], ['name', 'website', 'is_active']);
 
         Notification::make()->title('Đã lưu nội dung trang chủ')->success()->send();
     }

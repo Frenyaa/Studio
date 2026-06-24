@@ -7,7 +7,7 @@
             <div class="reveal overflow-hidden bg-ink">
                 <a href="{{ route('projects.show', $spotlight) }}" class="group block">
                     <div class="aspect-[4/3] w-full overflow-hidden">
-                        <img src="{{ asset('storage/' . $spotlight->cover_image) }}" alt="{{ $spotlight->title }}" loading="lazy"
+                        <img src="{{ Str::startsWith($spotlight->cover_image, 'http') ? $spotlight->cover_image : asset('storage/' . $spotlight->cover_image) }}" alt="{{ $spotlight->title }}" loading="lazy"
                              class="h-full w-full object-cover transition-transform duration-[1400ms] ease-luxe group-hover:scale-105">
                     </div>
                 </a>

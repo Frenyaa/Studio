@@ -9,7 +9,7 @@
         ->merge($project->images->pluck('image'))
         ->filter()
         ->unique()
-        ->map(fn ($img) => asset('storage/' . $img))
+        ->map(fn ($img) => Str::startsWith($img, 'http') ? $img : asset('storage/' . $img))
         ->values();
 @endphp
 

@@ -34,7 +34,7 @@
                 <div class="relative overflow-hidden bg-ink">
                     <div class="aspect-[3/4] w-full overflow-hidden">
                         @if ($category->cover_image)
-                            <img src="{{ asset('storage/' . $category->cover_image) }}" alt="{{ $category->name }}" loading="lazy"
+                            <img src="{{ Str::startsWith($category->cover_image, 'http') ? $category->cover_image : asset('storage/' . $category->cover_image) }}" alt="{{ $category->name }}" loading="lazy"
                                  class="h-full w-full object-cover transition-transform duration-[1400ms] ease-luxe group-hover:scale-105">
                         @else
                             <div class="flex h-full w-full items-center justify-center bg-ink-soft text-cream/70">

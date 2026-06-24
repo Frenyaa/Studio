@@ -12,7 +12,7 @@
             @foreach ($services as $service)
                 <div class="group reveal reveal-d{{ ($loop->index % 3) + 1 }} bg-ink p-10 transition-colors duration-500 hover:bg-ink-soft">
                     @if ($service->image)
-                        <img src="{{ asset('storage/' . $service->image) }}" alt="{{ $service->title }}" loading="lazy" class="mb-6 h-14 w-14 object-contain">
+                        <img src="{{ Str::startsWith($service->image, 'http') ? $service->image : asset('storage/' . $service->image) }}" alt="{{ $service->title }}" loading="lazy" class="mb-6 h-14 w-14 object-contain">
                     @elseif ($service->icon)
                         <x-dynamic-component :component="$service->icon" class="mb-6 h-10 w-10 text-cream" />
                     @endif

@@ -5,7 +5,7 @@
 >
     {{-- Ảnh nền --}}
     @php
-        $poster = $hero?->poster_source;
+        $poster = $hero?->poster_url ?? $hero?->poster_image;
     @endphp
 
     @if ($poster)

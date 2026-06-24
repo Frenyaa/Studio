@@ -92,7 +92,8 @@ class ProductResource extends Resource
             ->reorderable('sort_order')
             ->defaultSort('sort_order')
             ->columns([
-                Tables\Columns\ImageColumn::make('cover_image')->label('Ảnh')->square()->height(56),
+                Tables\Columns\ImageColumn::make('cover_image')->label('Ảnh')->square()->height(56)
+                    ->getStateUsing(fn ($record) => $record->cover_image),
                 Tables\Columns\TextColumn::make('name')->label('Tên sản phẩm')->searchable()->sortable()
                     ->description(fn (Product $record) => $record->sku ? 'SKU: ' . $record->sku : null),
                 Tables\Columns\TextColumn::make('category.name')->label('Loại')->badge()->sortable(),

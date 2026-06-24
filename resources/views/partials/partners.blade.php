@@ -9,14 +9,17 @@
             @foreach ($partners as $partner)
                 <a
                     @if($partner->website) href="{{ $partner->website }}" target="_blank" rel="noopener" @endif
-                    class="block"
+                    class="group flex flex-col items-center"
                 >
                     <img
-                        src="{{ asset('storage/' . $partner->logo) }}"
+                        src="{{ Str::startsWith($partner->logo, 'http') ? $partner->logo : asset('storage/' . $partner->logo) }}"
                         alt="{{ $partner->name }}"
                         loading="lazy"
-                        class="h-8 w-auto opacity-50 brightness-0 transition-all duration-500 hover:opacity-100 lg:h-10"
+                        class="h-8 w-auto grayscale opacity-60 transition-all duration-500 group-hover:grayscale-0 group-hover:opacity-100 lg:h-10"
                     >
+                    <span class="mt-2 text-[10px] font-medium uppercase tracking-widest text-cream/40 transition-colors duration-500 group-hover:text-cream/80">
+                        {{ $partner->name }}
+                    </span>
                 </a>
             @endforeach
         </div>

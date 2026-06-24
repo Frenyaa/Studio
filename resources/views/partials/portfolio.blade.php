@@ -1,6 +1,6 @@
 {{-- DỰ ÁN CỦA ANN: lưới hình ảnh khổ lớn, hover zoom + hiện tên --}}
 <section id="portfolio" class="bg-gradient-to-b from-ink to-ink-soft py-8 lg:py-12">
-    <div class="mx-auto max-w-7xl px-6 lg:px-10">
+    <div class="mx-auto max-w-[85rem] px-6 lg:px-10">
         {{-- Tiêu đề section --}}
         <div class="reveal mb-6 text-center">
             <p class="eyebrow">Portfolio</p>
@@ -12,48 +12,72 @@
             <p class="text-center text-cream/70">Chưa có dự án nổi bật. Hãy thêm dự án trong trang quản trị.</p>
         @else
             {{-- Lưới dự án --}}
-            <div class="grid grid-cols-1 gap-x-6 gap-y-2 sm:grid-cols-2 lg:grid-cols-2 lg:auto-rows-fr">
-                @foreach ($featuredProjects as $project)
-                    <a
-                        href="{{ route('projects.show', $project) }}"
-                        class="group reveal reveal-d{{ ($loop->index % 3) + 1 }} flex flex-col h-full {{ $loop->first ? 'row-span-2' : '' }}"
-                    >
-                        <div class="relative overflow-hidden bg-ink {{ $loop->first ? '' : 'flex-1' }}">
-                            <div class="{{ $loop->first ? 'aspect-[3/4]' : 'aspect-[3/4]' }} w-full overflow-hidden">
-                                <img
-                                    src="{{ asset('storage/' . $project->grid_image) }}"
-                                    alt="{{ $project->title }}"
-                                    loading="lazy"
-                                    class="h-full w-full object-cover transition-transform duration-[1400ms] ease-luxe group-hover:scale-105"
-                                >
-                            </div>
-                            {{-- Lớp phủ tinh tế khi hover --}}
+            <div class="grid grid-cols-1 gap-8 lg:grid-cols-2 lg:items-stretch">
+                {{-- Cột trái: 1 Item To (50%) --}}
+                @if(isset($featuredProjects[0]))
+                    @php $firstProject = $featuredProjects[0]; @endphp
+                    <a href="{{ route('projects.show', $firstProject) }}" class="group reveal flex flex-col h-full bg-ink-soft/10 p-6 border border-line/20 rounded-sm hover:border-accent/40 transition-colors duration-500">
+                        <div class="relative overflow-hidden bg-ink flex-1 min-h-[380px] lg:min-h-0 rounded-sm">
+                            <img src="{{ Str::startsWith($firstProject->grid_image, 'http') ? $firstProject->grid_image : asset('storage/' . $firstProject->grid_image) }}" alt="{{ $firstProject->title }}" loading="lazy"
+                                 class="absolute inset-0 h-full w-full object-cover transition-transform duration-[1400ms] ease-luxe group-hover:scale-105">
                             <div class="absolute inset-0 bg-black/0 transition-colors duration-500 group-hover:bg-black/25"></div>
                         </div>
 
-                        {{-- Caption sạch hiển thị bên dưới (phong cách editorial) --}}
-                        <div class="pt-3">
-                            <div class="flex items-baseline justify-between transition-colors duration-500">
+                        <div class="pt-5 flex flex-col justify-between">
+                            <div class="flex items-baseline justify-between">
                                 <div>
-                                    <h3 class="font-serif {{ $loop->first ? 'text-2xl' : 'text-sm' }} font-light text-cream">{{ $project->title }}</h3>
-                                    @if ($project->location)
-                                        <p class="mt-1 text-xs uppercase tracking-luxe text-cream/70">{{ $project->location }}</p>
+                                    <h3 class="font-serif text-2xl font-light text-cream group-hover:text-accent transition-colors duration-300">{{ $firstProject->title }}</h3>
+                                    @if ($firstProject->location)
+                                        <p class="mt-1 text-[11px] uppercase tracking-luxe text-cream/50">{{ $firstProject->location }}</p>
                                     @endif
                                 </div>
-                                @if ($project->category)
-                                    <span class="text-[11px] uppercase tracking-luxe text-cream/70">{{ $project->category->name }}</span>
+                                @if ($firstProject->category)
+                                    <span class="text-[11px] uppercase tracking-luxe text-cream/50">{{ $firstProject->category->name }}</span>
                                 @endif
                             </div>
 
-                            {{-- Mô tả ngắn --}}
-                            @if ($project->summary)
-                                <p class="mt-3 border-t border-line pt-4 text-sm leading-relaxed text-cream line-clamp-2 transition-colors duration-500 group-hover:border-cream/40">
-                                    {{ $project->summary }}
+                            @if ($firstProject->summary)
+                                <p class="mt-4 border-t border-line/20 pt-4 text-sm leading-relaxed text-cream/80 line-clamp-2">
+                                    {{ $firstProject->summary }}
                                 </p>
                             @endif
                         </div>
                     </a>
-                @endforeach
+                @endif
+
+                {{-- Cột phải: 2 Items nằm ngang xếp chồng (50%) --}}
+                <div class="flex flex-col justify-between gap-6">
+                    @foreach ($featuredProjects->slice(1, 2) as $project)
+                        <a href="{{ route('projects.show', $project) }}" class="group reveal flex flex-row gap-6 p-6 bg-ink-soft/10 border border-line/20 rounded-sm h-full lg:h-[calc(50%-12px)] items-stretch hover:border-accent/40 transition-colors duration-500">
+                            <div class="relative overflow-hidden bg-ink w-[32%] lg:w-[180px] xl:w-[200px] flex-shrink-0 rounded-sm h-full min-h-[140px] lg:min-h-0">
+                                <img src="{{ Str::startsWith($project->grid_image, 'http') ? $project->grid_image : asset('storage/' . $project->grid_image) }}" alt="{{ $project->title }}" loading="lazy"
+                                     class="absolute inset-0 h-full w-full object-cover transition-transform duration-[1400ms] ease-luxe group-hover:scale-105">
+                                <div class="absolute inset-0 bg-black/0 transition-colors duration-500 group-hover:bg-black/25"></div>
+                            </div>
+
+                            <div class="flex-1 flex flex-col justify-between py-1">
+                                <div>
+                                    <div class="flex items-baseline justify-between">
+                                        <h3 class="font-serif text-xl font-light text-cream group-hover:text-accent transition-colors duration-300">{{ $project->title }}</h3>
+                                        @if ($project->category)
+                                            <span class="text-[10px] uppercase tracking-luxe text-cream/50 ml-2 flex-shrink-0">{{ $project->category->name }}</span>
+                                        @endif
+                                    </div>
+                                    
+                                    @if ($project->location)
+                                        <p class="mt-1 text-[10px] uppercase tracking-luxe text-cream/50">{{ $project->location }}</p>
+                                    @endif
+
+                                    @if ($project->summary)
+                                        <p class="mt-3 text-xs leading-relaxed text-cream/70 line-clamp-3">
+                                            {{ $project->summary }}
+                                        </p>
+                                    @endif
+                                </div>
+                            </div>
+                        </a>
+                    @endforeach
+                </div>
             </div>
 
             {{-- CTA xem toàn bộ --}}

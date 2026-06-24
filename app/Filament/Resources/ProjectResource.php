@@ -129,7 +129,8 @@ class ProjectResource extends Resource
                 Tables\Columns\ImageColumn::make('cover_image')
                     ->label('Ảnh')
                     ->square()
-                    ->height(56),
+                    ->height(56)
+                    ->getStateUsing(fn ($record) => $record->cover_image),
 
                 Tables\Columns\TextColumn::make('title')
                     ->label('Tên dự án')

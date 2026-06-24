@@ -32,7 +32,7 @@
                         <a href="{{ route('products.show', $product) }}" class="group block">
                             <div class="relative overflow-hidden bg-ink-soft">
                                 <div class="aspect-[3/4] w-full overflow-hidden">
-                                    <img src="{{ asset('storage/' . $product->grid_image) }}" alt="{{ $product->name }}" loading="lazy"
+                                    <img src="{{ Str::startsWith($product->grid_image, 'http') ? $product->grid_image : asset('storage/' . $product->grid_image) }}" alt="{{ $product->name }}" loading="lazy"
                                          class="h-full w-full object-cover transition-transform duration-[1400ms] ease-luxe group-hover:scale-105">
                                 </div>
                                 <div class="absolute inset-0 bg-ink/0 transition-colors duration-500 group-hover:bg-ink/15"></div>
