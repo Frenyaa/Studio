@@ -9,7 +9,7 @@
         $consultNeeds = collect(['Mua sản phẩm có sẵn', 'Đặt làm theo yêu cầu', 'Tư vấn thiết kế', 'Khác']);
     }
 @endphp
-<section id="contact" class="bg-ink py-24 lg:py-32">
+<section id="contact" class="bg-ink py-12 lg:py-16">
     <div class="mx-auto max-w-3xl px-6 lg:px-10">
         <div class="reveal mb-14 text-center">
             <p class="eyebrow">Liên hệ</p>

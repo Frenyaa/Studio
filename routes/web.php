@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\AboutController;
-use App\Http\Controllers\BlogController;
+// use App\Http\Controllers\BlogController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LeadController;
@@ -26,9 +26,9 @@ Route::get('/du-an/{project}', [ProjectController::class, 'show'])->name('projec
 Route::get('/san-pham', [ProductController::class, 'index'])->name('products.index');
 Route::get('/san-pham/{product}', [ProductController::class, 'show'])->name('products.show');
 
-// Blog
-Route::get('/blog', [BlogController::class, 'index'])->name('blog.index');
-Route::get('/blog/{post}', [BlogController::class, 'show'])->name('blog.show');
+// Blog (disabled)
+// Route::get('/blog', [BlogController::class, 'index'])->name('blog.index');
+// Route::get('/blog/{post}', [BlogController::class, 'show'])->name('blog.show');
 
 // Trang nội dung / Chính sách
 Route::get('/trang/{page}', [PageController::class, 'show'])->name('pages.show');

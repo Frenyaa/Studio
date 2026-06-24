@@ -11,7 +11,7 @@
     $mapEmbed = $cs['contact_map_embed'] ?? '';
     $address = $cs['contact_address'] ?? 'Vũ Tông Phan, Thanh Xuân, Hà Nội';
 @endphp
-<section id="contact" class="bg-ink py-24 lg:py-32">
+<section id="contact" class="bg-ink py-12 lg:py-16">
     <div class="mx-auto max-w-7xl px-6 lg:px-10">
         {{-- Bản đồ & Form (2 cột) --}}
         <div class="grid gap-12 lg:grid-cols-2 lg:gap-16">

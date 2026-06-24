@@ -20,7 +20,5 @@
 
     @include('partials.feedback', ['feedbacks' => $feedbacks])
 
-    @include('partials.insights', ['posts' => $posts])
-
     @include('partials.partners', ['partners' => $partners])
 @endsection

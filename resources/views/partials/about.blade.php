@@ -1,5 +1,5 @@
 {{-- GIỚI THIỆU + KHỐI CHỈ SỐ chạy số tự động --}}
-<section id="about" class="bg-ink py-24 lg:py-32">
+<section id="about" class="bg-gradient-to-b from-ink to-ink-soft py-12 lg:py-16">
     <div class="mx-auto max-w-7xl px-6 lg:px-10">
         <div class="grid items-center gap-16 lg:grid-cols-2">
             {{-- Phần chữ giới thiệu --}}

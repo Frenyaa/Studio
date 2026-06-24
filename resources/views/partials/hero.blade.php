@@ -16,8 +16,8 @@
     @endif
 
     {{-- Lớp phủ mờ tối giản, nhẹ để giữ độ sáng của ảnh (luôn tối để chữ trắng dễ đọc) --}}
-    <div class="absolute inset-0 bg-black/25"></div>
-    <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-black/20"></div>
+    <div class="absolute inset-0 bg-black/40"></div>
+    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-black/30"></div>
 
     {{-- Logo phóng to mờ dần khi cuộn --}}
     @if ($hero?->show_logo_overlay ?? true)
@@ -33,18 +33,18 @@
 
     {{-- Nội dung overlay --}}
     <div class="relative z-10 flex h-full flex-col items-center justify-center px-6 text-center text-white">
-        <h1 class="max-w-4xl font-serif text-4xl font-light leading-tight tracking-wide animate-fade-up sm:text-5xl lg:text-6xl">
+        <h1 class="max-w-4xl font-serif text-4xl font-light leading-tight tracking-wide animate-fade-up drop-shadow-lg sm:text-5xl lg:text-6xl">
             {{ $hero?->slogan ?? 'NỘI THẤT CAO CẤP CHO KHÔNG GIAN SỐNG TINH TẾ' }}
         </h1>
 
         @if ($hero?->sub_slogan)
-            <p class="mt-6 max-w-xl text-sm font-light uppercase tracking-luxe text-white/80 animate-fade-up">
+            <p class="mt-6 max-w-xl text-sm font-light uppercase tracking-luxe text-white/80 animate-fade-up drop-shadow-md">
                 {{ $hero->sub_slogan }}
             </p>
         @endif
 
         <a
-            href="{{ $hero?->cta_anchor ?? '#categories' }}"
+            href="{{ route('products.index') }}"
             class="btn-line mt-12 border-white/70 text-white hover:bg-white hover:text-cream"
         >
             {{ $hero?->cta_label ?? 'XEM SẢN PHẨM' }}

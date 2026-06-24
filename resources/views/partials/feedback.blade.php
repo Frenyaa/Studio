@@ -1,6 +1,6 @@
 {{-- KHÁCH HÀNG: slider feedback tối giản (Alpine) --}}
 @if ($feedbacks->isNotEmpty())
-<section class="bg-ink-soft py-24 lg:py-32" id="feedback">
+<section class="bg-gradient-to-b from-ink to-ink-soft py-12 lg:py-16" id="feedback">
     <div
         x-data="feedbackSlider({{ $feedbacks->count() }})"
         class="reveal mx-auto max-w-3xl px-6 text-center lg:px-10"
