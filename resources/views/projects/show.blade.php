@@ -127,8 +127,8 @@
                 <div class="grid grid-cols-1 gap-6 sm:grid-cols-3">
                     @foreach ($related as $item)
                         <a href="{{ route('projects.show', $item) }}" class="group block">
-                            <div class="aspect-[3/4] overflow-hidden bg-ink">
-                                <img src="{{ asset('storage/' . $item->grid_image) }}" alt="{{ $item->title }}" loading="lazy"
+                            <div class="aspect-[4/3] overflow-hidden bg-ink">
+                                <img src="{{ Str::startsWith($item->grid_image, 'http') ? $item->grid_image : asset('storage/' . $item->grid_image) }}" alt="{{ $item->title }}" loading="lazy"
                                      class="h-full w-full object-cover transition-transform duration-1000 ease-luxe group-hover:scale-105">
                             </div>
                             <h3 class="mt-4 font-serif text-xl font-light text-cream">{{ $item->title }}</h3>

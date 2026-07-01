@@ -33,7 +33,7 @@
                     @foreach ($projects as $project)
                         <a href="{{ route('projects.show', $project) }}" class="group block">
                             <div class="relative overflow-hidden bg-ink">
-                                <div class="aspect-[3/4] w-full overflow-hidden">
+                                <div class="aspect-[4/3] w-full overflow-hidden">
                                     <img src="{{ Str::startsWith($project->grid_image, 'http') ? $project->grid_image : asset('storage/' . $project->grid_image) }}" alt="{{ $project->title }}" loading="lazy"
                                          class="h-full w-full object-cover transition-transform duration-[1400ms] ease-luxe group-hover:scale-105">
                                 </div>

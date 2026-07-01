@@ -31,7 +31,7 @@
                 {{-- Gallery --}}
                 <div>
                     <div class="group relative overflow-hidden bg-ink-soft" @click="lightbox = true">
-                        <div class="aspect-[4/3] w-full cursor-zoom-in overflow-hidden">
+                        <div class="aspect-square w-full cursor-zoom-in overflow-hidden">
                             <img :src="active" alt="{{ $product->name }}" class="h-full w-full object-cover">
                         </div>
                         <span class="absolute bottom-4 right-4 flex h-10 w-10 items-center justify-center bg-black/60 text-white">
@@ -116,8 +116,8 @@
                 <div class="grid grid-cols-1 gap-6 sm:grid-cols-3">
                     @foreach ($related as $item)
                         <a href="{{ route('products.show', $item) }}" class="group block">
-                            <div class="aspect-[3/4] overflow-hidden bg-ink">
-                                <img src="{{ asset('storage/' . $item->grid_image) }}" alt="{{ $item->name }}" loading="lazy"
+                            <div class="aspect-square overflow-hidden bg-ink">
+                                <img src="{{ Str::startsWith($item->grid_image, 'http') ? $item->grid_image : asset('storage/' . $item->grid_image) }}" alt="{{ $item->name }}" loading="lazy"
                                      class="h-full w-full object-cover transition-transform duration-1000 ease-luxe group-hover:scale-105">
                             </div>
                             <h3 class="mt-4 font-serif text-xl font-light text-cream">{{ $item->name }}</h3>
