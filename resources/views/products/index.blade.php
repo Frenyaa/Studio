@@ -27,11 +27,11 @@
             @if ($products->isEmpty())
                 <p class="text-center text-cream/70">Chưa có sản phẩm nào.</p>
             @else
-                <div class="grid grid-cols-1 gap-x-6 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
+                <div class="flex flex-wrap justify-center gap-x-6 gap-y-12">
                     @foreach ($products as $product)
-                        <a href="{{ route('products.show', $product) }}" class="group block">
-                            <div class="relative overflow-hidden bg-ink-soft">
-                                <div class="aspect-square w-full overflow-hidden">
+                        <a href="{{ route('products.show', $product) }}" class="group block w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] max-w-[400px] lg:max-w-none">
+                            <div class="relative overflow-hidden bg-ink-soft rounded-sm">
+                                <div class="aspect-[4/3] w-full overflow-hidden">
                                     <img src="{{ Str::startsWith($product->grid_image, 'http') ? $product->grid_image : asset('storage/' . $product->grid_image) }}" alt="{{ $product->name }}" loading="lazy"
                                          class="h-full w-full object-cover transition-transform duration-[1400ms] ease-luxe group-hover:scale-105">
                                 </div>

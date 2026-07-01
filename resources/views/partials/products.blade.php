@@ -8,10 +8,10 @@
             <div class="mx-auto mt-4 h-px w-16 bg-accent/70"></div>
         </div>
 
-        <div class="grid grid-cols-1 gap-8 md:grid-cols-3">
+        <div class="flex flex-wrap justify-center gap-8">
             @foreach ($featuredProducts as $product)
-                <a href="{{ route('products.show', $product) }}" class="group reveal flex flex-col h-full bg-ink-soft/10 p-5 border border-line/20 rounded-sm hover:border-accent/40 transition-colors duration-500">
-                    <div class="relative overflow-hidden bg-ink aspect-square w-full rounded-sm">
+                <a href="{{ route('products.show', $product) }}" class="group reveal flex flex-col bg-ink-soft/10 p-5 border border-line/20 rounded-sm hover:border-accent/40 transition-colors duration-500 w-full sm:w-[calc(50%-16px)] lg:w-[calc(33.333%-22px)] max-w-[420px] lg:max-w-none">
+                    <div class="relative overflow-hidden bg-ink aspect-[4/3] w-full rounded-sm">
                         <img src="{{ Str::startsWith($product->grid_image, 'http') ? $product->grid_image : asset('storage/' . $product->grid_image) }}" alt="{{ $product->name }}" loading="lazy"
                              class="absolute inset-0 h-full w-full object-cover transition-transform duration-[1400ms] ease-luxe group-hover:scale-105">
                         <div class="absolute inset-0 bg-black/0 transition-colors duration-500 group-hover:bg-black/25"></div>

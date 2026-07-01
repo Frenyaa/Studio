@@ -29,10 +29,10 @@
             @if ($projects->isEmpty())
                 <p class="text-center text-cream/70">Chưa có dự án nào.</p>
             @else
-                <div class="grid grid-cols-1 gap-x-6 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
+                <div class="flex flex-wrap justify-center gap-x-6 gap-y-12">
                     @foreach ($projects as $project)
-                        <a href="{{ route('projects.show', $project) }}" class="group block">
-                            <div class="relative overflow-hidden bg-ink">
+                        <a href="{{ route('projects.show', $project) }}" class="group block w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] max-w-[400px] lg:max-w-none">
+                            <div class="relative overflow-hidden bg-ink rounded-sm">
                                 <div class="aspect-[4/3] w-full overflow-hidden">
                                     <img src="{{ Str::startsWith($project->grid_image, 'http') ? $project->grid_image : asset('storage/' . $project->grid_image) }}" alt="{{ $project->title }}" loading="lazy"
                                          class="h-full w-full object-cover transition-transform duration-[1400ms] ease-luxe group-hover:scale-105">
