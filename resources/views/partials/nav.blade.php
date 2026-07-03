@@ -8,12 +8,11 @@
 >
     <nav class="mx-auto flex max-w-7xl items-center justify-between px-6 py-5 lg:px-10">
         {{-- Logo --}}
-        <a href="{{ route('home') }}" class="font-brand text-2xl font-semibold tracking-luxe drop-shadow-md">
+        <a href="{{ route('home') }}" class="flex items-center gap-3 font-brand text-2xl font-semibold tracking-luxe drop-shadow-md">
             @if (!empty($siteLogo))
                 <img src="{{ asset('storage/' . $siteLogo) }}" alt="{{ $siteName ?? config('app.name') }}" class="h-8 w-auto">
-            @else
-                {{ strtoupper($siteName ?? config('app.name')) }}
             @endif
+            <span>{{ strtoupper($siteName ?? config('app.name')) }}</span>
         </a>
 
         {{-- Menu desktop --}}

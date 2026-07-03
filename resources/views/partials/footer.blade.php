@@ -18,11 +18,12 @@
         <div class="grid gap-12 lg:grid-cols-5">
             {{-- Thương hiệu --}}
             <div class="lg:col-span-2">
-                @if ($logo)
-                    <img src="{{ asset('storage/' . $logo) }}" alt="{{ $brand }}" class="h-10 w-auto">
-                @else
+                <div class="flex items-center gap-3">
+                    @if ($logo)
+                        <img src="{{ asset('storage/' . $logo) }}" alt="{{ $brand }}" class="h-10 w-auto">
+                    @endif
                     <span class="font-brand text-3xl font-light tracking-luxe text-cream">{{ strtoupper($brand) }}</span>
-                @endif
+                </div>
                 <p class="mt-6 max-w-sm text-sm leading-relaxed text-cream/60">{{ $about }}</p>
             </div>
 
