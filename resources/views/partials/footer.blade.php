@@ -21,7 +21,7 @@
                 <div class="flex items-center gap-3">
                     @if ($logo)
                         <div class="bg-porcelain/95 px-4 py-2 rounded-sm shadow-sm flex items-center justify-center">
-                            <img src="{{ asset('storage/' . $logo) }}" alt="{{ $brand }}" class="h-12 w-auto object-contain">
+                            <img src="{{ asset('storage/' . $logo) }}" alt="{{ $brand }}" class="h-24 w-auto object-contain">
                         </div>
                     @endif
                     <span class="font-brand text-3xl font-light tracking-luxe text-cream">{{ strtoupper($brand) }}</span>
