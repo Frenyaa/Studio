@@ -8,14 +8,13 @@
 >
     <nav class="mx-auto flex max-w-7xl items-center justify-between px-6 py-5 lg:px-10">
         {{-- Logo --}}
-        <a href="{{ route('home') }}" class="font-brand text-2xl font-semibold tracking-luxe drop-shadow-md">
+        <a href="{{ route('home') }}" class="flex items-center gap-3 font-brand text-2xl font-semibold tracking-luxe drop-shadow-md">
             @if (!empty($siteLogo))
-                <div class="bg-porcelain/95 px-3 h-12 rounded-sm shadow-sm flex items-center justify-center border border-line/10">
-                    <img src="{{ asset('storage/' . $siteLogo) }}" alt="{{ $siteName ?? config('app.name') }}" class="h-9 w-auto object-contain">
+                <div class="bg-porcelain/95 px-2.5 h-10 rounded-sm shadow-sm flex items-center justify-center border border-line/10 flex-shrink-0">
+                    <img src="{{ asset('storage/' . $siteLogo) }}" alt="{{ $siteName ?? config('app.name') }}" class="h-7 w-auto object-contain">
                 </div>
-            @else
-                <span :class="(scrolled || !home) ? 'text-cream' : 'text-white'">{{ strtoupper($siteName ?? config('app.name')) }}</span>
             @endif
+            <span :class="(scrolled || !home) ? 'text-cream' : 'text-white'">{{ strtoupper($siteName ?? config('app.name')) }}</span>
         </a>
 
         {{-- Menu desktop --}}
