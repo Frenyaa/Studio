@@ -3,14 +3,16 @@
     x-data="{ home: {{ request()->routeIs('home') ? 'true' : 'false' }}, scrolled: false, mobileOpen: false }"
     x-init="scrolled = !home"
     @scroll.window="if (home) scrolled = (window.pageYOffset > 60)"
-    :class="scrolled ? 'bg-ink backdrop-blur shadow-[0_1px_0_0_rgba(0,0,0,0.06)] text-cream' : 'bg-transparent text-black'"
+    :class="scrolled ? 'bg-ink backdrop-blur shadow-[0_1px_0_0_rgba(0,0,0,0.06)] text-cream' : 'bg-transparent text-white'"
     class="fixed inset-x-0 top-0 z-50 transition-colors duration-500 ease-luxe"
 >
     <nav class="mx-auto flex max-w-7xl items-center justify-between px-6 py-5 lg:px-10">
         {{-- Logo --}}
         <a href="{{ route('home') }}" class="flex items-center gap-3 font-brand text-2xl font-semibold tracking-luxe drop-shadow-md">
             @if (!empty($siteLogo))
-                <img src="{{ asset('storage/' . $siteLogo) }}" alt="{{ $siteName ?? config('app.name') }}" class="h-12 w-auto object-contain">
+                <img src="{{ asset('storage/' . $siteLogo) }}" alt="{{ $siteName ?? config('app.name') }}" 
+                     class="h-12 w-auto object-contain transition-all duration-500"
+                     :class="(!scrolled && home) ? 'brightness-0 invert' : ''">
             @endif
             <span>{{ strtoupper($siteName ?? config('app.name')) }}</span>
         </a>
