@@ -10,8 +10,8 @@
         {{-- Logo --}}
         <a href="{{ route('home') }}" class="flex items-center gap-3 font-brand text-2xl font-semibold tracking-luxe drop-shadow-md">
             @if (!empty($siteLogo))
-                <div class="bg-porcelain/95 px-2.5 h-10 rounded-sm shadow-sm flex items-center justify-center border border-line/10 flex-shrink-0">
-                    <img src="{{ asset('storage/' . $siteLogo) }}" alt="{{ $siteName ?? config('app.name') }}" class="h-7 w-auto object-contain">
+                <div class="bg-porcelain/95 h-12 w-12 rounded-full shadow-sm flex items-center justify-center border border-line/10 flex-shrink-0">
+                    <img src="{{ asset('storage/' . $siteLogo) }}" alt="{{ $siteName ?? config('app.name') }}" class="h-10 w-10 object-contain rounded-full">
                 </div>
             @endif
             <span :class="(scrolled || !home) ? 'text-cream' : 'text-white'">{{ strtoupper($siteName ?? config('app.name')) }}</span>
