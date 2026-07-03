@@ -10,8 +10,8 @@
         {{-- Logo --}}
         <a href="{{ route('home') }}" class="font-brand text-2xl font-semibold tracking-luxe drop-shadow-md ml-1 lg:ml-2">
             @if (!empty($siteLogo))
-                <div class="bg-porcelain/95 h-20 w-20 rounded-full shadow-sm flex items-center justify-center border border-line/10">
-                    <img src="{{ asset('storage/' . $siteLogo) }}" alt="{{ $siteName ?? config('app.name') }}" class="h-17 w-17 object-contain rounded-full">
+                <div class="bg-porcelain/95 h-20 w-20 lg:h-28 lg:w-28 rounded-full shadow-sm flex items-center justify-center border border-line/10">
+                    <img src="{{ asset('storage/' . $siteLogo) }}" alt="{{ $siteName ?? config('app.name') }}" class="h-16 w-16 lg:h-24 lg:w-24 object-contain rounded-full">
                 </div>
             @else
                 <span :class="(scrolled || !home) ? 'text-cream' : 'text-white'">{{ strtoupper($siteName ?? config('app.name')) }}</span>
@@ -19,7 +19,7 @@
         </a>
 
         {{-- Menu desktop --}}
-        <ul class="hidden items-center gap-9 text-xs font-medium uppercase tracking-luxe lg:flex drop-shadow-md">
+        <ul class="hidden items-center gap-9 text-sm font-medium uppercase tracking-luxe lg:flex drop-shadow-md">
             <li><a href="{{ route('home') }}" class="transition-colors duration-300 hover:text-accent">Trang chủ</a></li>
 
             {{-- Sản phẩm + dropdown loại --}}

@@ -19,8 +19,8 @@
             {{-- Thương hiệu --}}
             <div class="lg:col-span-2">
                 @if ($logo)
-                    <div class="bg-porcelain/95 h-24 w-24 rounded-full shadow-sm inline-flex items-center justify-center border border-line/10">
-                        <img src="{{ asset('storage/' . $logo) }}" alt="{{ $brand }}" class="h-20 w-20 object-contain rounded-full">
+                    <div class="bg-porcelain/95 h-28 w-28 rounded-full shadow-sm inline-flex items-center justify-center border border-line/10">
+                        <img src="{{ asset('storage/' . $logo) }}" alt="{{ $brand }}" class="h-24 w-24 object-contain rounded-full">
                     </div>
                 @else
                     <span class="font-brand text-3xl font-light tracking-luxe text-cream">{{ strtoupper($brand) }}</span>
