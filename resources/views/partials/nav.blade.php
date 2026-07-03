@@ -6,12 +6,12 @@
     :class="scrolled ? 'bg-ink backdrop-blur shadow-[0_1px_0_0_rgba(0,0,0,0.06)] text-cream' : 'bg-transparent text-white'"
     class="fixed inset-x-0 top-0 z-50 transition-colors duration-500 ease-luxe"
 >
-    <nav class="mx-auto flex max-w-7xl items-center justify-between px-6 py-5 lg:px-10">
+    <nav class="mx-auto flex max-w-7xl items-center justify-between px-8 py-3 lg:px-16">
         {{-- Logo --}}
-        <a href="{{ route('home') }}" class="font-brand text-2xl font-semibold tracking-luxe drop-shadow-md">
+        <a href="{{ route('home') }}" class="font-brand text-2xl font-semibold tracking-luxe drop-shadow-md ml-1 lg:ml-2">
             @if (!empty($siteLogo))
-                <div class="bg-porcelain/95 h-16 w-16 rounded-full shadow-sm flex items-center justify-center border border-line/10">
-                    <img src="{{ asset('storage/' . $siteLogo) }}" alt="{{ $siteName ?? config('app.name') }}" class="h-13 w-13 object-contain rounded-full">
+                <div class="bg-porcelain/95 h-20 w-20 rounded-full shadow-sm flex items-center justify-center border border-line/10">
+                    <img src="{{ asset('storage/' . $siteLogo) }}" alt="{{ $siteName ?? config('app.name') }}" class="h-17 w-17 object-contain rounded-full">
                 </div>
             @else
                 <span :class="(scrolled || !home) ? 'text-cream' : 'text-white'">{{ strtoupper($siteName ?? config('app.name')) }}</span>
