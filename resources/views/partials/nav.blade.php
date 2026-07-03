@@ -10,7 +10,7 @@
         {{-- Logo --}}
         <a href="{{ route('home') }}" class="flex items-center gap-3 font-brand text-2xl font-semibold tracking-luxe drop-shadow-md">
             @if (!empty($siteLogo))
-                <img src="{{ asset('storage/' . $siteLogo) }}" alt="{{ $siteName ?? config('app.name') }}" class="h-8 w-auto">
+                <img src="{{ asset('storage/' . $siteLogo) }}" alt="{{ $siteName ?? config('app.name') }}" class="h-12 w-auto object-contain">
             @endif
             <span>{{ strtoupper($siteName ?? config('app.name')) }}</span>
         </a>
