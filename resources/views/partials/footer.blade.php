@@ -18,14 +18,13 @@
         <div class="grid gap-12 lg:grid-cols-5">
             {{-- Thương hiệu --}}
             <div class="lg:col-span-2">
-                <div class="flex items-center gap-3">
-                    @if ($logo)
-                        <div class="bg-porcelain/95 h-16 w-16 rounded-full shadow-sm inline-flex items-center justify-center border border-line/10 flex-shrink-0">
-                            <img src="{{ asset('storage/' . $logo) }}" alt="{{ $brand }}" class="h-13 w-13 object-contain rounded-full">
-                        </div>
-                    @endif
+                @if ($logo)
+                    <div class="bg-porcelain/95 h-20 w-20 rounded-full shadow-sm inline-flex items-center justify-center border border-line/10">
+                        <img src="{{ asset('storage/' . $logo) }}" alt="{{ $brand }}" class="h-16 w-16 object-contain rounded-full">
+                    </div>
+                @else
                     <span class="font-brand text-3xl font-light tracking-luxe text-cream">{{ strtoupper($brand) }}</span>
-                </div>
+                @endif
                 <p class="mt-6 max-w-sm text-sm leading-relaxed text-cream/60">{{ $about }}</p>
             </div>
 
